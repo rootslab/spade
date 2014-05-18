@@ -1,0 +1,43 @@
+{
+  "name": "spade",
+  "version": "0.0.1",
+  "description": "Spade, a Redis 2.x Client..",
+  "homepage": "https://github.com/rootslab/spade",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rootslab/spade.git"
+  },
+  "keywords": [
+    "spade",
+    "redis",
+    "client",
+    "redis client"
+  ],
+  "author": {
+    "name": "Guglielmo Ferri",
+    "email": "44gatti@gmail.com"
+  },
+  "dependencies": {
+    "bolgia" : ">=2.5.0",
+    "boris" : ">=0.9.0",
+    "cocker" : ">=0.10.1",
+    "libra" : "*",
+    "syllabus" : ">=0.15.4",
+    "train" : ">=3.0.0"
+  },
+  "devDependencies": {
+    },
+  "main": "index",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "test": "bash test/run.sh"
+  },
+  "license": "MIT",
+  "readmeFilename": "Readme.md",
+  "bugs": {
+    "url": "https://github.com/rootslab/spade/issues"
+  }
+}
