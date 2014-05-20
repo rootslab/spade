@@ -19,7 +19,7 @@ client.on( 'ready', function () {
     setTimeout( function () {
         client.commands.lrange( 'list1', 1, 3, function ( err, data, fn ) {
             log( fn( data ) );
-        } )
+        } );
     }, 4000 );
 } );
 

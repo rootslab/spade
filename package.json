@@ -1,7 +1,7 @@
 {
   "name": "spade",
-  "version": "0.0.3",
-  "description": "Spade, a Redis 2.x Client..",
+  "version": "0.0.4",
+  "description": "Spade, a Redis 2.x Client.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,
   "repository": {
