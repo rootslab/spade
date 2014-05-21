@@ -25,6 +25,9 @@ client.on( 'ready', function () {
                 setTimeout( function () {
                     client.commands.discard( function ( err, data, fn ) {
                         log( 'discard:', fn( data ) );
+                        client.commands.quit( function ( err, data, fn ) {
+                            log( 'quit:', fn( data ) );
+                        } );
                     } );
                 }, 2000 );
             } );

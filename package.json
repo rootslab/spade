@@ -1,6 +1,6 @@
 {
   "name": "spade",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Spade, a Redis 2.x Client.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,
@@ -23,8 +23,8 @@
     "boris" : ">=0.9.0",
     "cocker" : ">=0.10.1",
     "libra" : "*",
-    "syllabus" : ">=0.15.4",
-    "train" : ">=3.0.1"
+    "syllabus" : ">=0.15.6",
+    "train" : ">=3.2.0"
   },
   "devDependencies": {
     },
