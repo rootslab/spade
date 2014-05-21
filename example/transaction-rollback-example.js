@@ -29,7 +29,6 @@ client.once( 'ready', function (){
     setTimeout( function () {
         client.commands.exec( function ( err, data, fn ) {
             log( 'exec:', fn( data ) );
-            // log( client.libra.cqueue );
         } );
     }, 5000 );
 } );
