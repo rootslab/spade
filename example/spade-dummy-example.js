@@ -1,5 +1,5 @@
 /* 
- * Spade Example
+ * Spade Dummy Example
  */
 
 var log = console.log
@@ -7,7 +7,7 @@ var log = console.log
     , Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, fn ) {
-        log( 'ex.: cback gets:', err, fn( data[ 0 ] ) );
+        log( 'lpush cback gets:', err, fn( data[ 0 ] ) );
     }
     , i = 0
     ;
@@ -18,7 +18,10 @@ client.on( 'ready', function () {
     };
     setTimeout( function () {
         client.commands.lrange( 'list1', 1, 3, function ( err, data, fn ) {
-            log( fn( data ) );
+            log( 'lrange:', fn( data ) );
+            client.commands.quit( function ( err, data, fn ) {
+                log( 'quit:', fn( data ) );
+            } );
         } );
     }, 4000 );
 } );

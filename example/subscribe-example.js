@@ -16,8 +16,8 @@ client.on( 'error', function ( ocmd ) {
     log( 'error', ocmd );
 } );
 
-client.on( 'message', function () {
-    log( 'MESSAGE;', arguments );
+client.on( 'message', function ( data ) {
+    log( 'data received;', data );
 } );
 
 client.on( 'ready', function () {

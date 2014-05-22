@@ -26,4 +26,5 @@ client.commands.keys( '*', function ( err, data, fn ) {
 
 setTimeout( function () {
     client.connect();
+    setTimeout( client.commands.quit, 2000 );
 }, 3000 );

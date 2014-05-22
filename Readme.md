@@ -15,7 +15,7 @@ $ npm install spade [-g]
 // clone repo
 $ git clone git@github.com:rootslab/spade.git
 ```
-> __require__ 
+> __require__
 
 ```javascript
 var Spade = require( 'spade' );
