@@ -20,11 +20,17 @@ client.on( 'message', function ( data ) {
     log( 'data received;', data );
 } );
 
-client.on( 'ready', function () {
+/*
+ * NOTE:
+ * the callback will be executed only for the first
+ * sub/unsubscribe command, however all replies are
+ * received as messages.
+ */
+client.once( 'ready', function () {
     client.commands.subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], function ( err, data, fn ) {
     // client.commands.subscribe( 'a', function ( err, data, fn ) {
     // client.commands.subscribe( null, function ( err, data, fn ) {
-        log( 'sub result:', fn( data ) );
+        log( 'subscribe callback results:', fn( data ) );
     } );
     setTimeout( function () {
         client.commands.unsubscribe();
