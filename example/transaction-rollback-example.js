@@ -29,6 +29,9 @@ client.once( 'ready', function (){
     setTimeout( function () {
         client.commands.exec( function ( err, data, fn ) {
             log( 'exec:', fn( data ) );
+            client.commands.quit( function ( err, data, fn ) {
+                log( 'quit:', fn( data ) );
+            } );
         } );
     }, 5000 );
 } );
