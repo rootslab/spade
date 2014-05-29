@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-> ♠ Spade_, a Redis 2.x client.
+> ♠ _**Spade**_, a Redis 2.x client.
 
 ###Install
 
