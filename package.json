@@ -1,6 +1,6 @@
 {
   "name": "spade",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "♠ Spade, a full-featured Redis 2.x Client, with automatic socket reconnection and command rollback mechanisms.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,
@@ -23,7 +23,7 @@
     "bolgia" : ">=2.5.1",
     "boris" : ">=0.10.2",
     "cocker" : ">=0.10.1",
-    "libra" : ">=0.6.0",
+    "libra" : ">=0.7.0",
     "syllabus" : ">=0.21.0"
   },
   "devDependencies": {

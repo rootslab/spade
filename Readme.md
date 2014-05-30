@@ -29,6 +29,14 @@ var Spade = require( 'spade' );
 $ cd spade/
 $ npm test
 ```
+
+###Run Benchmark
+
+```bash
+$ cd spade/
+$ npm run-script bench
+```
+
 ###Constructor
 
 > Create an instance.

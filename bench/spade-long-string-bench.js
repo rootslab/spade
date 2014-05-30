@@ -12,6 +12,7 @@ var log = console.log
     , cc = tclients
     , stime = 0
     , ttime = 0
+    , long_string = "ABCDEFGHILMNOPQRSTUVZJKXYW0123456789abcdefghilmnopqrstuvzjkxyw0123456789"
     ;
 
 var sendCommands = function () {
@@ -50,7 +51,7 @@ var run = function () {
         , s = null
         ;
     for ( ; i < n; ++i ) {
-        s = new Spade();
+        s = Spade();
         list[ i ] = s;
         s.on( 'ready', enqueue );
     };
@@ -59,4 +60,25 @@ var run = function () {
     };
 };
 
-run();
+var add = function () {
+    var s = Spade()
+        ;
+    s.once( 'ready', function () {
+        var i = 0
+            , r = 0
+            , n = 100
+            ;
+        for ( ; i < n; ++i ) {
+            s.commands.lpush( 'mylist', long_string, function ( err, data, fn ) {
+                if ( ++r === n ) {
+                    s.commands.quit( run );
+                }
+            } );
+        };
+    } );
+    s.connect();
+};
+
+log( '- benchmark LRANGE with a long string argument (%d bytes): "%s"', long_string.length, long_string );
+
+add();
