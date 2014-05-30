@@ -1,7 +1,7 @@
 {
   "name": "spade",
-  "version": "0.4.2",
-  "description": "♠ Spade, a Redis 2.x Client.",
+  "version": "0.4.3",
+  "description": "♠ Spade, a full-fetured Redis 2.x Client, with automatic socket reconnection and command rollback mechanisms.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,
   "repository": {

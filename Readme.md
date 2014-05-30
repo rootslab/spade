@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-> ♠ _**Spade**_, a __Redis 2.x__ client.
+> ♠ _**Spade**_, a __a full-fetured Redis 2.x__ client, with automatic __socket reconnection__ and __command rollback mechanism__.
 
 ###Install
 
