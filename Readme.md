@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-> ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with automatic __socket reconnection__ and __command rollback__ mechanism.
+> ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism.
 
 ###Install
 
@@ -39,16 +39,42 @@ $ npm run-script bench
 
 ###Constructor
 
-> Create an instance.
+> Create an instance, the argument within [ ] is optional.
 
 ```javascript
-var l = Spade()
+Spade( [ Object opt ] )
 // or
-var l = new Spade()
+new Spade( [ Object opt ] )
+```
+
+####Options
+
+> Default options are listed.
+
+```javascript
+opt = {
+    /*
+     * Syllabus develop option to restrict
+     * commands to a particular Redis version.
+     */
+    semver : false
+    /*
+     * Cocker socket options
+     */
+    , socket : {
+        address : {
+            host : 'localhost'
+            , port : 6379
+        }
+        , reconnection : {
+            trials : 3
+            , interval : 1000
+        }
+    }
+}
 ```
 
 ### Properties
-
 
 ```javascript
 
@@ -61,6 +87,13 @@ var l = new Spade()
 ```javascript
 
 ```
+
+##Events
+
+```javascript
+
+```
+
 ------------------------------------------------------------------------
 
 
