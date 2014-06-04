@@ -11,7 +11,7 @@
 
 > ♠ __Spade__ is a simple and clean modular Redis client, it uses:
  - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
- - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies.
+ - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies, and commands rollbacks.
  - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
 
 ###Install
@@ -61,6 +61,12 @@ opt = {
     /*
      * Syllabus develop option to restrict
      * commands to a particular Redis version.
+     *
+     * - A boolean 'true' enable develop mode.
+     * - A semver string like '1.0.0' enbale develop mode
+     *   and restrict commands to Redis 1.0.0.
+     *
+     * See https://github.com/rootslab/syllabus.
      */
     semver : false
     /*
