@@ -156,7 +156,7 @@ Spade#connect( [ Object socket_opt [, Function cback] ] ) : Spade
  *
  * NOTE: From the client point of view it has the same effect of
  * sending and executing the Redis QUIT command. Connection will be
- * closed and no other attempts will be made.
+ * closed and no other re-connection attempts will be made.
  */
 Spade#disconnect( [ Object socket_opt [, Function cback] ] ) : Spade
 
