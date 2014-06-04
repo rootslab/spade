@@ -101,7 +101,7 @@ Spade#ready
 
 /*
  * An Object that holds all Redis commands/methods mix-ins
- * from Syllabus. It is a shortcut for Spade#syllabus.commands.
+ * from Syllabus. It is a shortcut for Spade.syllabus.commands.
  */
 Spade#commands : Object
 
