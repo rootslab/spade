@@ -12,8 +12,8 @@
 > It also possible to __restrict commands to a particular Redis version__ via constructor options.
 
 > ♠ __Spade__ is a simple and clean modular client library, it makes use of:
- - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
- - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
+ - __[Syllabus](https://github.com/rootslab/syllabus)__ module for command encoding and command helpers mix-ins.
+ - __[Libra](https://github.com/rootslab/libra)__ module to handle  between commands which have been sent and relative __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
  - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle __socket reconnection__ when the connection was lost. 
  - __[Boris](https://github.com/rootslab/boris)__, a pure js module to parse __Redis__ replies.
 
@@ -69,8 +69,8 @@ opt = {
      * commands to a particular Redis version.
      *
      * - A boolean 'true' enable develop mode.
-     * - A semver string like '1.0.0' enbale develop mode
-     *   and restrict commands to Redis 1.0.0.
+     * - A semver string like '1.0.0' enable develop mode
+     *   and restrict commands to Redis version 1.0.0.
      *
      * See https://github.com/rootslab/syllabus.
      */
