@@ -7,7 +7,12 @@
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-> ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism.
+> ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism for _subscriptions_ and _incomplete transactions_.
+
+> ♠ __Spade__ is a simple and clean modular Redis client, it uses:
+ - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
+ - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies.
+ - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
 
 ###Install
 
@@ -77,7 +82,32 @@ opt = {
 ### Properties
 
 ```javascript
+/*
+ * A property that holds the initial config object.
+ */
+Spade#options : Object
 
+/*
+ * A flag to indicates if the connection to Redis Server
+ * is currently active.
+ */
+Spade#ready
+
+/*
+ * An Object that holds all Redis commands/methods mix-ins
+ * from Syllabus. It is a shortcut for Spade#syllabus.commands.
+ */
+Spade#commands : Object
+
+/*
+ * Some shortcuts to internal modules.
+ */
+
+Spade#syllabus
+
+Spade#cocker
+
+Spade#libra
 ```
 
 ###Methods
@@ -85,12 +115,52 @@ opt = {
 > Arguments within [ ] are optional.
 
 ```javascript
+/*
+ * Connect to Redis Server, when the connection is fully
+ * established, 'ready' event will be emitted.
+ * It returns the current Spade instance.
+ *
+ * NOTE: You don't need to listen for the 'ready' event, commands
+ * will be queued in "offline mode" and written to socket when the
+ * connection will be ready.
+ *
+ * socket_opt = {
+ *      address : {
+ *          host : 'localhost'
+ *          , port : 6379
+ *      }
+ *      , reconnection : {
+ *          trials : 3
+ *          , interval : 1000
+ *      }
+ *  }
+ */
+Spade#connect( [ Object socket_opt ] ) : Spade
 
 ```
 
 ##Events
 
 ```javascript
+/*
+ * Connection was fully established.
+ */
+'ready' : function ( Object address ) : undefined
+
+/*
+ * Connection is down ( on the first 'close' event for the socket ).
+ */
+'offline' : function ( Object address ) : undefined
+
+/*
+ * Connection is definitively lost ( after opt.reconnection.trials times )
+ */
+'lost' : function ( Object address ) : undefined
+
+/*
+ * A parser or command error has occurred.
+ */
+'error' : function ( Error err, Object command ) : undefined
 
 ```
 
