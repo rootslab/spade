@@ -169,6 +169,17 @@ Spade#disconnect( [ Object socket_opt [, Function cback] ] ) : Spade
 
 ```javascript
 /*
+ * A message was received from PubSub system when the client is in
+ * Subscrition mode.
+ */
+'message' : function ( Array message ) : undefined
+
+/*
+ * A message was received when the client is in Monitor mode.
+ */
+'monitor' : function ( String message ) : undefined
+
+/*
  * Connection was fully established.
  */
 'ready' : function ( Object address ) : undefined
