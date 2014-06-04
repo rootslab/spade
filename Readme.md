@@ -9,10 +9,13 @@
 
 > ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__.
 
+> It also possible to __restrict commands to a particular Redis version__ via constructor options.
+
 > ♠ __Spade__ is a simple and clean modular client library, it makes use of:
  - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
  - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
- - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
+ - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle socket reconnection when the connection was lost. 
+ - __[Boris](https://github.com/rootslab/boris)__, a pure js module to parse __Redis__ replies.
 
 
 ###Install
