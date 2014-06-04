@@ -11,7 +11,7 @@
 
 > ♠ __Spade__ is a simple and clean modular Redis client, it uses:
  - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
- - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies; it handles also __commands queue rollbacks__ with the help of [Train](https://github.com/rootlsab/train) module.
+ - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
  - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
 
 
