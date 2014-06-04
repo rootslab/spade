@@ -38,7 +38,7 @@ $ npm test
 
 ###Run Benchmark
 
-> __NOTE__: You need a running Redis Server to execute benchamrks.
+> __NOTE__: You need a running Redis Server to execute benchmarks.
 
 ```bash
 $ cd spade/
