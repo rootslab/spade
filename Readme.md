@@ -9,7 +9,7 @@
 
 > ♠ _**Spade**_, a full-featured __Redis__ 2.x client, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__.
 
-> ♠ __Spade__ is a simple and clean modular Redis client, it uses:
+> ♠ __Spade__ is a simple and clean modular client library, it makes use of:
  - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __Redis__ commands/methods mix-ins.
  - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
  - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
@@ -127,6 +127,8 @@ Spade#libra
 /*
  * Connect to Redis Server, when the connection is fully
  * established, 'ready' event will be emitted.
+ * You can optionally use a cback that will be executed on
+ * the 'ready' event. 
  * It returns the current Spade instance.
  *
  * NOTE: You don't need to listen for the 'ready' event, commands
@@ -144,7 +146,19 @@ Spade#libra
  *      }
  *  }
  */
-Spade#connect( [ Object socket_opt ] ) : Spade
+Spade#connect( [ Object socket_opt [, Function cback] ] ) : Spade
+
+/*
+ * Disconnect from Redis Server.
+ * You can optionally use a cback that will be executed after socket
+ * disconnection.
+ * It returns the current Spade instance.
+ *
+ * NOTE: From the client point of view it has the same effect of
+ * sending and executing the Redis QUIT command. Connection will be
+ * closed and no other attempts will be made.
+ */
+Spade#disconnect( [ Object socket_opt [, Function cback] ] ) : Spade
 
 ```
 
@@ -165,7 +179,7 @@ Spade#connect( [ Object socket_opt ] ) : Spade
  * Client is trying to reconnect to Redis server, k is the number
  * of current connection attempt.
  *
- * NOTE: 'millis' indicates the last interval of time between attempts-
+ * NOTE: 'millis' indicates the last interval of time between attempts.
  */
 'attempt' : function ( Number k, Object address, Number millis ) : undefined
 
