@@ -14,6 +14,7 @@
  - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between sent commands and __Redis__ replies, and commands rollbacks.
  - __[Cocker](https://github.com/rootslab/cocker)__ to properly handle socket reconnection when the connection was lost. 
 
+
 ###Install
 
 ```bash
@@ -36,6 +37,8 @@ $ npm test
 ```
 
 ###Run Benchmark
+
+> __NOTE__: You need a running Redis Server to execute benchamrks.
 
 ```bash
 $ cd spade/
