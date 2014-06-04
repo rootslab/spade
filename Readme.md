@@ -162,6 +162,14 @@ Spade#connect( [ Object socket_opt ] ) : Spade
 'offline' : function ( Object address ) : undefined
 
 /*
+ * Client is trying to reconnect to Redis server, k is the number
+ * of current connection attempt.
+ *
+ * NOTE: 'millis' indicates the last interval of time between attempts-
+ */
+'attempt' : function ( Number k, Object address, Number millis ) : undefined
+
+/*
  * Connection is definitively lost ( after opt.reconnection.trials times )
  */
 'lost' : function ( Object address ) : undefined
