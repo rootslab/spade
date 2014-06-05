@@ -1,4 +1,4 @@
-###Spade
+###♠ Spade
 [![build status](https://secure.travis-ci.org/rootslab/spade.png?branch=master)](http://travis-ci.org/rootslab/spade) 
 [![NPM version](https://badge.fury.io/js/spade.png)](http://badge.fury.io/js/spade)
 [![build status](https://david-dm.org/rootslab/spade.png)](https://david-dm.org/rootslab/spade)
