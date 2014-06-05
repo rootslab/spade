@@ -87,6 +87,36 @@ opt = {
             trials : 3
             , interval : 1000
         }
+        , connection : {
+            /*
+             * encoding could be: 'ascii', 'utf8', 'utf16le' or 
+             * 'ucs2','buffer'. It defaults to null or 'buffer'.
+             */
+            encoding : null
+            /*
+             * keepAlive defaults to true, false in net.Socket,
+             * Specify a number to set also the initialDelay.
+             */
+            , keepAlive : true
+            // 'timeout' event delay, default is 0 ( no timeout )
+            , timeout : 0
+            /*
+            * noDelay is true for default, it disables the Nagle
+            * algorithm ( no TCP data buffering for socket.write )
+            */
+            , noDelay : true
+            /*
+             * If true, the socket won't automatically send a FIN
+             * packet when the other end of the socket sends a FIN
+             * packet. Defaults to false.
+             */
+            , allowHalfOpen : false
+        }
+        , path : {
+            fd : undefined
+            , readable : true
+            , writable : true
+        }
     }
 }
 ```
