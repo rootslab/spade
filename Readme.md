@@ -11,7 +11,7 @@
 
 > It also possible to __restrict commands to a particular Redis version__ via constructor options.
 
-> ♠ __Spade__ is a simple and clean modular library, it makes use of some __well tested__ modules:
+> ♠ __Spade__ is a __simple and clean__ modular library, it makes use of some __well tested__ modules:
  - __[Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
  > Internally it uses __[Hoar](https://github.com/rootslab/hoar)__ module to handle __Semantic Versioning__ ( 2.0 ), __[Sermone](https://github.com/rootslab/hoar)__ to encode commands, __[Abaco](https://github.com/rootslab/hoar)__ and __[Bolgia](https://github.com/rootslab/hoar)__ modules to get some utilities.
  - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between commands which have been sent and relative __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
