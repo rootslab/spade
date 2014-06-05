@@ -161,7 +161,7 @@ Spade#connect( [ Object socket_opt [, Function cback] ] ) : Spade
  * sending and executing the Redis QUIT command. Connection will be
  * closed and no other re-connection attempts will be made.
  */
-Spade#disconnect( [ Object socket_opt [, Function cback] ] ) : Spade
+Spade#disconnect( [ Function cback] ] ) : Spade
 
 ```
 
