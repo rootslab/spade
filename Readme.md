@@ -87,17 +87,14 @@ opt = {
      * Cocker socket options
      */
     , socket : {
-
         address : {
             host : 'localhost'
             , port : 6379
         }
-
         , reconnection : {
             trials : 3
             , interval : 1000
         }
-
         , connection : {
             /*
              * encoding could be: 'ascii', 'utf8', 'utf16le' or 
@@ -125,7 +122,6 @@ opt = {
              */
             , allowHalfOpen : false
         }
-
         , path : {
             fd : undefined
             , readable : true
@@ -189,6 +185,9 @@ Spade.syllabus
  *          trials : 3
  *          , interval : 1000
  *      }
+ *      , connection : {
+ *          ...
+ *      }
  *  }
  */
 Spade#connect( [ Object socket_opt [, Function cback] ] ) : Spade
@@ -227,7 +226,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'ready' : function ( Object address ) : undefined
 
 /*
- * Connection is down ( on the first 'close' event for the socket ).
+ * Connection is currently down ( on the first 'close' event from the socket ).
  */
 'offline' : function ( Object address ) : undefined
 
