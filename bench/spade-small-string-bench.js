@@ -13,6 +13,9 @@ var log = console.log
     , stime = 0
     , ttime = 0
     , small_string = '1234'
+    , spade_opt = {
+        hiredis : !!true
+    }
     ;
 
 var sendCommands = function () {
@@ -51,7 +54,7 @@ var run = function () {
         , s = null
         ;
     for ( ; i < n; ++i ) {
-        s = Spade();
+        s = Spade( spade_opt );
         list[ i ] = s;
         s.on( 'ready', enqueue );
     };
@@ -61,7 +64,7 @@ var run = function () {
 };
 
 var add = function () {
-    var s = Spade()
+    var s = Spade( spade_opt )
         ;
     s.once( 'ready', function () {
         var i = 0
@@ -79,6 +82,8 @@ var add = function () {
     s.connect();
 };
 
-log( '- benchmark LRANGE with a small string argument (%d bytes): "%s"', small_string.length, small_string );
+log( '\n- using: "%s" parser.', Spade( spade_opt ).hiboris.hreader ? 'hiredis' : 'Boris' );
+
+log( '- benchmark LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
 
 add();

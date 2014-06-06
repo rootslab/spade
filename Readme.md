@@ -16,7 +16,7 @@
  > Internally it uses __[Hoar](https://github.com/rootslab/hoar)__ module to handle __Semantic Versioning__ ( 2.0 ), __[Sermone](https://github.com/rootslab/sermone)__ to encode commands, __[Abaco](https://github.com/rootslab/abaco)__ and __[Bolgia](https://github.com/rootslab/bolgia)__ modules to get some utilities.
  - __[Libra](https://github.com/rootslab/libra)__ module to handle bindings between commands which have been sent and relative __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
  - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle __socket reconnection__ when the connection is lost. 
- - __[Hiboris](https://github.com/rootslab/boris)__, a utility module to load native__[hiredis](https://github.com/redis/hiredis-node)__ parser, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a pure js parser module for __Redis__ replies. Internally it uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
+ - __[Hiboris](https://github.com/rootslab/boris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ replies; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
 
 ###Install
 
@@ -75,18 +75,29 @@ opt = {
      * See https://github.com/rootslab/syllabus.
      */
     semver : false
+
+    /*
+     * Hiboris options, for defaults 'hiredis'
+     * native parser is disabled in favour of
+     * Boris JS parser.
+     */
+    , hiredis : false
+
     /*
      * Cocker socket options
      */
     , socket : {
+
         address : {
             host : 'localhost'
             , port : 6379
         }
+
         , reconnection : {
             trials : 3
             , interval : 1000
         }
+
         , connection : {
             /*
              * encoding could be: 'ascii', 'utf8', 'utf16le' or 
@@ -114,6 +125,7 @@ opt = {
              */
             , allowHalfOpen : false
         }
+
         , path : {
             fd : undefined
             , readable : true
