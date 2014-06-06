@@ -7,13 +7,13 @@ var log = console.log
     , Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, fn ) {
-        log( 'lpush cback gets:', err, fn( data[ 0 ] ) );
+        log( 'lpush cback gets:', err, data, fn( data ) );
     }
     , i = 0
     ;
 
 client.on( 'ready', function () {
-    while ( ++i <= 100 ) {
+    while ( ++i <= 5 ) {
         client.commands.lpush( 'list1', 'ambarabàcciccìcoccò', cback );
     };
     setTimeout( function () {
