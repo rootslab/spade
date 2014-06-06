@@ -26,7 +26,7 @@ b.on( 'match', function ( e, d, convert ) {
 
 b.parse( rdata );
 
-hreader.feed( info_reply );
+hreader.feed( new Buffer( info_reply ) );
 
 hreply = hreader.get();
 log( '- hiredis result:', util.inspect( [ hreply + '' ], false, 3, true ) );

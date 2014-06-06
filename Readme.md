@@ -98,7 +98,9 @@ opt = {
              * Specify a number to set also the initialDelay.
              */
             , keepAlive : true
-            // 'timeout' event delay, default is 0 ( no timeout )
+            /*
+             * 'timeout' event delay, default is 0 ( no timeout )
+             */
             , timeout : 0
             /*
             * noDelay is true for default, it disables the Nagle
