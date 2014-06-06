@@ -7,7 +7,7 @@ var log = console.log
     , Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, fn ) {
-        log( 'lpush cback gets:', err, data, fn( data ) );
+        log( 'lpush cback gets:', err, fn( data ) );
     }
     , i = 0
     ;
