@@ -239,7 +239,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'attempt' : function ( Number k, Object address, Number millis ) : undefined
 
 /*
- * Connection is definitively lost ( after opt.reconnection.trials times )
+ * Connection is definitively lost ( after opt.reconnection.trials times ).
  */
 'lost' : function ( Object address ) : undefined
 
