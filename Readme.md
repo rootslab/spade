@@ -158,12 +158,10 @@ Spade.commands : Object
 /*
  * Some shortcuts to internal modules.
  */
-
-Spade.syllabus
-
 Spade.cocker
-
+Spade.hiboris
 Spade.libra
+Spade.syllabus
 ```
 
 ###Methods
