@@ -251,7 +251,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'lost' : function ( Object address ) : undefined
 
 /*
- * Socket times out from inactivity.
+ * Socket times out for inactivity.
  * It only notifies that the socket has been idle.
  */
 'timeout' : function ( Object address, Number timeout ) : undefined
