@@ -225,7 +225,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  */
 'error' : function ( Error err, Object command ) : undefined
 
- /* CONNECTION */
+ /* Socket Connection Events */
 
 /*
  * Connection was fully established.
