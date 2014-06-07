@@ -221,6 +221,13 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'monitor' : function ( String message ) : undefined
 
 /*
+ * A parser or command error has occurred.
+ */
+'error' : function ( Error err, Object command ) : undefined
+
+ /* CONNECTION */
+
+/*
  * Connection was fully established.
  */
 'ready' : function ( Object address ) : undefined
@@ -244,10 +251,10 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'lost' : function ( Object address ) : undefined
 
 /*
- * A parser or command error has occurred.
+ * Socket times out from inactivity.
+ * It only notifies that the socket has been idle.
  */
-'error' : function ( Error err, Object command ) : undefined
-
+'timeout' : function ( Object address, Number timeout ) : undefined
 ```
 
 ------------------------------------------------------------------------

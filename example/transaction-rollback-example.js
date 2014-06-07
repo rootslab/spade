@@ -24,6 +24,8 @@ client.commands.ping( function ( err, data, fn ) {
     log( 'ping:', fn( data ) );
 } );
 
+// TODO - NOTE: manual shutdown Redis
+
 client.once( 'ready', function (){
     log( 'ready' );
     setTimeout( function () {
