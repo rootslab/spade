@@ -140,7 +140,7 @@ opt = {
 Spade.options : Object
 
 /*
- * A flag to indicates if the connection to Redis Server
+ * A flag to indicate if the connection to Redis Server
  * is currently active.
  */
 Spade.ready
@@ -161,7 +161,7 @@ Spade.cocker
 // Parser module.
 Spade.hiboris
 
-// Queue Manager for COmmands/replies bindings.
+// Queue Manager for Commands/Replies bindings.
 Spade.libra
 
 // Redis Commands Mix-ins
