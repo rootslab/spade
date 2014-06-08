@@ -102,7 +102,7 @@ opt = {
              */
             encoding : null
             /*
-             * keepAlive defaults to true, false in net.Socket,
+             * keepAlive defaults to true ( it is false in net.Socket ).
              * Specify a number to set also the initialDelay.
              */
             , keepAlive : true
@@ -154,9 +154,17 @@ Spade.commands : Object
 /*
  * Some shortcuts to internal modules.
  */
+
+// Socket module.
 Spade.cocker
+
+// Parser module.
 Spade.hiboris
+
+// Queue Manager for COmmands/replies bindings.
 Spade.libra
+
+// Redis Commands Mix-ins
 Spade.syllabus
 ```
 
