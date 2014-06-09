@@ -147,7 +147,7 @@ Spade.ready : Boolean
 
 /*
  * An Object that holds all Redis commands/methods mix-ins
- * from Syllabus. It is a shortcut for Spade.syllabus.commands.
+ * from Syllabus. It is a shortcut for Spade.mixins.commands.
  */
 Spade.commands : Object
 
@@ -169,7 +169,7 @@ Spade.queue : Libra
 
 /*
  * Syllabus property contains all Redis Commands Mix-ins for the current
- * semantic version specified ( Spade default is '*' ).
+ * semantic version specified ( Spade default value is false, interpreted as '*' ).
  *
  * NOTE: Specifying a particular semver version enables develop mode, some
  * mix-ins will be added to get some info about a particular command.
