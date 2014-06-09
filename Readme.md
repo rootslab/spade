@@ -167,7 +167,14 @@ Spade.parser : Hiboris | Boris
 // Queue Manager for Commands/Replies bindings.
 Spade.queue : Libra
 
-// Redis Commands Mix-ins
+/*
+ * Syllabus property contains all Redis Commands Mix-ins for the current
+ * semantic version specified ( Spade default is '*' ).
+ *
+ * NOTE: Specifying a particular semver version enables develop mode, some
+ * mix-ins will be added to get some info about a particular command.
+ * See Syllabus module for some examples.
+ */
 Spade.mixins : Syllabus
 ```
 
