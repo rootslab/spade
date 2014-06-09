@@ -143,7 +143,7 @@ Spade.options : Object
  * A flag to indicate if the connection to Redis Server
  * is currently active.
  */
-Spade.ready
+Spade.ready : Boolean
 
 /*
  * An Object that holds all Redis commands/methods mix-ins
@@ -155,17 +155,17 @@ Spade.commands : Object
  * Some shortcuts to internal modules.
  */
 
-// Socket module.
-Spade.cocker
+// Cocker module that inherits from net.Socket.
+Spade.socket : Cocker
 
 // Parser module.
-Spade.hiboris
+Spade.parser : Hiboris
 
 // Queue Manager for Commands/Replies bindings.
-Spade.libra
+Spade.queue : Libra
 
 // Redis Commands Mix-ins
-Spade.syllabus
+Spade.mixins : Syllabus
 ```
 
 ###Methods
