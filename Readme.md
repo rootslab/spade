@@ -158,7 +158,10 @@ Spade.commands : Object
 // Cocker module that inherits from net.Socket.
 Spade.socket : Cocker
 
-// Parser module, it could be 'hiredis' native parser or Boris JS parser.
+/*
+ * Parser module, it could be an instance of Hiboris, a module
+ * wrapper for the hiredis native parser, or the Boris JS parser.
+ */
 Spade.parser : Hiboris | Boris
 
 // Queue Manager for Commands/Replies bindings.
