@@ -208,7 +208,7 @@ Spade.mixins : Syllabus
  *      }
  *  }
  */
-Spade#connect( [ Object socket_opt [, Function cback] ] ) : Spade
+Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
 
 /*
  * Disconnect from Redis Server.
@@ -275,7 +275,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'timeout' : function ( Object address, Number timeout ) : undefined
 ```
 
-------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 
 ### MIT License
