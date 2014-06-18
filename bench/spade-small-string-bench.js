@@ -82,7 +82,7 @@ var add = function () {
     s.connect();
 };
 
-log( '\n- using: "%s" parser.', Spade( spade_opt ).hiboris.hreader ? 'hiredis' : 'Boris' );
+log( '\n- using: "%s" parser.', Spade( spade_opt ).parser.hreader ? 'hiredis' : 'Boris' );
 
 log( '- benchmark LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
 
