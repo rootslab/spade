@@ -8,6 +8,7 @@
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
 > ♠ _**Spade**_, a full-featured __Redis__ client module, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__.
+> It also supports __LUA__ scripts caching via [Syllabus](https://github.com/rootslab/syllabus) and [Camphora](https://github.com/rootslab/camphora) modules.
 
 > It also possible to __restrict commands to a particular Redis version__ via constructor options.
 
@@ -222,6 +223,32 @@ Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
  */
 Spade#disconnect( [ Function cback ] ) : Spade
 
+
+/*
+ * Initialize LUA script cache, loading and sending all the files
+ * found in the './node_modules/syllabus/lib/lua/scripts' directory,
+ * to the Redis Server.
+ *
+ * NOTE:
+ *  Empty files and scripts refused by Redis (with an error reply),
+ *  are automatically evicted from the cache.
+ *
+ * NOTE:
+ *  - to send/run a script loaded from the cache, use:
+ *     Spade.lua.script.run( 'test.lua', [ .. ], [ .. ], function ( err, data, fn ) { .. } );
+ *
+ *  - to manually load a script into the cache, use:
+ *     Spade.lua.script.load( key, data, function( err, data, fn ) { .. } );
+ *
+ *  - to clear Spade cache and Redis cache, use:
+ *     Spade.lua.script.flush();
+ *
+ *  - to get the current cache object/hash (an instance of Camphora), use
+ *     Spade.lua.cache();
+ *
+ *  See also Syllabus : https://github.com/rootslab/syllabus
+ */
+ Spade@initCache() : undefined
 ```
 
 ##Events
@@ -243,7 +270,36 @@ Spade#disconnect( [ Function cback ] ) : Spade
  */
 'error' : function ( Error err, Object command ) : undefined
 
- /* Socket Connection Events */
+
+/* LUA Script Cache Events */
+
+/*
+ * Cache was initiliazed, script files are loaded in memory and a list of
+ * SCRIPT LOAD commands are ready to be written to the socket.
+ */
+'cacheinit' : function ( Array script_load_commands ) : undefined
+
+/*
+ * A script was loaded in the cache and successfully processed by Redis.
+ */
+'cacheload' : function ( String script_name, Buffer data, String txt ) : undefined
+
+/*
+ * All scripts, found in the Syllabus scripts directory, are written to socket
+ * and processed by Redis.
+ *
+ * NOTE: 'cacheready' event happens always after the 'ready' connection event,
+ * then all scripts should be processed by Redis before launch this event.
+ *
+ * NOTE: Errored scripts are not added to cache, listen to 'error' event to capture
+ * script failures.
+ *
+ * NOTE: LUA cache is an instance of Camphora module.
+ */
+'cacheready' : function ( Camphora scripts_cache ) : undefined
+
+
+/* Socket Connection Events */
 
 /*
  * Connection was fully established.
