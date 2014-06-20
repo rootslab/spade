@@ -1,6 +1,6 @@
 {
   "name": "spade",
-  "version": "0.16.2",
+  "version": "0.16.3",
   "description": "♠ Spade, a full-featured Redis client module, with offline queue for commands, automatic socket reconnection and command rollback mechanisms for subscriptions and incomplete transactions, caching for LUA scripts.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,

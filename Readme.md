@@ -270,7 +270,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 ```javascript
 /*
  * A message was received from PubSub system when the client is in
- * Subscrition mode.
+ * Subscrition (PubSub) mode.
  */
 'message' : function ( Array message ) : undefined
 ```
@@ -288,7 +288,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 
 ```javascript
 /*
- * A parser or command error has occurred.
+ * A parser, command encoding or script loading error has occurred.
  */
 'error' : function ( Error err, Object command ) : undefined
 ```
@@ -303,7 +303,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'cacheinit' : function ( Array script_load_commands ) : undefined
 
 /*
- * A script was loaded in the cache and successfully processed by Redis.
+ * A script was loaded in the cache and wa successfully processed by Redis.
  */
 'cacheload' : function ( String script_name, Buffer data, String txt ) : undefined
 
@@ -312,10 +312,10 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * and processed by Redis.
  *
  * NOTE: 'cacheready' event happens always after the 'ready' connection event,
- * then all scripts should be processed by Redis before launch this event.
+ * because all scripts should be processed by Redis before launching this event.
  *
- * NOTE: Errored scripts are not added to cache, listen to 'error' event to capture
- * script failures.
+ * NOTE: Errored scripts are not added to cache, listen to 'error' event
+ * to capture script loading failures.
  *
  * NOTE: LUA cache is an instance of Camphora module.
  */
