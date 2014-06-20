@@ -303,7 +303,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'cacheinit' : function ( Array script_load_commands ) : undefined
 
 /*
- * A script was loaded in the cache and wa successfully processed by Redis.
+ * A script was loaded in the cache and was successfully processed by Redis.
  */
 'cacheload' : function ( String script_name, Buffer data, String txt ) : undefined
 
