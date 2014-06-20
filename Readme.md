@@ -320,7 +320,6 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * NOTE: 'cacheready' event happens always after the 'ready' connection event,
  * because all scripts should be processed by Redis before launching this event.
  *
- *
  * NOTE: LUA cache is an instance of Camphora module.
  */
 'cacheready' : function ( Camphora scripts_cache ) : undefined
