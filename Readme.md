@@ -247,10 +247,10 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *  - to send/run a script loaded from the cache, use:
  *     Spade.lua.script.run( 'test.lua', [ .. ], [ .. ], function ( err, data, fn ) { .. } );
  *
- *  - to manually load/send a script into the cache and to Redis, use:
+ *  - to manually load a script into the cache and send it to Redis, use:
  *     Spade.lua.script.load( key, data, function( err, data, fn ) { .. } );
  *
- *  - to clear Spade cache and Redis cache, use:
+ *  - to clear Spade and Redis cache, use:
  *     Spade.lua.script.flush();
  *
  *  - to get the current cache object/hash (an instance of Camphora), use:
