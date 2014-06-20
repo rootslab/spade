@@ -288,7 +288,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 
 ```javascript
 /*
- * A parser, command encoding or script loading error has occurred.
+ * A parser or command encoding error has occurred.
  */
 'error' : function ( Error err, Object command ) : undefined
 ```
@@ -303,6 +303,12 @@ Spade#disconnect( [ Function cback ] ) : Spade
 'cacheinit' : function ( Array script_load_commands ) : undefined
 
 /*
+ * A script was processed and refused by Redis with an error reply.
+ * Errored scripts are not added to local cache.
+ */
+'scriptfailure' : function ( String script_name, String error_message ) : undefined
+
+/*
  * A script was loaded in the cache and was successfully processed by Redis.
  */
 'cacheload' : function ( String script_name, Buffer data, String txt ) : undefined
@@ -314,8 +320,6 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * NOTE: 'cacheready' event happens always after the 'ready' connection event,
  * because all scripts should be processed by Redis before launching this event.
  *
- * NOTE: Errored scripts are not added to cache, listen to 'error' event
- * to capture script loading failures.
  *
  * NOTE: LUA cache is an instance of Camphora module.
  */
