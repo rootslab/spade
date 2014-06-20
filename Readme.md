@@ -148,6 +148,12 @@ Spade.options : Object
 Spade.ready : Boolean
 
 /*
+ * A flag to avoid initializing scripts cache multiple times,
+ * when the client is offline ( multiple #initCache() calls ).
+ */
+Spade.cacheready : Boolean
+
+/*
  * An Object that holds all Redis commands/methods mix-ins
  * from Syllabus. It is a shortcut for Spade.mixins.commands.
  */

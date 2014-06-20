@@ -6,16 +6,16 @@ var log = console.log
     , util = require( 'util' )
     , inspect = util.inspect
     , Spade = require( '../' )
-    , client = Spade()
-    , cback = function ( err, data, fn ) {
-        log( 'ex.: cback gets:', err, fn( data[ 0 ] ) );
-    }
-    , i = 0
+    , client = Spade( {} )
     , filename = 'test0.lua'
     ;
 
 client.on( 'error', function ( ocmd ) {
     log( '\nerror', inspect( ocmd, false, 3, true ) );
+} );
+
+client.on( 'ready', function ( address ) {
+    log( '\nready', inspect( address, false, 3, true ) );
 } );
 
 client.on( 'cacheload', function ( script, data, txt ) {
