@@ -238,6 +238,10 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * Initialize LUA script cache, loading and sending all the files
  * found in the './node_modules/syllabus/lib/lua/scripts' directory,
  * to the Redis Server.
+ * Optionally you could specify a custom path with 'file_load_opt':
+ * { filepath : '/my/scripts/dir' }
+ *
+ * See Camphora#load for a list of available options: https://github.com/rootslab/camphora
  *
  * NOTE:
  *  Empty files and scripts refused by Redis (with an error reply),
@@ -256,11 +260,9 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *  - to get the current cache object/hash (an instance of Camphora), use:
  *     Spade.lua.cache();
  *
- *  See also:
- * - Syllabus : https://github.com/rootslab/syllabus
- * - Camphora : https://github.com/rootslab/camphora
+ *  See Syllabus.lua : https://github.com/rootslab/syllabus
  */
- Spade#initCache() : undefined
+ Spade#initCache( [ Object file_load_opt ] ) : undefined
 ```
 
 ##Events
