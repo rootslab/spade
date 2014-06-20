@@ -7,7 +7,7 @@ var log = console.log
     , inspect = util.inspect
     , Spade = require( '../' )
     , client = Spade( {} )
-    , filename = 'test0.lua'
+    , filename = 'test_reply.lua'
     ;
 
 client.on( 'error', function ( ocmd ) {
