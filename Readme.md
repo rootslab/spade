@@ -238,31 +238,36 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * Initialize LUA script cache, loading and sending all the files
  * found in the './node_modules/syllabus/lib/lua/scripts' directory,
  * to the Redis Server.
- * Optionally you could specify a custom path with 'file_load_opt':
- * { filepath : '/my/scripts/dir' }
+ * It triggers 'cacheinit', 'cacheload', 'cacheready' and 'scriptfailure'
+ * events. See "Script Cache Events" Section.
+ * Optionally you could specify a custom path like:
+ *
+ *  'file_load_opt' = { filepath : '/my/scripts/dir' };
  *
  * See Camphora#load for a list of available options: https://github.com/rootslab/camphora
  *
- * NOTE:
- *  Empty files and scripts refused by Redis (with an error reply),
- *  are automatically evicted from the cache.
+ * NOTE: For default cache will be not cleared before initializing,
+ * to achieve it, use a true value for 'reset'.
+ *
+ * NOTE: Empty files and scripts processed and refused by Redis,
+ * with an error reply, are automatically evicted from the cache.
  *
  * NOTE:
- *  - to send/run a script loaded from the cache, use:
- *     Spade.lua.script.run( 'test.lua', [ .. ], [ .. ], function ( err, data, fn ) { .. } );
+ * - to send/run a script loaded from the cache, use:
+ *    Spade.lua.script.run( 'test.lua', [ .. ], [ .. ], function ( err, data, fn ) { .. } );
  *
- *  - to manually load a script into the cache and send it to Redis, use:
- *     Spade.lua.script.load( key, data, function( err, data, fn ) { .. } );
+ * - to manually load a script into the cache and send it to Redis, use:
+ *    Spade.lua.script.load( key, data, function( err, data, fn ) { .. } );
  *
- *  - to clear Spade and Redis cache, use:
- *     Spade.lua.script.flush();
+ * - to clear Spade and Redis cache, use:
+ *    Spade.lua.script.flush();
  *
- *  - to get the current cache object/hash (an instance of Camphora), use:
- *     Spade.lua.cache();
+ * - to get the current cache object/hash (an instance of Camphora), use:
+ *    Spade.lua.cache();
  *
- *  See Syllabus.lua : https://github.com/rootslab/syllabus
+ * See Syllabus.lua : https://github.com/rootslab/syllabus
  */
- Spade#initCache( [ Object file_load_opt ] ) : undefined
+ Spade#initCache( [ Object file_load_opt [, Boolean reset ] ] ) : undefined
 ```
 
 ##Events
