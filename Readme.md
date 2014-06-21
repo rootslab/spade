@@ -196,10 +196,9 @@ Spade.mixins : Syllabus
 
 ```javascript
 /*
- * Connect to Redis Server, when the connection is fully
- * established, 'ready' event will be emitted.
- * You can optionally use a cback that will be executed on
- * the 'ready' event. 
+ * Connect to Redis Server, when the connection is fully established,
+ * 'ready' event will be emitted. You can optionally use a cback that
+ * will be executed on the 'ready' event.
  * It returns the current Spade instance.
  *
  * NOTE: You don't need to listen for the 'ready' event, commands
@@ -249,8 +248,8 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * NOTE: For default cache will be not cleared before initializing,
  * to achieve it, use a true value for 'reset'.
  *
- * NOTE: Empty files and scripts processed and refused by Redis,
- * with an error reply, are automatically evicted from the cache.
+ * NOTE: Empty files and scripts processed and refused by Redis with
+ * an error reply, are automatically evicted from the cache.
  *
  * NOTE:
  * - to send/run a script loaded from the cache, use:
@@ -304,7 +303,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 
 ```javascript
 /*
- * Cache was initiliazed, script files are loaded in memory and a list of
+ * Cache was initialized, script files are loaded in memory and a list of
  * SCRIPT LOAD commands are ready to be written to the socket.
  */
 'cacheinit' : function ( Array script_load_commands ) : undefined
