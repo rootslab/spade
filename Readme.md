@@ -135,6 +135,8 @@ opt = {
 
 ### Properties
 
+> Don't mess with these properties!
+
 ```javascript
 /*
  * A property that holds the initial config object.
@@ -144,6 +146,7 @@ Spade.options : Object
 /*
  * An Object that holds all Redis commands/methods mix-ins
  * from Syllabus. It is a shortcut for Spade.mixins.commands.
+ * See https://github.com/rootslab/syllabus#syllabus-commands.
  */
 Spade.commands : Object
 
@@ -291,7 +294,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 /*
  * Send/Run a script from the cache.
  */
-Spade.lua.script#run( String sname, Array keys, Array args [, Function cback ] ) : undefined
+Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
  * Manually load a script into the cache and send it to Redis.
