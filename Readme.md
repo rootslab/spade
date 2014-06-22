@@ -282,8 +282,6 @@ Spade#disconnect( [ Function cback ] ) : Spade
 
 ####LUA SCRIPT Methods
 
-> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
-
 ```javascript
 /*
  * Send/Run a script from the cache.
@@ -304,8 +302,8 @@ Spade.lua.script#flush();
  * Current cache property, an instance of Camphora.
  */
 Spade.lua.cache
-
 ```
+> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
 
 ##Events
 
