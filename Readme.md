@@ -175,19 +175,28 @@ Spade.socket : Cocker
 Spade.parser : Hiboris | Boris
 
 /*
- * Queue Manager for Commands/Replies bindings.
+ * Libra Queue Manager for Commands/Replies bindings.
  */
 Spade.queue : Libra
 
 /*
- * Syllabus property contains all Redis Commands Mix-ins for the current
- * semantic version specified ( Spade default value is false, interpreted as '*' ).
+ * Syllabus property contains all Redis Commands Mix-ins for the
+ * current semantic version specified.
+ * Spade default value is false, interpreted as '*'.
  *
- * NOTE: Specifying a particular semver version enables develop mode, some
- * mix-ins will be added to get some info about a particular command.
+ * NOTE: Specifying a particular semver version enables develop
+ * mode, some mix-ins will be added to get some info about a
+ * particular command.
  * See Syllabus module for some examples.
  */
 Spade.mixins : Syllabus
+
+/*
+ * A property that holds LUA commands and Cache, a shortcut
+ * for Spade.mixins.lua.
+ * See https://github.com/rootslab/syllabus#properties-methods.
+ */
+Spade.lua : Object
 ```
 
 ###Methods
