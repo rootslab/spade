@@ -304,9 +304,9 @@ Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
 /*
  * Clear Spade and Redis cache.
  */
-Spade.lua.script#flush() : undefined
+Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
-> See **_Syllabus.lua_** at __https://github.com/rootslab/syllabus#properties-methods__.
+> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
 
 ##Events
 
