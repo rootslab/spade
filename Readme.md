@@ -280,30 +280,30 @@ Spade#disconnect( [ Function cback ] ) : Spade
  Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
 ```
 
-####LUA SCRIPT Methods
+####LUA Cache and SCRIPT Methods
 
 ```javascript
 /*
  * Send/Run a script from the cache.
  */
-Spade.lua.script#run( String script_name, Array keys, Array args [, Function cback ] );
+Spade.lua.script#run( String script_name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
  * Manually load a script into the cache and send it to Redis.
  */
-Spade.lua.script#load( String key, String data [, Function cback ] );
+Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
  
 /*
  * Clear Spade and Redis cache.
  */
-Spade.lua.script#flush();
+Spade.lua.script#flush() : undefined
 
 /*
  * Current cache property, an instance of Camphora.
  */
-Spade.lua.cache
+Spade.lua.cache : Camphora
 ```
-> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
+> See **_Syllabus.lua_** at __https://github.com/rootslab/syllabus#properties-methods__.
 
 ##Events
 
