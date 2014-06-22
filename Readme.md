@@ -264,8 +264,8 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *   file path : '/my/scripts/dir'
  *  };
  *
- *   See Camphora#load for a list of available options,
- *   https://github.com/rootslab/camphora
+ *   See Camphora#load for a list of available options:
+ *   https://github.com/rootslab/camphora#options
  *
  *   NOTE: Empty files and scripts processed and refused by Redis with
  *   an error reply, are automatically evicted from the cache.
