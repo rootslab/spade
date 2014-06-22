@@ -197,6 +197,11 @@ Spade.mixins : Syllabus
  * See https://github.com/rootslab/syllabus#properties-methods.
  */
 Spade.lua : Object
+
+/*
+ * Current cache property, an instance of Camphora.
+ */
+Spade.lua.cache : Camphora
 ```
 
 ###Methods
@@ -286,7 +291,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 /*
  * Send/Run a script from the cache.
  */
-Spade.lua.script#run( String script_name, Array keys, Array args [, Function cback ] ) : undefined
+Spade.lua.script#run( String sname, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
  * Manually load a script into the cache and send it to Redis.
@@ -297,11 +302,6 @@ Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
  * Clear Spade and Redis cache.
  */
 Spade.lua.script#flush() : undefined
-
-/*
- * Current cache property, an instance of Camphora.
- */
-Spade.lua.cache : Camphora
 ```
 > See **_Syllabus.lua_** at __https://github.com/rootslab/syllabus#properties-methods__.
 
