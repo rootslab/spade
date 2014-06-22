@@ -183,13 +183,12 @@ Spade.parser : Hiboris | Boris
 Spade.queue : Libra
 
 /*
- * Syllabus property contains all Redis Commands Mix-ins for the
- * current semantic version specified.
- * Spade default value is false, interpreted as '*'.
+ * Property that contains all mix-ins for the current semantic
+ * version specified. Spade default value is false, interpreted
+ * as '*'.
  *
  * NOTE: Specifying a particular semver version enables develop
- * mode, some mix-ins will be added to get some info about a
- * particular command.
+ * mode, some mix-ins will be added to get infos about commands.
  * See Syllabus module for some examples.
  */
 Spade.mixins : Syllabus
