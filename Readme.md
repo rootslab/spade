@@ -261,7 +261,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *
  * - A custom loading path with 'file_load_opt':
  *  {
- *   file path : '/my/scripts/dir'
+ *   filepath : '/my/scripts/dir'
  *  };
  *
  *   See Camphora#load for a list of available options:
@@ -283,7 +283,9 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *
  *   NOTE: if 'camphora_cache_opt' is set, cache will be re-initialized;
  *   it happens only if the cache is ready, or when no other script commands
- *   are already been queued and not yet been sent to Redis.
+ *   are already been queued and not yet been sent to Redis ( for example, when
+ *   the client is offline ); otherwise option object will be ignored and cache
+ *   will remain intact.
  */
  Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
 ```
