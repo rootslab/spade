@@ -239,34 +239,63 @@ Spade#disconnect( [ Function cback ] ) : Spade
  * to the Redis Server.
  * It triggers 'cacheinit', 'cacheload', 'cacheready' and 'scriptfailure'
  * events. See "Script Cache Events" Section.
- * Optionally you could specify a custom path like:
  *
- *  'file_load_opt' = { filepath : '/my/scripts/dir' };
+ * Optionally you could specify:
  *
- * See Camphora#load for a list of available options: https://github.com/rootslab/camphora
+ * - A custom loading path with 'file_load_opt':
+ *  {
+ *   file path : '/my/scripts/dir'
+ *  };
  *
- * NOTE: For default cache will be not cleared before initializing,
- * to achieve it, use a true value for 'reset'.
+ *   See Camphora#load for a list of available options,
+ *   https://github.com/rootslab/camphora
  *
- * NOTE: Empty files and scripts processed and refused by Redis with
- * an error reply, are automatically evicted from the cache.
+ *   NOTE: Empty files and scripts processed and refused by Redis with
+ *   an error reply, are automatically evicted from the cache.
  *
- * NOTE:
- * - to send/run a script loaded from the cache, use:
- *    Spade.lua.script.run( 'test.lua', [ .. ], [ .. ], function ( err, data, fn ) { .. } );
+ * - A custom init configuration for the Camphora costructor to build or
+ *   rebuild the cache.
+ *   Default values for 'camphora_cache_opt' are:
+ *  {
+ *    capacity : 128
+ *    , encrypt_keys : false
+ *    , algorithm : 'sha1'
+ *    , output_encoding : 'hex'
+ *    , input_encoding : 'binary'
+ *  }
  *
- * - to manually load a script into the cache and send it to Redis, use:
- *    Spade.lua.script.load( key, data, function( err, data, fn ) { .. } );
- *
- * - to clear Spade and Redis cache, use:
- *    Spade.lua.script.flush();
- *
- * - to get the current cache object/hash (an instance of Camphora), use:
- *    Spade.lua.cache();
- *
- * See Syllabus.lua : https://github.com/rootslab/syllabus
+ *   NOTE: if 'camphora_cache_opt' is set, cache will be re-initialized;
+ *   it happens only if the cache is ready, or when no other script commands
+ *   are already been queued and not yet been sent to Redis.
  */
- Spade#initCache( [ Object file_load_opt [, Boolean reset ] ] ) : undefined
+ Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
+```
+
+####LUA SCRIPT Methods
+
+> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
+
+```javascript
+/*
+ * Send/Run a script from the cache.
+ */
+Spade.lua.script#run( String script_name, Array keys, Array args [, Function cback ] );
+ 
+/*
+ * Manually load a script into the cache and send it to Redis.
+ */
+Spade.lua.script#load( String key, String data [, Function cback ] );
+ 
+/*
+ * Clear Spade and Redis cache.
+ */
+Spade.lua.script#flush();
+
+/*
+ * Current cache property, an instance of Camphora.
+ */
+Spade.lua.cache
+
 ```
 
 ##Events
