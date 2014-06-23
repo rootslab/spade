@@ -359,7 +359,7 @@ var log = console.log
     , client = Spade( {} )
     ;
 
-//connect
+// start async connection to Redis
 client.connect();
 
 // execute TIME command
