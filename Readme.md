@@ -51,7 +51,7 @@ $ npm run-script bench
 ```
 -----------------------------------------------------------------------
 
-###TOC
+###Table of Contents
 
 - __[Constructor](#constructor)__
    - __[Options](#options)__
@@ -151,6 +151,7 @@ opt = {
     }
 }
 ```
+_[Back to ToC](#table-of-contents)_
 
 -----------------------------------------------------------------------------
 
@@ -226,6 +227,7 @@ Spade.lua : Object
  */
 Spade.lua.cache : Camphora
 ```
+_[Back to ToC](#table-of-contents)_
 
 ----------------------------------------------------------------------
 
@@ -311,6 +313,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  */
  Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Redis Commands
 
@@ -393,6 +396,8 @@ Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
 
 > See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
+
+_[Back to ToC](#table-of-contents)_
 
 -----------------------------------------------------------------------------
 
@@ -490,6 +495,7 @@ Spade.lua.script#flush( [ Function cback ] ) : undefined
  */
 'timeout' : function ( Object address, Number timeout ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 -------------------------------------------------------------------------------
 
