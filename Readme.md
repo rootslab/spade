@@ -49,6 +49,25 @@ $ npm test
 $ cd spade/
 $ npm run-script bench
 ```
+-----------------------------------------------------------------------
+
+###TOC
+
+- [Constructor](#constructor)
+   - __[Options](#options)__
+- __[Properties](#properties)__
+- __[Methods](#methods)__
+   - __[Redis Commands](#redis-commands)__
+   - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
+- __[Events](#)__
+   - __[PubSub Events](#pubsub-events)__
+   - __[Monitor Events](#monitor-events)__
+   - __[Error Events](#error-events)__
+   - __[Script Cache Events](#script-cache-events)__
+   - __[Socket Connection Events](#socket-connection-event)__
+- __[MIT License](#mit-license)__
+
+-----------------------------------------------------------------------
 
 ###Constructor
 
@@ -133,6 +152,8 @@ opt = {
 }
 ```
 
+-----------------------------------------------------------------------------
+
 ### Properties
 
 > Don't mess with these properties!
@@ -205,6 +226,8 @@ Spade.lua : Object
  */
 Spade.lua.cache : Camphora
 ```
+
+----------------------------------------------------------------------
 
 ###Methods
 
@@ -289,26 +312,6 @@ Spade#disconnect( [ Function cback ] ) : Spade
  Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
 ```
 
-####LUA Cache and SCRIPT Methods
-
-```javascript
-/*
- * Send/Run a script from the cache.
- */
-Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
- 
-/*
- * Manually load a script into the cache and send it to Redis.
- */
-Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
- 
-/*
- * Clear Spade and Redis cache.
- */
-Spade.lua.script#flush( [ Function cback ] ) : undefined
-```
-> See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
-
 ####Redis Commands
 
 > __Spade.commands__ property contains all methods to encode ans send __Redis__ commands,
@@ -370,8 +373,28 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 } );
 ```
 
->
+####LUA Cache and SCRIPT Methods
 
+```javascript
+/*
+ * Send/Run a script from the cache.
+ */
+Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
+ 
+/*
+ * Manually load a script into the cache and send it to Redis.
+ */
+Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
+ 
+/*
+ * Clear Spade and Redis cache.
+ */
+Spade.lua.script#flush( [ Function cback ] ) : undefined
+```
+
+> See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
+
+-----------------------------------------------------------------------------
 
 ##Events
 
