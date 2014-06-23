@@ -307,7 +307,71 @@ Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
  */
 Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
-> See **_Syllabus.lua_** at _https://github.com/rootslab/syllabus#properties-methods_.
+> See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
+
+####Redis Commands
+
+> __Spade.commands__ property contains all methods to encode ans send __Redis__ commands,
+> via the __Syllabus__ module.
+
+__Brief List of Redis Command Types:__
+- __Keys__ : _23 commands_.
+- __Strings__ : _26 commands_.
+- __Hashes__ : _14 commands_.
+- __Lists__ : _17 commands_.
+- __Sets__ : _15 commands_.
+- __Sorted Sets__ : _20 commands_.
+- __HyperLogLog__ : _3 commands_.
+- __PubSub__ : _8 commands_.
+- __Transactions__ : _5 commands_.
+- __Scripting__ : _6 commands_.
+- __Connection__ : _5 commands_.
+- __Server__ : _27 commands_.
+
+> See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
+
+
+> __Every command mix-in accepts a callback__ function as the last argument, this __callback__ will get __3__ arguments:
+
+```javascript
+'callback' : function ( Boolean is_err_reply, Array data, Function reveal ) {
+    /*
+     * 'is_err_reply' is a Boolean that signals an ERROR reply from Redis,
+     * ( not a JS Error ), then reply data will contain the error message(s).
+     *
+     * 'data' is a list containing reply data Buffers.
+     *
+     * 'reveal' is a utility function that converts the* the raw Redis Reply
+     * in a simple usable form.
+     *
+     * NOTE: The utility function is not the same for all command replies,
+     * because, as we surely know, some reply needs particular format and 
+     * type conversions.
+     */
+}
+```
+
+> __Example Code__:
+
+```javascript
+var log = console.log
+    , Spade = require( 'spade' )
+    , client = Spade( {} )
+    ;
+
+//connect
+client.connect();
+
+// execute TIME command
+client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
+    log( '\n- error reply:', is_err_reply );
+    log( '- raw reply:', reply_data_arr );
+    log( '- converted reply:', reveal_fn( reply_data_arr ) );
+} );
+```
+
+>
+
 
 ##Events
 
