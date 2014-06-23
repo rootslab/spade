@@ -53,7 +53,7 @@ $ npm run-script bench
 
 ###TOC
 
-- [Constructor](#constructor)
+- __[Constructor](#constructor)__
    - __[Options](#options)__
 - __[Properties](#properties)__
 - __[Methods](#methods)__
@@ -64,7 +64,7 @@ $ npm run-script bench
    - __[Monitor Events](#monitor-events)__
    - __[Error Events](#error-events)__
    - __[Script Cache Events](#script-cache-events)__
-   - __[Socket Connection Events](#socket-connection-event)__
+   - __[Socket Connection Events](#socket-connection-events)__
 - __[MIT License](#mit-license)__
 
 -----------------------------------------------------------------------
