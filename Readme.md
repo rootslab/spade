@@ -98,9 +98,9 @@ opt = {
     semver : false
 
     /*
-     * Hiboris option, for default the 'hiredis'
-     * native parser is disabled in favour of
-     * Boris JS parser.
+     * Hiboris option. For default, the loading
+     * of 'hiredis' native parser is disabled
+     * in favour of Boris JS parser.
      */
     , hiredis : false
 
@@ -115,6 +115,13 @@ opt = {
         , reconnection : {
             trials : 3
             , interval : 1000
+            /*
+             * A value to use for calculating the pause between two
+             * connection attempts. Default value is the golden ratio.
+             * Final value is calculated as:
+             * interval * Math.pow( factor, curr.attempts + 1 )
+             */
+            , factor : ( Math.sqrt( 5 ) + 1 ) / 2
         }
         , connection : {
             /*
@@ -128,12 +135,12 @@ opt = {
              */
             , keepAlive : true
             /*
-             * 'timeout' event delay, default is 0 ( no timeout )
+             * 'timeout' event delay, default is 0 ( no timeout ).
              */
             , timeout : 0
             /*
             * noDelay is true for default, it disables the Nagle
-            * algorithm ( no TCP data buffering for socket.write )
+            * algorithm ( no TCP data buffering for socket.write ).
             */
             , noDelay : true
             /*
