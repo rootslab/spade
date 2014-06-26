@@ -68,6 +68,7 @@ $ npm run-script bench
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#)__
+   - __[Auth Events](#auth-events)__
    - __[PubSub Events](#pubsub-events)__
    - __[Monitor Events](#monitor-events)__
    - __[Error Events](#error-events)__
@@ -450,6 +451,26 @@ _[Back to ToC](#table-of-contents)_
 
 ##Events
 
+####Auth Events
+
+> These events are emitted __only if AUTH is mandatory__ for the current
+> connected host. it 
+
+```javascript
+/*
+ * The reply to AUTH command is an Error, then client will be
+ * disconnected; it also happens when AUTH is not required by
+ * Redis.
+ */
+'authfailed' : function ( Object address, String password, Array reply ) : undefined
+
+/*
+ * Client authorization is successful. After that the command
+ * queue will be processed.
+ */
+'authorized' : function ( Object address, String password, Array reply ) : undefined
+```
+
 ####PubSub Events
 
 ```javascript
@@ -476,23 +497,6 @@ _[Back to ToC](#table-of-contents)_
  * A parser or command encoding error has occurred.
  */
 'error' : function ( Error err, Object command ) : undefined
-```
-
-####Auth Events
-
-> These events are emitted __only if AUTH is mandatory__ for the current
-> connected host. It 
-
-```javascript
-/*
- * The AUTH command reply is an Error, client will be disconnected.
- */
-'authfailed' : function ( Object address, String password, Array reply ) : undefined
-
-/*
- * Client authorization is successful.
- */
-'authorized' : function ( Object address, String password, Array reply ) : undefined
 ```
 
 ####Script Cache Events
