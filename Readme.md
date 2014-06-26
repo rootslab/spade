@@ -450,8 +450,8 @@ Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
 > __NOTE__: 
 > _**Spade.lua.script**_ property is similar to _**Spade.commands.script**_, these
-> properties are inherited directly from _**Syllabus**_, the main difference is that, methods
-> below will update the __LUA__ cache.
+> properties are inherited directly from _**Syllabus**_, the main difference is that
+* these methods will update the __LUA__ cache.
 
 > See also **_[initCache](#methods)_** method and **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
 
