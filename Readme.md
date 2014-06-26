@@ -8,16 +8,17 @@
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
 > ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
- - It collects commands in __offline queue__ when the client is offline.
+ - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
+   constructor option.
  - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
    not voluntarily interrupted.
+ - It collects commands in the __queue__ also when the client is __offline__.
+ - It implements an authomatic __command rollback__ mechanism for __subscriptions__ and __incomplete
+   transactions__, when connection is lost and becames ready again.
  - It implements __AUTHorization__ logic on socket connection/re-connection, configurable via the _**security**_
-   constructor option.
- - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
    constructor option.
  - It offers automatic __LUA scripts caching__, using a simple __NFU with linear Aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
- - It implements an authomatic __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__, when connection is lost and becames ready again.
 
 > ♠ __Spade__ makes use of some __well tested__ modules:
  - __[Σ Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it  also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
@@ -33,7 +34,7 @@ $ npm install spade [-g]
 // clone repo
 $ git clone git@github.com:rootslab/spade.git
 ```
-> _**install and update devDependencies**_:
+> __install and update devDependencies__:
 
 ```bash
  $ cd spade/
