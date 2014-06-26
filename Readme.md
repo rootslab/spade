@@ -3,18 +3,24 @@
 [![NPM version](https://badge.fury.io/js/spade.png)](http://badge.fury.io/js/spade)
 [![build status](https://david-dm.org/rootslab/spade.png)](https://david-dm.org/rootslab/spade)
 [![devDependency Status](https://david-dm.org/rootslab/spade/dev-status.png)](https://david-dm.org/rootslab/spade#info=devDependencies)
-[![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
-
 [![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
-> ♠ _**Spade**_, a full-featured __Redis__ client module, with __offline queue__ for commands, automatic __socket reconnection__ and __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__.
+[![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-> It also supports __LUA scripts caching__ via __[Σ Syllabus](https://github.com/rootslab/syllabus)__ and __[Camphora](https://github.com/rootslab/camphora)__ modules.
+> ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
+ - It collects commands in __offline queue__ when the client is offline.
+ - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
+   not voluntarily interrupted.
+ - It implements __AUTHorization__ logic on socket connection/re-connection, configurable via the _**security**_
+   constructor option.
+ - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
+   constructor option.
+ - It offers automatic __LUA scripts caching__, using a simple __NFU with linear Aging__ eviction
+   algorithm ( __NFU__ stands for _Not Frequently Used_ ).
+ - It implements an authomatic __command rollback__ mechanism for __subscriptions__ and __incomplete transactions__, when connection is lost and becames ready again.
 
-> It also possible to __restrict commands to a particular Redis version__ via constructor options.
-
-> ♠ __Spade__ is a __simple and clean__ modular library, it makes use of some __well tested__ modules:
- - __[Σ Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
+> ♠ __Spade__ makes use of some __well tested__ modules:
+ - __[Σ Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it  also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
  > Internally it uses __[Hoar](https://github.com/rootslab/hoar)__ module to handle __Semantic Versioning 2.0__, __[Sermone](https://github.com/rootslab/sermone)__ to encode commands, __[Abaco](https://github.com/rootslab/abaco)__ and __[Bolgia](https://github.com/rootslab/bolgia)__ modules to get some utilities. Moreover, __Syllabus__ mantains a __cache__ for __LUA__ scripts, using the __[Camphora](https://github.com/rootslab/camphora)__ module.
  - __[♎ Libra](https://github.com/rootslab/libra)__ module to handle bindings between commands which have been sent and relative __Redis__ replies; it handles also __commands queue rollbacks__ with the help of __[Train](https://github.com/rootlsab/train)__ module.
  - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle __socket reconnection__ when the connection is lost. 
@@ -27,7 +33,7 @@ $ npm install spade [-g]
 // clone repo
 $ git clone git@github.com:rootslab/spade.git
 ```
-### Install and Update development dependencies
+> _**install and update devDependencies**_:
 
 ```bash
  $ cd spade/
@@ -165,19 +171,17 @@ opt = {
     /*
      * Security options.
      *
-     * Two sample entries are already present in the cache, holding default
-     * values from redis.conf. An entry key could be a filepath or a network
-     * endpoint (ip:port).
+     * Two sample entries are already present in the cache, holding default values
+     * from redis.conf. An entry key could be a filepath or a network endpoint.
      *
      * Every entry should have a:
      *
-     * - 'requirepass' property, it contains the Redis password for the 
-     * current host.
+     * - 'requirepass' property, it contains the Redis password for the current host.
      *
-     * - 'mandatory' property, it defaults to false. If true, whenever a
-     * client connection is established and if an entry is found in the
-     * security hash. an AUTH command will be sent to Redis, before any
-     * other command in the command queue.
+     * - 'mandatory' property, it defaults to false. If true, whenever a client 
+     * connection is established and if an entry is found in the security hash. an
+     * AUTH command will be sent to Redis, before any other command in the command
+     * queue.
      *
      * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
      * then the client will be automatically disconnected to force re-AUTH on
@@ -186,7 +190,7 @@ opt = {
      * then if the command queue is not empty, it will be processed.
      */
      , security : {
-        // a network path
+        // a network path (ip:port)
         '127.0.0.1:6379' : {
             requirepass : 'foobared'
             , mandatory : false
