@@ -454,19 +454,17 @@ _[Back to ToC](#table-of-contents)_
 ####Auth Events
 
 > These events are emitted __only if AUTH is mandatory__ for the current
-> connected host. it 
+> connected host.
 
 ```javascript
 /*
- * The reply to AUTH command is an Error, then client will be
- * disconnected; it also happens when AUTH is not required by
- * Redis.
+ * The reply to AUTH command is an Error, then client will be disconnected; it also
+ * happens when AUTH is not required by Redis but issued by the client.
  */
 'authfailed' : function ( Object address, String password, Array reply ) : undefined
 
 /*
- * Client authorization is successful. After that the command
- * queue will be processed.
+ * Client authorization is successful. After that the command queue will be processed.
  */
 'authorized' : function ( Object address, String password, Array reply ) : undefined
 ```
