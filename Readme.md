@@ -2,7 +2,7 @@
 [![build status](https://secure.travis-ci.org/rootslab/spade.png?branch=master)](http://travis-ci.org/rootslab/spade) 
 [![NPM version](https://badge.fury.io/js/spade.png)](http://badge.fury.io/js/spade)
 [![build status](https://david-dm.org/rootslab/spade.png)](https://david-dm.org/rootslab/spade)
-
+[![devDependency Status](https://david-dm.org/rootslab/spade/dev-status.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
 [![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
