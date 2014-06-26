@@ -161,6 +161,41 @@ opt = {
             , allowHalfOpen : false
         }
     }
+    /*
+     * Security options.
+     *
+     * Two sample entries are already present in the cache, holding default
+     * values from redis.conf. An entry key could be a filepath or a network
+     * endpoint (ip:port).
+     *
+     * Every entry should have a:
+     *
+     * - 'requirepass' property, it contains the Redis password for the 
+     * current host.
+     *
+     * - 'mandatory' property, it defaults to false. If true, whenever a
+     * client connection is established and if an entry is found in the
+     * security hash. an AUTH command will be sent to Redis, before any
+     * other command in the command queue.
+     *
+     * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
+     * then the client will be automatically disconnected to force re-AUTH on
+     * reconnection; it also happens if AUTH isn't required by Redis.
+     * If authorization is granted by Redis, an 'authorize' event will be emitted,
+     * then if the command queue is not empty, it will be processed.
+     */
+     , security : {
+        // a network path
+        '127.0.0.1:6379' : {
+            requirepass : 'foobared'
+            , mandatory : false
+        }
+        // a unix domain socket path
+        , '/tmp/redis.sock' : {
+            requirepass : 'foobared'
+            , mandatory : false
+        }
+    }
 }
 ```
 _[Back to ToC](#table-of-contents)_
@@ -441,6 +476,23 @@ _[Back to ToC](#table-of-contents)_
  * A parser or command encoding error has occurred.
  */
 'error' : function ( Error err, Object command ) : undefined
+```
+
+####Auth Events
+
+> These events are emitted __only if AUTH is mandatory__ for the current
+> connected host. It 
+
+```javascript
+/*
+ * The AUTH command reply is an Error, client will be disconnected.
+ */
+'authfailed' : function ( Object address, String password, Array reply ) : undefined
+
+/*
+ * Client authorization is successful.
+ */
+'authorized' : function ( Object address, String password, Array reply ) : undefined
 ```
 
 ####Script Cache Events
