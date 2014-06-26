@@ -186,7 +186,8 @@ opt = {
      *
      * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
      * then the client will be automatically disconnected to force re-AUTH on
-     * reconnection; it also happens if AUTH isn't required by Redis.
+     * reconnection; it also happens if AUTH isn't required by Redis, but was sent
+     * by the client.
      * If authorization is granted by Redis, an 'authorize' event will be emitted,
      * then if the command queue is not empty, it will be processed.
      */
@@ -447,8 +448,12 @@ Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
  */
 Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
+> __NOTE__: 
+> _**Spade.lua.script**_ property is similar to _**Spade.commands.script**_, these
+> properties are inherited directly from _**Syllabus**_, the main difference is that, methods
+> below will update the __LUA__ cache.
 
-> See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
+> See also **_[initCache](#methods)_** method and **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
 
 _[Back to ToC](#table-of-contents)_
 
