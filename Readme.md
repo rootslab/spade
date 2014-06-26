@@ -2,7 +2,7 @@
 [![build status](https://secure.travis-ci.org/rootslab/spade.png?branch=master)](http://travis-ci.org/rootslab/spade) 
 [![NPM version](https://badge.fury.io/js/spade.png)](http://badge.fury.io/js/spade)
 [![build status](https://david-dm.org/rootslab/spade.png)](https://david-dm.org/rootslab/spade)
-
+[![devDependency Status](https://david-dm.org/rootslab/spade/dev-status.png)](https://david-dm.org/rootslab/spade#info=devDependencies)
 [![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
@@ -26,6 +26,14 @@
 $ npm install spade [-g]
 // clone repo
 $ git clone git@github.com:rootslab/spade.git
+```
+### Install and Update development dependencies
+
+```bash
+ $ cd spade/
+ $ npm install --dev
+ # update
+ $ npm update --dev
 ```
 > __require__
 
@@ -60,6 +68,7 @@ $ npm run-script bench
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#)__
+   - __[Auth Events](#auth-events)__
    - __[PubSub Events](#pubsub-events)__
    - __[Monitor Events](#monitor-events)__
    - __[Error Events](#error-events)__
@@ -108,9 +117,11 @@ opt = {
      * Cocker socket options
      */
     , socket : {
-        address : {
-            host : 'localhost'
+        path : null
+        , address : {
+            host : '127.0.0.1'
             , port : 6379
+            , family : 'Ipv4'
         }
         , reconnection : {
             trials : 3
@@ -150,10 +161,40 @@ opt = {
              */
             , allowHalfOpen : false
         }
-        , path : {
-            fd : undefined
-            , readable : true
-            , writable : true
+    }
+    /*
+     * Security options.
+     *
+     * Two sample entries are already present in the cache, holding default
+     * values from redis.conf. An entry key could be a filepath or a network
+     * endpoint (ip:port).
+     *
+     * Every entry should have a:
+     *
+     * - 'requirepass' property, it contains the Redis password for the 
+     * current host.
+     *
+     * - 'mandatory' property, it defaults to false. If true, whenever a
+     * client connection is established and if an entry is found in the
+     * security hash. an AUTH command will be sent to Redis, before any
+     * other command in the command queue.
+     *
+     * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
+     * then the client will be automatically disconnected to force re-AUTH on
+     * reconnection; it also happens if AUTH isn't required by Redis.
+     * If authorization is granted by Redis, an 'authorize' event will be emitted,
+     * then if the command queue is not empty, it will be processed.
+     */
+     , security : {
+        // a network path
+        '127.0.0.1:6379' : {
+            requirepass : 'foobared'
+            , mandatory : false
+        }
+        // a unix domain socket path
+        , '/tmp/redis.sock' : {
+            requirepass : 'foobared'
+            , mandatory : false
         }
     }
 }
@@ -409,6 +450,24 @@ _[Back to ToC](#table-of-contents)_
 -----------------------------------------------------------------------------
 
 ##Events
+
+####Auth Events
+
+> These events are emitted __only if AUTH is mandatory__ for the current
+> connected host.
+
+```javascript
+/*
+ * The reply to AUTH command is an Error, then client will be disconnected; it also
+ * happens when AUTH is not required by Redis but issued by the client.
+ */
+'authfailed' : function ( Object address, String password, Array reply ) : undefined
+
+/*
+ * Client authorization is successful. After that the command queue will be processed.
+ */
+'authorized' : function ( Object address, String password, Array reply ) : undefined
+```
 
 ####PubSub Events
 
