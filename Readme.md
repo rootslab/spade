@@ -27,6 +27,14 @@ $ npm install spade [-g]
 // clone repo
 $ git clone git@github.com:rootslab/spade.git
 ```
+### Install and Update development dependencies
+
+```bash
+ $ cd spade/
+ $ npm install --dev
+ # update
+ $ npm update --dev
+```
 > __require__
 
 ```javascript
@@ -108,9 +116,11 @@ opt = {
      * Cocker socket options
      */
     , socket : {
-        address : {
+        path : null
+        , address : {
             host : '127.0.0.1'
             , port : 6379
+            , family : 'Ipv4'
         }
         , reconnection : {
             trials : 3
@@ -149,11 +159,6 @@ opt = {
              * packet. Defaults to false.
              */
             , allowHalfOpen : false
-        }
-        , path : {
-            fd : undefined
-            , readable : true
-            , writable : true
         }
     }
 }
