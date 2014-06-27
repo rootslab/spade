@@ -375,7 +375,7 @@ _[Back to ToC](#table-of-contents)_
 
 ####Redis Commands
 
-> __Spade.commands__ property contains all methods to encode ans send __Redis__ commands,
+> __Spade.commands__ property contains all methods to encode and send __Redis__ commands,
 > via the __Syllabus__ module.
 
 > __Brief List of Redis Command Types:__
