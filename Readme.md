@@ -13,7 +13,7 @@
  - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
    not voluntarily interrupted.
  - It collects commands in the __queue__ also when the client is __offline__.
- - It implements an authomatic __command rollback__ mechanism for __subscriptions__ and __incomplete
+ - It implements an automatic __command rollback__ mechanism for __subscriptions__ and __incomplete
    transactions__, when connection is lost and becames ready again.
  - It implements __AUTHorization__ logic on socket connection/re-connection, configurable via the _**security**_
    constructor option.
