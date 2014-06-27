@@ -29,6 +29,8 @@
 
 ###Install
 
+> __NOTE:__ only __node__ engines _**">=v0.10.x"**_ are supported.
+
 ```bash
 $ npm install spade [-g]
 // clone repo
@@ -58,13 +60,15 @@ $ npm test
 
 ###Run Benchmark
 
-> __NOTE__: You need a running __Redis Server__ instance to execute benchmarks.
+> __NOTE__: You need a running __Redis Server__ instance, with default configuration, to execute benchmarks.
 
 ```bash
 $ cd spade/
 $ npm run-script bench
 ```
------------------------------------------------------------------------
+> __NOTE__: You should install _devDependencies_ to use the __hiredis__ parser for benchmarks.
+
+----------------------------------------------------------------------------------------------
 
 ###Table of Contents
 
@@ -374,19 +378,19 @@ _[Back to ToC](#table-of-contents)_
 > __Spade.commands__ property contains all methods to encode ans send __Redis__ commands,
 > via the __Syllabus__ module.
 
-__Brief List of Redis Command Types:__
-- __Keys__ : _23 commands_.
-- __Strings__ : _26 commands_.
-- __Hashes__ : _14 commands_.
-- __Lists__ : _17 commands_.
-- __Sets__ : _15 commands_.
-- __Sorted Sets__ : _20 commands_.
-- __HyperLogLog__ : _3 commands_.
-- __PubSub__ : _8 commands_.
-- __Transactions__ : _5 commands_.
-- __Scripting__ : _6 commands_.
-- __Connection__ : _5 commands_.
-- __Server__ : _27 commands_.
+> __Brief List of Redis Command Types:__
+> - __Keys__ : _23 commands_.
+> - __Strings__ : _26 commands_.
+> - __Hashes__ : _14 commands_.
+> - __Lists__ : _17 commands_.
+> - __Sets__ : _15 commands_.
+> - __Sorted Sets__ : _20 commands_.
+> - __HyperLogLog__ : _3 commands_.
+> - __PubSub__ : _8 commands_.
+> - __Transactions__ : _5 commands_.
+> - __Scripting__ : _6 commands_.
+> - __Connection__ : _5 commands_.
+> - __Server__ : _27 commands_.
 
 > See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
@@ -410,7 +414,6 @@ __Brief List of Redis Command Types:__
      */
 }
 ```
-
 > __Example Code__:
 
 ```javascript
@@ -463,8 +466,10 @@ _[Back to ToC](#table-of-contents)_
 
 ####Auth Events
 
-> These events are emitted __only if AUTH is mandatory__ for the current
-> connected host. 
+> These events are emitted __only if AUTH is set to be mandatory__ for the current
+> connected host; namely, in the security options/cache of the client, exists an entry
+> for this host, _'ip:port'_ or _'/path/to/file'_, with __'mandatory'__ property set
+> to __true__.
 
 ```javascript
 /*
