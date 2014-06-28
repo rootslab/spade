@@ -483,8 +483,8 @@ _[Back to ToC](#table-of-contents)_
 
 > These events are emitted __only if AUTH is set to be mandatory__ for the current
 > connected host; namely, in the security options/cache of the client, exists an entry
-> for this host, _'ip:port'_ or _'/path/to/file'_, with __'mandatory'__ property set
-> to __true__.
+> for this host, '__ip:port__' or '__/path/to/file__', with __'requirepass'__ property set
+> to a non empty string.
 
 ```javascript
 /*
