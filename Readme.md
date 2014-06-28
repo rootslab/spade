@@ -181,17 +181,18 @@ opt = {
      * Two sample entries are already present in the cache, holding default values
      * from redis.conf. An entry key could be a filepath or a network endpoint.
      *
-     * Every entry should have a:
+     * Every entry should be a file path ('/path/to/file.sock'), or a network path
+     * ('ip:port'), and should contain a:
      *
-     * - 'requirepass' property, it contains the Redis password for the current host.
-     *
-     * - 'mandatory' property, it defaults to false. If true, whenever a client 
-     * connection is established and if an entry is found in the security hash. an
-     * AUTH command will be sent to Redis, before any other command in the command
+     * - 'requirepass' property, it contains the Redis password string for the current
+     * host. It defaults to null. Whenever a client connection is established and if
+     * an entry is found in the security hash. an AUTH command will be sent to Redis,
+     * before any other command in the command
      * queue.
      *
      * - 'db' property, it defaults to 0. On every reconnection the first command to
-     * send after AUTH is SELECT db.
+     * send after AUTH is SELECT db. If db === -1, on client reconnection the SELECT
+     * command will not been sent.
      *
      * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
      * then the client will be automatically disconnected to force re-AUTH on
@@ -203,14 +204,12 @@ opt = {
      , security : {
         // a network path (ip:port)
         '127.0.0.1:6379' : {
-            requirepass : 'foobared'
-            , mandatory : false
+            requirepass : null
             , db : 0
         }
         // a unix domain socket path
         , '/tmp/redis.sock' : {
-            requirepass : 'foobared'
-            , mandatory : false
+            requirepass : null
             , db : 0
         }
     }

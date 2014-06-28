@@ -15,6 +15,12 @@ var log = console.log
     , long_string = "ABCDEFGHILMNOPQRSTUVZJKXYW0123456789abcdefghilmnopqrstuvzjkxyw0123456789"
     , spade_opt = {
         hiredis : !!true
+        , security : {
+            '127.0.0.1:6379' : {
+                // -1 disables SELECT db on connection
+                db : -1
+            }
+        }
     }
     ;
 

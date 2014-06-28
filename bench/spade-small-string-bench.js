@@ -15,6 +15,12 @@ var log = console.log
     , small_string = '1234'
     , spade_opt = {
         hiredis : !!true
+        , security : {
+            '127.0.0.1:6379' : {
+                // -1 disables SELECT db on connection
+                db : -1
+            }
+        }
     }
     ;
 
