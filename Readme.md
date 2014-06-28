@@ -17,6 +17,7 @@
    transactions__, when connection is lost and becames ready again.
  - It implements __AUTHorization__ logic on socket connection/re-connection, configurable via the _**security**_
    constructor option.
+ - It implements __automatic db SELECTion__ on reconnection.
  - It offers automatic __LUA scripts caching__, using a simple __NFU with linear Aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
 
@@ -79,12 +80,13 @@ $ npm run-script bench
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#)__
-   - __[Auth Events](#auth-events)__
-   - __[PubSub Events](#pubsub-events)__
-   - __[Monitor Events](#monitor-events)__
    - __[Error Events](#error-events)__
+   - __[Auth Events](#auth-events)__
+   - __[Select Events](#select-events)__
    - __[Script Cache Events](#script-cache-events)__
    - __[Socket Connection Events](#socket-connection-events)__
+   - __[PubSub Events](#pubsub-events)__
+   - __[Monitor Events](#monitor-events)__
 - __[MIT License](#mit-license)__
 
 -----------------------------------------------------------------------
@@ -188,6 +190,9 @@ opt = {
      * AUTH command will be sent to Redis, before any other command in the command
      * queue.
      *
+     * - 'db' property, it defaults to 0. On every reconnection the first command to
+     * send after AUTH is SELECT db.
+     *
      * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
      * then the client will be automatically disconnected to force re-AUTH on
      * reconnection; it also happens if AUTH isn't required by Redis, but was sent
@@ -200,11 +205,13 @@ opt = {
         '127.0.0.1:6379' : {
             requirepass : 'foobared'
             , mandatory : false
+            , db : 0
         }
         // a unix domain socket path
         , '/tmp/redis.sock' : {
             requirepass : 'foobared'
             , mandatory : false
+            , db : 0
         }
     }
 }
@@ -464,6 +471,15 @@ _[Back to ToC](#table-of-contents)_
 
 ##Events
 
+####Error Events
+
+```javascript
+/*
+ * A parser or command encoding error has occurred.
+ */
+'error' : function ( Error err, Object command ) : undefined
+```
+
 ####Auth Events
 
 > These events are emitted __only if AUTH is set to be mandatory__ for the current
@@ -477,41 +493,34 @@ _[Back to ToC](#table-of-contents)_
  * happens when AUTH is not required by Redis but issued by the client. No 'ready'
  * event could be launched.
  */
-'authfailed' : function ( Object address, String password, Array reply ) : undefined
+'authfailed' : function ( String password, Array reply, Object address ) : undefined
 
 /*
  * Client authorization is successful. After that the command queue will be processed.
  * and the 'ready' event could be launched.
  */
-'authorized' : function ( Object address, String password, Array reply ) : undefined
+'authorized' : function ( String password, Array reply, Object address ) : undefined
 ```
 
-####PubSub Events
+####Select Events
+
+> These events are emitted on every reconnection to Redis after that AUTH command
+> and then also SELECT will be processed, it will be sent before all commands in
+> the queue, if any exists.
 
 ```javascript
 /*
- * A message was received from PubSub system when the client is in
- * Subscrition (PubSub) mode.
+ * The reply to AUTH command is an Error, then client will be disconnected; it also
+ * happens when AUTH is not required by Redis but issued by the client. No 'ready'
+ * event could be launched.
  */
-'message' : function ( Array message ) : undefined
-```
+'dbfailed' : function ( String db, Array reply, Object address ) : undefined
 
-####Monitor Events
-
-```javascript
 /*
- * A message was received when the client is in Monitor mode.
+ * Client authorization is successful. After that the command queue will be processed.
+ * and the 'ready' event could be launched.
  */
-'monitor' : function ( String message ) : undefined
-```
-
-####Error Events
-
-```javascript
-/*
- * A parser or command encoding error has occurred.
- */
-'error' : function ( Error err, Object command ) : undefined
+'dbselected' : function ( String db, Array reply, Object address ) : undefined
 ```
 
 ####Script Cache Events
@@ -578,6 +587,26 @@ _[Back to ToC](#table-of-contents)_
  */
 'timeout' : function ( Object address, Number timeout ) : undefined
 ```
+
+####PubSub Events
+
+```javascript
+/*
+ * A message was received from PubSub system when the client is in
+ * Subscrition (PubSub) mode.
+ */
+'message' : function ( Array message ) : undefined
+```
+
+####Monitor Events
+
+```javascript
+/*
+ * A message was received when the client is in Monitor mode.
+ */
+'monitor' : function ( String message ) : undefined
+```
+
 _[Back to ToC](#table-of-contents)_
 
 -------------------------------------------------------------------------------
