@@ -405,8 +405,8 @@ _[Back to ToC](#table-of-contents)_
      *
      * 'data' is a list containing reply data Buffers.
      *
-     * 'reveal' is a utility function that converts the* the raw Redis Reply
-     * in a simple usable form.
+     * 'reveal' is a utility function that converts the raw Redis Reply in
+     * a simple and usable form.
      *
      * NOTE: The utility function is not the same for all command replies,
      * because, as we surely know, some reply needs particular format and 
