@@ -516,8 +516,8 @@ _[Back to ToC](#table-of-contents)_
 'dbfailed' : function ( String db, Array reply, Object address ) : undefined
 
 /*
- * Client authorization is successful. After that the command queue will be processed.
- * and the 'ready' event could be launched.
+ * Client authorization is successful. Now the command queue will be processed,
+ * the 'ready' event could be launched.
  */
 'dbselected' : function ( String db, Array reply, Object address ) : undefined
 ```
@@ -558,9 +558,22 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * Connection was fully established.
+ * After that the client has established a connection to the Redis host,
+ * it is now ready to write commands to the socket and to receive the
+ * relative replies from Redis. It happens after processing AUTH and
+ * SELECT commands and finally the offline queue.
+ *
+ * NOTE: Every commands executed by the client before the 'ready' event,
+ * will be enqueued in 'offline mode' and sent/written to socket when
+ * 'ready' will be emitted.
  */
 'ready' : function ( Object address ) : undefined
+
+/*
+ * A client connection is fully esatblished with Redis host. This event
+ * happens before 'ready' and before the AUTH and SELECT related events.
+ */
+'connect' : function ( Object address ) : undefined
 
 /*
  * Connection is currently down ( on the first 'close' event from the socket ).
@@ -568,20 +581,20 @@ _[Back to ToC](#table-of-contents)_
 'offline' : function ( Object address ) : undefined
 
 /*
- * Client is trying to reconnect to Redis server, k is the number
- * of current connection attempt.
+ * Client is trying to reconnect to Redis server, k is the number of current
+ * connection attempt.
  *
  * NOTE: 'millis' indicates the last interval of time between attempts.
  */
 'attempt' : function ( Number k, Object address, Number millis ) : undefined
 
 /*
- * Connection is definitively lost ( after opt.reconnection.trials times ).
+ * The connection is definitively lost ( after opt.reconnection.trials times ).
  */
 'lost' : function ( Object address ) : undefined
 
 /*
- * Socket times out for inactivity.
+ * The socket times out for inactivity.
  * It only notifies that the socket has been idle.
  */
 'timeout' : function ( Object address, Number timeout ) : undefined

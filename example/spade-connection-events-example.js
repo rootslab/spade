@@ -1,5 +1,5 @@
 /* 
- * Spade Example
+ * Spade Connection Events Example
  */
 
 var log = console.log
@@ -39,10 +39,5 @@ client.on( 'attempt', function ( n, dest, lapse ) {
 client.on( 'error', function ( err, data ) {
     log( 'error', arguments );
 } );
-
-client.on( 'close', function () {
-    log( 'close', arguments );
-} );
-
 
 client.connect();
