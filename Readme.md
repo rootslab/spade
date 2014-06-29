@@ -503,10 +503,9 @@ _[Back to ToC](#table-of-contents)_
 
 ####Select Events
 
-> These events are emitted on every client (re)connection to Redis.
-> __SELECT__ will be sent before all commands in the queue. When Redis needs authentication.
-> __SELECT__ will be sent __always after__ sending and having received a successful reply
-> from the __AUTH__ command.
+> These events are emitted on every client (re)connection to __Redis__. __SELECT__ will be
+> sent before all commands in the queue. When Redis needs authentication, it will be sent
+> __always after__ having sent and received a successful reply for the __AUTH__ command.
 
 ```javascript
 /*
