@@ -15,9 +15,8 @@
  - It collects commands in the __queue__ also when the client is __offline__.
  - It implements an automatic __command rollback__ mechanism for __subscriptions__ and __incomplete
    transactions__, when connection is lost and becames ready again.
- - It implements __AUTHorization__ logic on socket connection/re-connection, configurable via the _**security**_
-   constructor option.
- - It implements __automatic db SELECTion__ on reconnection.
+ - It implements __AUTH__ logic and __automatic db SELECT__ on socket (re)connection, configurable
+   via the _**security**_ constructor option.
  - It offers automatic __LUA scripts caching__, using a simple __NFU__ with __linear aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
 
