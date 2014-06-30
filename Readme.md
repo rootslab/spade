@@ -442,24 +442,27 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 
 ```javascript
 /*
- * Send/Run a script from the cache.
+ * Get a script from the cache and send it to Redis.
+ * It executes an EVALSHA command with the digest of the current script ( if it exists ).
  */
 Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
  * Manually load a script into the cache and send it to Redis.
+ * It executes a SCRIPT LOAD command.
  */
 Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
  
 /*
  * Clear Spade and Redis cache.
+ * It executes a SCRIPT FLUSH command.
  */
 Spade.lua.script#flush( [ Function cback ] ) : undefined
 ```
 > __NOTE__: 
-> _**Spade.lua.script**_ property is similar to _**Spade.commands.script**_, these
-> properties are inherited directly from _**Syllabus**_, the main difference is that
-> these methods will update the __LUA__ cache.
+> _**Spade.lua.script**_ hash property is quite similar to _**Spade.commands.script**_, these
+> properties are inherited directly from _**Syllabus**_, the main difference is that these
+> methods will also update the __LUA__ cache.
 
 > See also **_[initCache](#methods)_** method and **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
 
