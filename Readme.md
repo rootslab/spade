@@ -481,9 +481,9 @@ _[Back to ToC](#table-of-contents)_
 ####Auth Events
 
 > These events are emitted on every client (re)connection to Redis and only if
-> __AUTH is set to be mandatory__ for the current connected host; namely, in the
-> client security options/cache, exists an entry for this host, '__ip:port__' or
-> '__/path/to/file__', with __'requirepass'__ property set to a non empty string.
+> __AUTH is set to be mandatory__ for the current connected host; namely, should
+> exist an entry, _'ip:port'_ or _'/path/to/file'_, with __requirepass__ property
+> set to a non empty string.
 
 ```javascript
 /*
@@ -502,9 +502,13 @@ _[Back to ToC](#table-of-contents)_
 
 ####Select Events
 
-> These events are emitted on every client (re)connection to __Redis__. __SELECT__ will be
-> sent before all commands in the queue. When Redis needs authentication, it will be sent
-> __always after__ having sent and received a successful reply for the __AUTH__ command.
+> These events are emitted on every client (re)connection to __Redis__. If the __db__
+> property is set for the current connected host in the __security__ options/cache, the
+> __SELECT__ db command will be sent before all other commands in the queue.
+>
+> __NOTE__:
+> When __Redis needs authentication__, __SELECT__ command will be sent __always after__
+> having sent the __AUTH__ command and having received a successful reply from __Redis__.
 
 ```javascript
 /*
