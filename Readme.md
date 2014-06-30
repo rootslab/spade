@@ -443,7 +443,7 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 
 ####LUA Cache and SCRIPT Methods
 
-> Manually execute scripts commands, differently from to _**Spade.commands.script**_ methods,
+> Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
 > these ones will also update the hidden cache for __LUA__ scripts.
 
 ```javascript
@@ -454,8 +454,8 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
- * Manually load a script into the cache and send it to Redis. It executes a SCRIPT LOAD command.
- * 'lback' function will be called with an argument that represents the entry
+ * Manually load a script into the cache and send it to Redis. It executes a SCRIPT LOAD 
+ * command. 'lback' function will be called with an argument that represents the entry
  * loaded in the cache, or undefined if an error occurs.
  */
 Spade.lua.script#load( String key, String data [, Function cback [, Function lback ] ] ) : undefined
