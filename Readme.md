@@ -287,6 +287,9 @@ Spade.lua : Object
 
 /*
  * Current cache property, an instance of Camphora.
+ *
+ * NOTE: the LUA script cache remains hidden until you explicitly
+ * call the #initCache method.
  */
 Spade.lua.cache : Camphora
 ```
@@ -338,9 +341,9 @@ Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
 Spade#disconnect( [ Function cback ] ) : Spade
 
 /*
- * Initialize LUA script cache, loading and sending all the files
- * found in the './node_modules/syllabus/lib/lua/scripts' directory,
- * to the Redis Server.
+ * Initialize or reveal the (hidden) LUA script cache. It loads and sends
+ * all the files found in the './node_modules/syllabus/lib/lua/scripts'
+ * directory, to the Redis Server ( after the 'ready' event ).
  * It triggers 'cacheinit', 'cacheload', 'cacheready' and 'scriptfailure'
  * events. See "Script Cache Events" Section.
  *
@@ -440,6 +443,9 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 
 ####LUA Cache and SCRIPT Methods
 
+> Manually execute scripts commands, differently from to _**Spade.commands.script**_ methods,
+> these ones will also update the hidden cache for __LUA__ scripts.
+
 ```javascript
 /*
  * Get a script from the cache and send it to Redis.
@@ -448,23 +454,22 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
- * Manually load a script into the cache and send it to Redis.
- * It executes a SCRIPT LOAD command.
+ * Manually load a script into the cache and send it to Redis. It executes a SCRIPT LOAD command.
+ * 'lback' function will be called with an argument that represents the entry
+ * loaded in the cache, or undefined if an error occurs.
  */
-Spade.lua.script#load( String key, String data [, Function cback ] ) : undefined
+Spade.lua.script#load( String key, String data [, Function cback [, Function lback ] ] ) : undefined
  
 /*
- * Clear Spade and Redis cache.
- * It executes a SCRIPT FLUSH command.
+ * Clear Spade and Redis cache. It executes a SCRIPT FLUSH command.
+ * 'fback' function will be called with the number of elements flushed from the cache.
  */
-Spade.lua.script#flush( [ Function cback ] ) : undefined
+Spade.lua.script#flush( [ Function cback [, Function fback ] ] ) : undefined
 ```
-> __NOTE__: 
-> _**Spade.lua.script**_ hash property is quite similar to _**Spade.commands.script**_, these
-> properties are inherited directly from _**Syllabus**_, the main difference is that these
-> methods will also update the __LUA__ cache.
+> __See__ **_[initCache](#methods)_** method for loading script files and for revealing
+> the hidden __LUA__ cache.
 
-> See also **_[initCache](#methods)_** method and **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_** property.
+> __See__ also **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
 
 _[Back to ToC](#table-of-contents)_
 
@@ -531,8 +536,8 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * Cache was initialized, script files are loaded in memory and a list of
- * SCRIPT LOAD commands are ready to be written to the socket.
+ * Cache was initialized, script files are loaded in memory and a list
+ * of SCRIPT LOAD commands are ready to be written to the socket.
  */
 'cacheinit' : function ( Array script_load_commands ) : undefined
 

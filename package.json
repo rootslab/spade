@@ -1,6 +1,6 @@
 {
   "name": "spade",
-  "version": "0.25.5",
+  "version": "0.25.6",
   "description": "♠ Spade, a full-featured, multi-modular Redis client, with offline queue for commands, automatic socket reconnection and command rollback mechanisms for subscriptions and incomplete transactions, moreover, it supports caching for LUA scripts.",
   "homepage": "https://github.com/rootslab/spade",
   "private": false,
@@ -23,11 +23,11 @@
     "email": "44gatti@gmail.com"
   },
   "dependencies": {
-    "bolgia" : "=2.6.0",
+    "bolgia" : "=2.6.1",
     "hiboris" : "=1.0.0",
     "cocker" : "=0.13.1",
     "libra" : "=0.9.3",
-    "syllabus" : "=0.29.1"
+    "syllabus" : "=0.29.2"
   },
   "devDependencies": {
       "hiredis" : ">=0.1.17"
