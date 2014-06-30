@@ -510,14 +510,13 @@ _[Back to ToC](#table-of-contents)_
 > __SELECT__ db command will be sent before all other commands in the queue.
 >
 > __NOTE__:
-> When __Redis needs authentication__, __SELECT__ command will be sent __always after__
+> When __Redis needs authentication__, __SELECT__ command will be sent __only after__
 > having sent the __AUTH__ command and having received a successful reply from __Redis__.
 
 ```javascript
 /*
- * The reply to AUTH command is an Error, then client will be disconnected; it also
- * happens when AUTH is not required by Redis but issued by the client. No 'ready'
- * event could be launched.
+ * The reply to SELECT command is an Error, then client will be disconnected.
+ * No 'ready' event could be launched.
  */
 'dbfailed' : function ( String db, Array reply, Object address ) : undefined
 
