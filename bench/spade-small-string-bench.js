@@ -27,14 +27,14 @@ var log = console.log
 var sendCommands = function () {
     var i = 0
         , client = null
+        , ccmd = null
         ;
 
     stime = Date.now();
 
     for ( ; i < requests; ++i ) {
-        client = list[ i % tclients ];
-        client.commands.lrange( 'mylist', 0, 99, function () {
-            // heapdump.writeSnapshot();
+        ccmd = list[ i % tclients ].commands;
+        ccmd.lrange( 'mylist', 0, 99, function () {
             if ( --rc === 0 ) {
                 ttime = Date.now() - stime;
                 log( '-> command:', 'LRANGE mylist 0 99' );
@@ -71,6 +71,7 @@ var run = function () {
 
 var add = function () {
     var s = Spade( spade_opt )
+        , commands = s.commands
         ;
     s.once( 'ready', function () {
         var i = 0
@@ -78,9 +79,9 @@ var add = function () {
             , n = 100
             ;
         for ( ; i < n; ++i ) {
-            s.commands.lpush( 'mylist', small_string, function ( err, data, fn ) {
+            commands.lpush( 'mylist', small_string, function ( err, data, fn ) {
                 if ( ++r === n ) {
-                    s.commands.quit( run );
+                    commands.quit( run );
                 }
             } );
         };
@@ -90,6 +91,6 @@ var add = function () {
 
 log( '- using: "%s" parser.', Spade( spade_opt ).parser.hreader ? 'hiredis' : 'Boris' );
 
-log( '- benchmark LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
+log( '- spade benchmark, LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
 
 add();

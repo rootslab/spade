@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var log = console.log
-    , Spade = require( '../' )
+    , nRedis = require( 'redis' )
     // number of clients
     , tclients = 20
     // number of requests to send
@@ -12,29 +12,19 @@ var log = console.log
     , cc = tclients
     , stime = 0
     , ttime = 0
-    , long_string = "ABCDEFGHILMNOPQRSTUVZJKXYW0123456789abcdefghilmnopqrstuvzjkxyw0123456789"
-    , spade_opt = {
-        hiredis : !!true
-        , security : {
-            '127.0.0.1:6379' : {
-                // -1 disables SELECT db on connection
-                db : -1
-            }
-        }
-    }
+    , small_string = '1234'
     ;
 
 var sendCommands = function () {
     var i = 0
         , client = null
-        , ccmd = null
         ;
 
     stime = Date.now();
 
     for ( ; i < requests; ++i ) {
-        ccmd = list[ i % tclients ].commands;
-        ccmd.lrange( 'mylist', 0, 99, function () {
+        client = list[ i % tclients ];
+        client.lrange( 'mylist', 0, 99, function () {
             if ( --rc === 0 ) {
                 ttime = Date.now() - stime;
                 log( '-> command:', 'LRANGE mylist 0 99' );
@@ -60,18 +50,14 @@ var run = function () {
         , s = null
         ;
     for ( ; i < n; ++i ) {
-        s = Spade( spade_opt );
+        s = nRedis.createClient( 6379, '127.0.0.1' );
         list[ i ] = s;
         s.on( 'ready', enqueue );
-    };
-    for ( ; --i >= 0; ) {
-        list[ i ].connect();
     };
 };
 
 var add = function () {
-    var s = Spade( spade_opt )
-        , commands = s.commands
+    var s = nRedis.createClient( 6379, '127.0.0.1' );
         ;
     s.once( 'ready', function () {
         var i = 0
@@ -79,18 +65,23 @@ var add = function () {
             , n = 100
             ;
         for ( ; i < n; ++i ) {
-            commands.lpush( 'mylist', long_string, function ( err, data, fn ) {
+            s.lpush( 'mylist', small_string, function ( err, data, fn ) {
                 if ( ++r === n ) {
-                    commands.quit( run );
+                    s.quit( run );
                 }
             } );
         };
     } );
-    s.connect();
 };
 
-log( '- using: "%s" parser', Spade( spade_opt ).parser.hreader ? 'hiredis' : 'Boris' );
 
-log( '- benchmark LRANGE with a long string argument (%d bytes):\n  "%s"', long_string.length, long_string );
+try {
+    hiredis = require( 'hiredis' );
+    log( '- using: "hiredis" parser.' );
+} catch ( err ) {
+    log( '- using: "JS" parser.' );
+} finally {
+    log( '- node_redis benchmark, LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
+    add();
+};
 
-add();

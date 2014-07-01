@@ -1,5 +1,5 @@
 /* 
- * Spade MONITOR Example
+ * Spade Offline Queue Example
  */
 
 var log = console.log
