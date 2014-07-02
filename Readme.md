@@ -75,7 +75,7 @@ $ npm run-script node_redis_bench
 ```
 
 > __NOTE__:
->  - becnhmarks need a running __Redis__ server instance, with default configuration.
+>  - benchmarks need a running __Redis__ server instance, with default configuration.
 >  - to switch to the faster __hiredis__ native parser, install **_devDependencies_** .
 
 ----------------------------------------------------------------------------------------------
