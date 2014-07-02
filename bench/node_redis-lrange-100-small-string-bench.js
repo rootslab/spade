@@ -12,7 +12,7 @@ var log = console.log
     , cc = tclients
     , stime = 0
     , ttime = 0
-    , long_string = "ABCDEFGHILMNOPQRSTUVZJKXYW0123456789abcdefghilmnopqrstuvzjkxyw0123456789"
+    , small_string = '1234'
     ;
 
 var sendCommands = function () {
@@ -65,7 +65,7 @@ var add = function () {
             , n = 100
             ;
         for ( ; i < n; ++i ) {
-            s.lpush( 'mylist', long_string, function ( err, data, fn ) {
+            s.lpush( 'mylist', small_string, function ( err, data, fn ) {
                 if ( ++r === n ) {
                     s.quit( run );
                 }
@@ -74,14 +74,14 @@ var add = function () {
     } );
 };
 
+log( '- node_redis benchmark, "LRANGE mylist 0 99" with a small string reply (%d bytes):\n  "%s"', small_string.length, small_string );
 
 try {
     hiredis = require( 'hiredis' );
-    log( '- using: "hiredis" parser.' );
+    log( '-> using: "HIREDIS NATIVE" parser.' );
 } catch ( err ) {
-    log( '- using: "JS" parser.' );
+    log( '-> using: "node_redis JS" parser.' );
 } finally {
     add();
-    log( '- node_redis benchmark, LRANGE with a small string argument (%d bytes):\n  "%s"', long_string.length, long_string );
 };
 

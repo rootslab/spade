@@ -1,6 +1,6 @@
 fails=0
 n=0
-for t in bench/*-bench.js; do
+for t in bench/spade-*-bench.js; do
   echo -e "\n[" $t "]\n"
   node $t || let fails++
   let n++

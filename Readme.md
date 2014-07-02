@@ -29,7 +29,7 @@
 
 ###Install
 
-> __NOTE:__ only __node__ engines _**">=v0.10.x"**_ are supported.
+> __NOTE:__ only __node__ engines **">=v0.10.x"** are supported.
 
 ```bash
 $ npm install spade [-g]
@@ -58,15 +58,24 @@ $ cd spade/
 $ npm test
 ```
 
-###Run Benchmark
+###Run Benchmarks
 
-> __NOTE__: You need a running __Redis Server__ instance, with default configuration, to execute benchmarks.
+> run benchamrks for __Spade__.
 
 ```bash
 $ cd spade/
 $ npm run-script bench
 ```
-> __NOTE__: You should install _devDependencies_ to use the __hiredis__ parser for benchmarks.
+> run benchmarks for **node_redis** (_npm install redis_).
+
+```bash
+$ cd spade/
+$ npm run-script node_redis_bench
+```
+
+> __NOTE__: You need a running __Redis Server__ instance, with default configuration.
+
+> __NOTE__: Install _devDependencies_ to use the fast __hiredis__ parser.
 
 ----------------------------------------------------------------------------------------------
 

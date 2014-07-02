@@ -89,8 +89,8 @@ var add = function () {
     s.connect();
 };
 
-log( '- using: "%s" parser.', Spade( spade_opt ).parser.hreader ? 'hiredis' : 'Boris' );
+log( '- spade benchmark, "LRANGE mylist 0 99" with a small string reply (%d bytes):\n  "%s"', small_string.length, small_string );
 
-log( '- spade benchmark, LRANGE with a small string argument (%d bytes):\n  "%s"', small_string.length, small_string );
+log( '-> using: "%s" parser.', Spade( spade_opt ).parser.hreader ? 'HIREDIS NATIVE' : 'BORIS JS' );
 
 add();
