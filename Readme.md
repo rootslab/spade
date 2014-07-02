@@ -9,7 +9,8 @@
 
 > ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
-   constructor option.
+   constructor option. Specifying this option turns __Spade__ in _develop mode_, it enables a series
+   of mix-ins to get brief descriptions of every implemented command.
  - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
    not voluntarily interrupted.
  - It collects commands in the __queue__ also when the client is __offline__.
@@ -117,16 +118,21 @@ new Spade( [ Object opt ] )
 ```javascript
 opt = {
     /*
-     * Syllabus develop option to restrict
-     * commands to a particular Redis version.
+     * Syllabus option to enable develop mode and restrict
+     * commands to a particular Redis semantic version.
+     * Use:
+     * - boolean 'true' or string '*' for all commands available.
+     * - semver string to restrict commands ( like '1.0.0' ).
      *
-     * - A boolean 'true' enable develop mode.
-     * - A semver string like '1.0.0' enable develop mode
-     *   and restrict commands to Redis version 1.0.0.
+     * NOTE, develop mode enables some utility methods to get command
+     * descriptions, like:
+     * - Spade.mixins#info( String command ) get cmd infos
+     * - Spade.mixins#size() get the current number of commands
+     * - Spade.mixins#stick( [ Boolean attach ] ) attach #info to every mix-in.
      *
-     * See https://github.com/rootslab/syllabus.
+     * See https://github.com/rootslab/syllabus#properties-methods.
      */
-    semver : false
+    semver : null
 
     /*
      * Hiboris option. For default, the loading
