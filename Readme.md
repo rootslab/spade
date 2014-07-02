@@ -60,22 +60,23 @@ $ npm test
 
 ###Run Benchmarks
 
-> run benchamrks for __Spade__.
+> run benchmarks for __spade__.
 
 ```bash
 $ cd spade/
 $ npm run-script bench
 ```
-> run benchmarks for **node_redis** (_npm install redis_).
+> run benchmarks for **node_redis**.
 
 ```bash
 $ cd spade/
+$ npm install redis
 $ npm run-script node_redis_bench
 ```
 
-> __NOTE__: You need a running __Redis Server__ instance, with default configuration.
-
-> __NOTE__: Install _devDependencies_ to use the fast __hiredis__ parser.
+> __NOTE__:
+>  - becnhmarks need a running __Redis__ server instance, with default configuration.
+>  - to switch to the faster __hiredis__ native parser, install **_devDependencies_** .
 
 ----------------------------------------------------------------------------------------------
 
