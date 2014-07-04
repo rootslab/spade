@@ -137,7 +137,7 @@ opt = {
     /*
      * Hiboris option. For default, the loading
      * of 'hiredis' native parser is disabled
-     * in favour of Boris JS parser.
+     * in favour of ( the slower ) Boris JS parser.
      */
     , hiredis : false
 
@@ -202,8 +202,7 @@ opt = {
      * - 'requirepass' property, it contains the Redis password string for the current
      * host. It defaults to null. Whenever a client connection is established and if
      * an entry is found in the security hash. an AUTH command will be sent to Redis,
-     * before any other command in the command
-     * queue.
+     * before any other command in the command queue.
      *
      * - 'db' property, it defaults to 0. On every reconnection the first command to
      * send after AUTH is SELECT db. If db === -1, on client reconnection the SELECT
@@ -232,7 +231,7 @@ opt = {
 ```
 _[Back to ToC](#table-of-contents)_
 
------------------------------------------------------------------------------
+----------------------------------------------------------------------
 
 ### Properties
 
