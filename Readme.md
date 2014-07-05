@@ -58,6 +58,7 @@ var Spade = require( 'spade' );
 $ cd spade/
 $ npm test
 ```
+> __NOTE__: tests need a running __Redis__ server instance, with default/stock configuration.
 
 ###Run Benchmarks
 
@@ -76,7 +77,7 @@ $ npm run-script node_redis_bench
 ```
 
 > __NOTE__:
->  - benchmarks need a running __Redis__ server instance, with default configuration.
+>  - benchmarks need a running __Redis__ server instance, with default/stock configuration.
 >  - to switch to the faster __hiredis__ native parser, install **_devDependencies_** .
 
 ----------------------------------------------------------------------------------------------
