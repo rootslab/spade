@@ -147,6 +147,7 @@ opt = {
     , socket : {
         path : null
         , address : {
+            // 'localhost'
             host : '127.0.0.1'
             , port : 6379
             , family : 'Ipv4'
@@ -329,7 +330,7 @@ _[Back to ToC](#table-of-contents)_
  *
  * socket_opt = {
  *      address : {
- *          host : 'localhost'
+ *          host : '127.0.0.1'
  *          , port : 6379
  *      }
  *      , reconnection : {
@@ -553,6 +554,8 @@ _[Back to ToC](#table-of-contents)_
 /*
  * Cache was initialized, script files are loaded in memory and a list
  * of SCRIPT LOAD commands are ready to be written to the socket.
+ * Now that script commands are queued, it is possible to use and send
+ * these and other commands.
  */
 'cacheinit' : function ( Array script_load_commands ) : undefined
 

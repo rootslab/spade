@@ -22,7 +22,7 @@ client.on( 'monitor', function ( msg ) {
 
 client.on( 'ready', function () {
     client.commands.monitor( function ( err, data, fn ) {
-        log( 'monitor:', fn( data )  );
+        log( 'monitor:', fn( data ) );
         setTimeout( function () {
             client.commands.quit( function ( err, data, fn ) {
                 log( 'quit:', fn( data ) );
