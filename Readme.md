@@ -599,8 +599,8 @@ _[Back to ToC](#table-of-contents)_
 'ready' : function ( Object address ) : undefined
 
 /*
- * A client connection is fully esatblished with Redis host. This event
- * happens before 'ready' and before the AUTH and SELECT related events.
+ * A client connection is fully established with Redis host. This event
+ * happens before 'ready' and AUTH/SELECT related events.
  */
 'connect' : function ( Object address ) : undefined
 
