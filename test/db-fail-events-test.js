@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade. socket connection events test.
+ * Spade. db selection events test.
  */
 
 var debug = !! true
@@ -15,8 +15,7 @@ var debug = !! true
     , client = Spade( {
         security : {
             '127.0.0.1:6379' : {
-                // disable db selection
-                db : -1
+                db : 1024
             }
         }
     } )
@@ -27,6 +26,21 @@ var debug = !! true
     ;
 
 log( '- created new Spade client with default options.' );
+
+client.on( 'dbselected', function ( db, reply, address ) {
+    eresult.push( 'dbselected' );
+    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+} );
+
+client.on( 'dbfailed', function ( db, reply, address ) {
+    eresult.push( 'dbfailed' );
+    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
+} );
+
+client.on( 'dbselected', function ( db, reply, address ) {
+    eresult.push( 'dbselected' );
+    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+} );
 
 client.on( 'error', function () {
     eresult.push( 'error' );
@@ -61,26 +75,13 @@ client.on( 'lost', function ( address ) {
 log( '- added client listeners for socket connection events.' );
 log( '- opening client connection.' );
 
-client.connect( null, function () {
-    log( '- now client is connected and ready to send.' );
-    // push expected events
-    evts.push( 'connect', 'ready' );
-} );
+client.connect();
+
+evts.push( 'connect', 'dbfailed', 'offline', 'lost' );
 
 log( '- wait 2 secs to collect events..' );
 
 setTimeout( function () {
     log( '- check emitted events from client, should be: %s.', inspect( evts, false, 1, true ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client connection!' );
-
-    log( '- now disconnecting client.' );
-    client.disconnect( function () {
-        log( '- client disconnected.' );
-        // push expected events
-        evts.push( 'offline', 'lost' );
-
-        log( '- check emitted events from client, should be: %s.', inspect( evts, false, 2, true ) );
-        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection!' );
-    } );
-
+    assert.deepEqual( eresult, evts, 'something goes wrong with client db selection!' );
 }, 2000 );

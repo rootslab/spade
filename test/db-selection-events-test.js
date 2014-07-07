@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade. socket connection events test.
+ * Spade. db selection events test.
  */
 
 var debug = !! true
@@ -12,14 +12,7 @@ var debug = !! true
     , util = require( 'util' )
     , inspect = util.inspect
     , Spade = require( '../' )
-    , client = Spade( {
-        security : {
-            '127.0.0.1:6379' : {
-                // disable db selection
-                db : -1
-            }
-        }
-    } )
+    , client = Spade()
     // expected events
     , evts = []
     // collected events
@@ -27,6 +20,17 @@ var debug = !! true
     ;
 
 log( '- created new Spade client with default options.' );
+
+
+client.on( 'dbfailed', function ( db, reply, address ) {
+    eresult.push( 'dbfailed' );
+    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
+} );
+
+client.on( 'dbselected', function ( db, reply, address ) {
+    eresult.push( 'dbselected' );
+    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+} );
 
 client.on( 'error', function () {
     eresult.push( 'error' );
@@ -64,14 +68,14 @@ log( '- opening client connection.' );
 client.connect( null, function () {
     log( '- now client is connected and ready to send.' );
     // push expected events
-    evts.push( 'connect', 'ready' );
+    evts.push( 'connect', 'dbselected', 'ready' );
 } );
 
 log( '- wait 2 secs to collect events..' );
 
 setTimeout( function () {
     log( '- check emitted events from client, should be: %s.', inspect( evts, false, 1, true ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client connection!' );
+    assert.deepEqual( eresult, evts, 'something goes wrong with db selection!' );
 
     log( '- now disconnecting client.' );
     client.disconnect( function () {
