@@ -37,11 +37,6 @@ client.on( 'dbfailed', function ( db, reply, address ) {
     log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
-client.on( 'dbselected', function ( db, reply, address ) {
-    eresult.push( 'dbselected' );
-    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
-} );
-
 client.on( 'error', function () {
     eresult.push( 'error' );
     log( ' !error', inspect( arguments, false, 3, true ) );
