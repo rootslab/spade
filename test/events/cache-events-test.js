@@ -67,11 +67,6 @@ client.on( 'dbfailed', function ( db, reply, address ) {
     log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
-client.on( 'error', function () {
-    eresult.push( 'error' );
-    log( ' !error', inspect( arguments, false, 3, true ) );
-} );
-
 client.on( 'connect', function ( address ) {
     eresult.push( 'connect' );
     dbg( '  !connect', inspect( [ address.host, address.port ], false, 1, true ) );
