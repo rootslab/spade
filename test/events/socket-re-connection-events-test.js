@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade. db selection events test.
+ * Spade, socket re-connection events test.
  */
 
 var debug = !! true
@@ -10,32 +10,25 @@ var debug = !! true
     , dbg = debug ? log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
+    , Bolgia = require( 'bolgia' )
+    , clone = Bolgia.clone
     , inspect = util.inspect
     , Spade = require( '../' )
-    , client = Spade( {
-        security : {
-            '127.0.0.1:6379' : {
-                db : 1024
+    , opt = {
+        socket : {
+            address : {
+                port : 9999
             }
         }
-    } )
+    }
+    , client = Spade( clone( opt ) )
     // expected events
     , evts = []
     // collected events
     , eresult = []
     ;
 
-log( '- created new Spade client with default options.' );
-
-client.on( 'dbselected', function ( db, reply, address ) {
-    eresult.push( 'dbselected' );
-    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
-} );
-
-client.on( 'dbfailed', function ( db, reply, address ) {
-    eresult.push( 'dbfailed' );
-    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
-} );
+log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
 client.on( 'error', function () {
     eresult.push( 'error' );
@@ -54,7 +47,7 @@ client.on( 'ready', function ( address ) {
 
 client.on( 'attempt', function ( attempt, address, interval ) {
     eresult.push( 'attempt' );
-    dbg( ' !attempt', inspect( [ attempt, interval ], false, 1, true ) );
+    dbg( '  !attempt', inspect( [ attempt, interval ], false, 1, true ) );
 } );
 
 client.on( 'offline', function ( address ) {
@@ -68,15 +61,34 @@ client.on( 'lost', function ( address ) {
 } );
 
 log( '- added client listeners for socket connection events.' );
-log( '- opening client connection.' );
+
+log( '- opening client connection to a not existemt host:port to force reconnection.' );
+
+// push expected events
+evts.push( 'offline', 'attempt', 'attempt', 'attempt', 'lost' );
 
 client.connect();
 
-evts.push( 'connect', 'dbfailed', 'offline', 'lost' );
-
-log( '- wait 2 secs to collect events..' );
+log( '- wait 16 seconds to collect events..' );
 
 setTimeout( function () {
-    log( '- check emitted events from client, should be: %s.', inspect( evts, false, 1, true ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client db selection!' );
-}, 2000 );
+    log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
+    assert.deepEqual( eresult, evts );
+
+    log( '- opening connection to default Redis host:port.' );
+    client.connect( { address : { port : 6379 } }, function () {
+
+        log( '- now disconnecting client.' );
+        client.disconnect( function () {
+            log( '- client disconnected.' );
+
+            // push expected events
+            evts.push( 'connect', 'ready', 'offline', 'lost' );
+
+            log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
+            assert.deepEqual( eresult, evts );
+        } );
+
+    } );
+
+}, 16000 );

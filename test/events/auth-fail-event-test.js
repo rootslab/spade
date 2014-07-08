@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade. db selection events test.
+ * Spade, auth failing test.
  */
 
 var debug = !! true
@@ -10,26 +10,44 @@ var debug = !! true
     , dbg = debug ? log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
+    , Bolgia = require( 'bolgia' )
+    , clone = Bolgia.clone
     , inspect = util.inspect
     , Spade = require( '../' )
-    , client = Spade()
+    , opt = {
+        security : {
+            '127.0.0.1:6379' : {
+                requirepass : 'fake'
+            }
+        }
+    }
+    , client = Spade( clone( opt ) )
     // expected events
     , evts = []
     // collected events
     , eresult = []
     ;
 
-log( '- created new Spade client with default options.' );
+log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
+client.on( 'authorized', function ( db, reply, address ) {
+    eresult.push( 'authorized' );
+    log( '  !authorized', inspect( [ db, reply ], false, 3, true ) );
+} );
 
-client.on( 'dbfailed', function ( db, reply, address ) {
-    eresult.push( 'dbfailed' );
-    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
+client.on( 'authfailed', function ( db, reply, address ) {
+    eresult.push( 'authfailed' );
+    log( '  !authfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'dbselected', function ( db, reply, address ) {
     eresult.push( 'dbselected' );
     log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+} );
+
+client.on( 'dbfailed', function ( db, reply, address ) {
+    eresult.push( 'dbfailed' );
+    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'error', function () {
@@ -62,29 +80,16 @@ client.on( 'lost', function ( address ) {
     dbg( '  !lost', inspect( [ address.host, address.port ], false, 1, true ) );
 } );
 
-log( '- added client listeners for socket connection events.' );
+log( '- added client listeners for auth events.' );
 log( '- opening client connection.' );
 
-client.connect( null, function () {
-    log( '- now client is connected and ready to send.' );
-    // push expected events
-    evts.push( 'connect', 'dbselected', 'ready' );
-} );
+client.connect();
 
-log( '- wait 2 secs to collect events..' );
+evts.push( 'connect', 'authfailed', 'offline', 'lost' );
+
+log( '- wait 1 second to collect events..' );
 
 setTimeout( function () {
-    log( '- check emitted events from client, should be: %s.', inspect( evts, false, 1, true ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with db selection!' );
-
-    log( '- now disconnecting client.' );
-    client.disconnect( function () {
-        log( '- client disconnected.' );
-        // push expected events
-        evts.push( 'offline', 'lost' );
-
-        log( '- check emitted events from client, should be: %s.', inspect( evts, false, 2, true ) );
-        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection!' );
-    } );
-
-}, 2000 );
+    log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
+    assert.deepEqual( eresult, evts, 'something goes wrong with client authorization! got: "' + eresult + '"' );
+}, 1000 );

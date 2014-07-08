@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade. socket connection events test.
+ * Spade, socket connection events test.
  */
 
 var debug = !! true
@@ -10,23 +10,26 @@ var debug = !! true
     , dbg = debug ? log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
+    , Bolgia = require( 'bolgia' )
+    , clone = Bolgia.clone
     , inspect = util.inspect
     , Spade = require( '../' )
-    , client = Spade( {
+    , opt = {
         security : {
             '127.0.0.1:6379' : {
                 // disable db selection
                 db : -1
             }
         }
-    } )
+    }
+    , client = Spade( clone( opt ) )
     // expected events
     , evts = []
     // collected events
     , eresult = []
     ;
 
-log( '- created new Spade client with default options.' );
+log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
 client.on( 'error', function () {
     eresult.push( 'error' );
@@ -67,20 +70,21 @@ client.connect( null, function () {
     evts.push( 'connect', 'ready' );
 } );
 
-log( '- wait 2 secs to collect events..' );
+log( '- wait 1 second to collect events..' );
 
 setTimeout( function () {
-    log( '- check emitted events from client, should be: %s.', inspect( evts, false, 1, true ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client connection!' );
+    log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
+    assert.deepEqual( eresult, evts, 'something goes wrong with client connection! got: "' + eresult + '"' );
 
     log( '- now disconnecting client.' );
     client.disconnect( function () {
         log( '- client disconnected.' );
+ 
         // push expected events
         evts.push( 'offline', 'lost' );
 
-        log( '- check emitted events from client, should be: %s.', inspect( evts, false, 2, true ) );
-        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection!' );
+        log( '- check collected events from client, should be: %s.', inspect( evts, false, 2, true ) );
+        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection! got: "' + eresult + '"' );
     } );
 
-}, 2000 );
+}, 1000 );
