@@ -647,9 +647,26 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * A message was received when the client is in Monitor mode.
+ * A 'message' was received when the client is in Monitor mode.
+ * 
+ * NOTE: the 'formatter' function converts the 'message' to an
+ * object/hash; for example, with an input like:
+ *
+ * 'monitor 1404871788.612598 [0 127.0.0.1:35604] "ping"',
+ *
+ * it will output:
+ *
+ * {
+ *  ip : '127.0.0.1'
+ *  , port : 35604
+ *  , utime : 1404871788612
+ *  , msecs :  0.598
+ *  , db : 0
+ *  , cmd : '"ping"'
+ * }
+ *
  */
-'monitor' : function ( String message ) : undefined
+'monitor' : function ( String message, Function formatter ) : undefined
 ```
 
 _[Back to ToC](#table-of-contents)_
