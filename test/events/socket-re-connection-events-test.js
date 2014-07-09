@@ -32,7 +32,7 @@ log( '- created new Spade client with custom options:', inspect( opt, false, 3, 
 
 client.on( 'error', function () {
     eresult.push( 'error' );
-    log( ' !error', inspect( arguments, false, 3, true ) );
+    dbg( ' !error', inspect( arguments, false, 3, true ) );
 } );
 
 client.on( 'connect', function ( address ) {

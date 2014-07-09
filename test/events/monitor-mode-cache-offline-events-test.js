@@ -23,47 +23,47 @@ log( '- created new Spade client with default options.' );
 
 client.on( 'error', function ( oerr ) {
     eresult.push( 'error' );
-    log( '  !error', inspect( [ oerr.cmd, oerr.err ], false, 3, true ) );
+    dbg( '  !error', inspect( [ oerr.cmd, oerr.err ], false, 3, true ) );
 } );
 
 client.on( 'cacheinit', function ( script_list ) {
     eresult.push( 'cacheinit' );
-    log( '  !cacheinit', inspect( script_list.length, false, 3, true ) );
+    dbg( '  !cacheinit', inspect( script_list.length, false, 3, true ) );
 } );
 
 client.on( 'scriptfailure', function ( sname, emsg ) {
     eresult.push( 'scriptfailure' );
-    log( '  !scriptfailure', inspect( sname, false, 3, true ) );
+    dbg( '  !scriptfailure', inspect( sname, false, 3, true ) );
 } );
 
 client.on( 'cacheload', function ( sname ) {
     eresult.push( 'cacheload' );
-    log( '  !cacheload', inspect( sname, false, 3, true ) );
+    dbg( '  !cacheload', inspect( sname, false, 3, true ) );
 } );
 
 client.on( 'cacheready', function ( lua_script_cache ) {
     eresult.push( 'cacheready' );
-    log( '  !cacheready', inspect( Object.keys( lua_script_cache.cache ), false, 3, true ) );
+    dbg( '  !cacheready', inspect( Object.keys( lua_script_cache.cache ), false, 3, true ) );
 } );
 
 client.on( 'authorized', function ( db, reply, address ) {
     eresult.push( 'authorized' );
-    log( '  !authorized', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !authorized', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'authfailed', function ( db, reply, address ) {
     eresult.push( 'authfailed' );
-    log( '  !authfailed', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !authfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'dbselected', function ( db, reply, address ) {
     eresult.push( 'dbselected' );
-    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'dbfailed', function ( db, reply, address ) {
     eresult.push( 'dbfailed' );
-    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'connect', function ( address ) {
@@ -91,10 +91,11 @@ client.on( 'lost', function ( address ) {
     dbg( '  !lost', inspect( [ address.host, address.port ], false, 1, true ) );
 } );
 
-client.on( 'monitor', function ( message ) {
-    eresult.push( 'monitor' );
+client.on( 'monitor', function ( message, formatter ) {
+    eresult.push( 'monitor', message );
     dbg( '  !monitor', inspect( message, false, 1, true ) );
 } );
+
 
 log( '- added client listeners, also for "monitor" event.' );
 
@@ -128,7 +129,7 @@ log( '- now waiting 1 secs to collect events..' );
 
 setTimeout( function () {
 
-    log( '- check default cache script, should be refused.' );
+    log( '- check default script, should be refused.' );
     assert.ok( ~eresult.indexOf( 'scriptfailure' ) );
 
     log( '- cache should be empty:', [ 0, 0 ] );

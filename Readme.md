@@ -388,13 +388,17 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *    , input_encoding : 'binary'
  *  }
  *
+ * - You can optionally use a cback that will be executed on 'cacheready',
+ *   with the current cache instance as argument.
+ *   See also "Script Cache Events" section.
+ *
  *   NOTE: if 'camphora_cache_opt' is set, cache will be re-initialized;
  *   it happens only if the cache is ready, or when no other script commands
  *   are already been queued and not yet been sent to Redis ( for example, when
  *   the client is offline ); otherwise option object will be ignored and cache
  *   will remain intact.
  */
- Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt ] ] ) : undefined
+ Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function cback ] ] ] ) : undefined
 ```
 _[Back to ToC](#table-of-contents)_
 

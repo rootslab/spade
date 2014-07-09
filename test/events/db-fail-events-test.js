@@ -32,17 +32,17 @@ log( '- created new Spade client with custom options:', inspect( opt, false, 3, 
 
 client.on( 'dbselected', function ( db, reply, address ) {
     eresult.push( 'dbselected' );
-    log( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'dbfailed', function ( db, reply, address ) {
     eresult.push( 'dbfailed' );
-    log( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
+    dbg( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
 } );
 
 client.on( 'error', function () {
     eresult.push( 'error' );
-    log( ' !error', inspect( arguments, false, 3, true ) );
+    dbg( ' !error', inspect( arguments, false, 3, true ) );
 } );
 
 client.on( 'connect', function ( address ) {
