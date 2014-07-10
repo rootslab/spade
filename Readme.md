@@ -91,6 +91,7 @@ $ npm run-script node_redis_bench
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#)__
+   - __[Event Sequence Diagramm](#event-sequence-diagram)__
    - __[Error Events](#error-events)__
    - __[Auth Events](#auth-events)__
    - __[Select Events](#select-events)__
@@ -498,6 +499,61 @@ _[Back to ToC](#table-of-contents)_
 
 ##Events
 
+- __[Event Sequence Diagramm](#event-sequence-diagram)__
+- __[Error Events](#error-events)__
+- __[Auth Events](#auth-events)__
+- __[Select Events](#select-events)__
+- __[Script Cache Events](#script-cache-events)__
+- __[Socket Connection Events](#socket-connection-events)__
+- __[PubSub Events](#pubsub-events)__
+- __[Monitor Events](#monitor-events)__
+
+####Event Sequence Diagram
+
+>  - the event emitted for first could be:
+    - **_connect_** or **_offline_**, after the execution of __connect__ or __disconnect__ methods.
+    - **_cacheinit_**, after the execution of __initCache__ method.
+    - **_error_**, it _"simply"_ happens.
+
+```javascript
+                             +                                     +
+                             |                                     |
+                             v                                     v
+                          connect+------->(timeout)              error
+                             +
+                             |
+                             +-------->(authorized)                +
+                             |               +                     |
+                             V               |                     v
+              +         (authfailed)   +-----+-----+          (cacheinit)
+              |              +         |           |               +
+              v              |         v           v               |
+  +------->offline<----------+----+(dbfailed) (dbselected)         |
+  |           +              |                     +               |
+  |           |              |                     |               |
+  +           v              |                     v               |
+lost<-----(*attempt*)        +------------------+ready+------------+
+  +           +                                    +               |
+  |           |            (*monitor*)<--+         |               v
+  |           |                          |         |      +--------+-------+
+  +->connect<-+                          +---------+      |                |
+        +                                |                v                v
+        |                  (*message*)<--+        (*scriptfailure*)   (*cacheload*)
+        v                                                 +                +
+       ...                                                |                |
+                                                          +--------+-------+
+                                                                   |
+                                                                   v
+                                                              (cacheready)
+```
+
+> __NOTE__:
+>  - events between __(__ __)__ could never happen, most of them depends on client configuration.
+>  - events within __*__ could be emitted more than once, namely _0_ or _k_ times with _k >= 1_.
+>  - __timeout__ could happen in _"any"_ moment after the __connect__ event.
+
+_[Back to ToC](#table-of-contents)_
+
 ####Error Events
 
 ```javascript
@@ -664,6 +720,8 @@ _[Back to ToC](#table-of-contents)_
  *  , db : 0
  *  , cmd : '"ping"'
  * }
+ *
+ * See also Syllabus.formatters.
  *
  */
 'monitor' : function ( String message, Function formatter ) : undefined
