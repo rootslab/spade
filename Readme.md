@@ -28,6 +28,30 @@
  - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle __socket reconnection__ when the connection is lost. 
  - __[Hiboris](https://github.com/rootslab/hiboris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ string protocol; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
 
+###Table of Contents
+
+- __[Install](#install)__
+- __[Run Tests](#run-tests)__
+- __[Run Benchmarks](#run-benchmarks)__
+- __[Constructor](#constructor)__
+   - __[Options](#options)__
+- __[Properties](#properties)__
+- __[Methods](#methods)__
+   - __[Redis Commands](#redis-commands)__
+   - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
+- __[Events](#events)__
+   - __[Event Sequence Diagramm](#event-sequence-diagram)__
+   - __[Error Events](#error-events)__
+   - __[Auth Events](#auth-events)__
+   - __[Select Events](#select-events)__
+   - __[Script Cache Events](#script-cache-events)__
+   - __[Socket Connection Events](#socket-connection-events)__
+   - __[PubSub Events](#pubsub-events)__
+   - __[Monitor Events](#monitor-events)__
+- __[MIT License](#mit-license)__
+
+-----------------------------------------------------------------------
+
 ###Install
 
 > __NOTE:__ only __node__ engines **">=v0.10.x"** are supported.
@@ -81,27 +105,6 @@ $ npm run-script node_redis_bench
 >  - to switch to the faster __hiredis__ native parser, install **_devDependencies_** .
 
 ----------------------------------------------------------------------------------------------
-
-###Table of Contents
-
-- __[Constructor](#constructor)__
-   - __[Options](#options)__
-- __[Properties](#properties)__
-- __[Methods](#methods)__
-   - __[Redis Commands](#redis-commands)__
-   - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
-- __[Events](#)__
-   - __[Event Sequence Diagramm](#event-sequence-diagram)__
-   - __[Error Events](#error-events)__
-   - __[Auth Events](#auth-events)__
-   - __[Select Events](#select-events)__
-   - __[Script Cache Events](#script-cache-events)__
-   - __[Socket Connection Events](#socket-connection-events)__
-   - __[PubSub Events](#pubsub-events)__
-   - __[Monitor Events](#monitor-events)__
-- __[MIT License](#mit-license)__
-
------------------------------------------------------------------------
 
 ###Constructor
 
