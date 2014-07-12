@@ -40,7 +40,7 @@
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#events)__
-   - __[Event Sequence Diagramm](#event-sequence-diagram)__
+   - __[Event Sequence Diagram](#event-sequence-diagram)__
    - __[Error Events](#error-events)__
    - __[Auth Events](#auth-events)__
    - __[Select Events](#select-events)__
@@ -523,7 +523,7 @@ _[Back to ToC](#table-of-contents)_
 
 ##Events
 
-- __[Event Sequence Diagramm](#event-sequence-diagram)__
+- __[Event Sequence Diagram](#event-sequence-diagram)__
 - __[Error Events](#error-events)__
 - __[Auth Events](#auth-events)__
 - __[Select Events](#select-events)__
