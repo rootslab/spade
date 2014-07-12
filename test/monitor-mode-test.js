@@ -11,7 +11,9 @@ var debug = !! true
     , dbg = debug ? log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
+    , test_utils = require( './deps/test-utils' )
     , inspect = util.inspect
+    , format = test_utils.format
     , Spade = require( '../' )
     , client = Spade()
     , another_client = Spade( {
@@ -29,83 +31,12 @@ var debug = !! true
 
 log( '- created new Spade client with default options.' );
 
-client.on( 'error', function ( oerr ) {
-    eresult.push( 'error' );
-    dbg( '  !error', inspect( [ oerr.cmd, oerr.err ], false, 3, true ) );
+log( '- enable CLI logging.' );
+
+client.cli( true, function ( ename, args ) {
+    eresult.push( ename );
+    dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
-
-client.on( 'cacheinit', function ( script_list ) {
-    eresult.push( 'cacheinit' );
-    dbg( '  !cacheinit', inspect( script_list.length, false, 3, true ) );
-} );
-
-client.on( 'scriptfailure', function ( sname, emsg ) {
-    eresult.push( 'scriptfailure' );
-    dbg( '  !scriptfailure', inspect( sname, false, 3, true ) );
-} );
-
-client.on( 'cacheload', function ( sname ) {
-    eresult.push( 'cacheload' );
-    dbg( '  !cacheload', inspect( sname, false, 3, true ) );
-} );
-
-client.on( 'cacheready', function ( lua_script_cache ) {
-    eresult.push( 'cacheready' );
-    dbg( '  !cacheready', inspect( Object.keys( lua_script_cache.cache ), false, 3, true ) );
-} );
-
-client.on( 'authorized', function ( db, reply, address ) {
-    eresult.push( 'authorized' );
-    dbg( '  !authorized', inspect( [ db, reply ], false, 3, true ) );
-} );
-
-client.on( 'authfailed', function ( db, reply, address ) {
-    eresult.push( 'authfailed' );
-    dbg( '  !authfailed', inspect( [ db, reply ], false, 3, true ) );
-} );
-
-client.on( 'dbselected', function ( db, reply, address ) {
-    eresult.push( 'dbselected' );
-    dbg( '  !dbselected', inspect( [ db, reply ], false, 3, true ) );
-} );
-
-client.on( 'dbfailed', function ( db, reply, address ) {
-    eresult.push( 'dbfailed' );
-    dbg( '  !dbfailed', inspect( [ db, reply ], false, 3, true ) );
-} );
-
-client.on( 'connect', function ( address ) {
-    eresult.push( 'connect' );
-    dbg( '  !connect', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'ready', function ( address ) {
-    eresult.push( 'ready' );
-    dbg( '  !ready', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'attempt', function ( attempt, address, interval ) {
-    eresult.push( 'attempt' );
-    dbg( ' !attempt', inspect( [ attempt, interval ], false, 1, true ) );
-} );
-
-client.on( 'offline', function ( address ) {
-    eresult.push( 'offline' );
-    dbg( '  !offline', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'lost', function ( address ) {
-    eresult.push( 'lost' );
-    dbg( '  !lost', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'monitor', function ( message, formatter ) {
-    eresult.push( 'monitor', message );
-    dbg( '  !monitor', inspect( message, false, 1, true ) );
-} );
-
-log( '- added client listeners, also for "monitor" event.' );
-
 
 log( '- now connecting client.' );
 
@@ -157,6 +88,7 @@ client.connect( null, function () {
                     el = eresult[ r ];
                     if ( isArray( el ) ) {
                         log( '- check if %s exists in monitor messages.', evts[ i ] );
+                        log( el [ 0 ])
                         assert.ok( ~ el[ 0 ].indexOf( evts[ i++ ] ), 'monitor messages should contain these commands: ' + evts );
                     }
                 };

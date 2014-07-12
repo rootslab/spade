@@ -12,7 +12,9 @@ var debug = !! true
     , util = require( 'util' )
     , Bolgia = require( 'bolgia' )
     , clone = Bolgia.clone
+    , test_utils = require( './deps/test-utils' )
     , inspect = util.inspect
+    , format = test_utils.format
     , Spade = require( '../' )
     , opt = {
         security : {
@@ -31,43 +33,19 @@ var debug = !! true
 
 log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
-client.on( 'error', function () {
-    eresult.push( 'error' );
-    dbg( ' !error', inspect( arguments, false, 3, true ) );
+log( '- enable CLI logging.' );
+
+client.cli( true, function ( ename, args ) {
+    eresult.push( ename );
+    dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
 
-client.on( 'connect', function ( address ) {
-    eresult.push( 'connect' );
-    dbg( '  !connect', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'ready', function ( address ) {
-    eresult.push( 'ready' );
-    dbg( '  !ready', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'attempt', function ( attempt, address, interval ) {
-    eresult.push( 'attempt' );
-    dbg( ' !attempt', inspect( [ attempt, interval ], false, 1, true ) );
-} );
-
-client.on( 'offline', function ( address ) {
-    eresult.push( 'offline' );
-    dbg( '  !offline', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'lost', function ( address ) {
-    eresult.push( 'lost' );
-    dbg( '  !lost', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-log( '- added client listeners for socket connection events.' );
 log( '- opening client connection.' );
 
 client.connect( null, function () {
     log( '- now client is connected and ready to send.' );
     // push expected events
-    evts.push( 'connect', 'ready' );
+    evts.push( 'connect', 'scanqueue', 'ready' );
 } );
 
 log( '- wait 1 second to collect events..' );

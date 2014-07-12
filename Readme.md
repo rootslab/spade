@@ -313,6 +313,13 @@ Spade.lua : Object
  * call the #initCache method.
  */
 Spade.lua.cache : Camphora
+
+/*
+ * An array containing all event listeners for logging to console.
+ * See Spade#cli.
+ */
+Spade.cli_debug : Array
+
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -402,7 +409,21 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *   the client is offline ); otherwise option object will be ignored and cache
  *   will remain intact.
  */
- Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function cback ] ] ] ) : undefined
+Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function cback ] ] ] ) : undefined
+
+/*
+ * Enable event logging to console.
+ * This method enables/logs some extra event for debugging/testing purpose,
+ * like:
+ * - 'reply' for Redis replies.
+ * - 'scanqueue' when the "offline" command queue is processed.
+ * - 'queued' for command when the client is offline.
+ * 
+ * NOTE: 
+ * - 'enable' option defaults to true.
+ * - default 'logger' function prints the event name and its arguments to console.
+ */
+Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -678,7 +699,7 @@ _[Back to ToC](#table-of-contents)_
  *
  * NOTE: 'millis' indicates the last interval of time between attempts.
  */
-'attempt' : function ( Number k, Object address, Number millis ) : undefined
+'attempt' : function ( Number k, Number millis, Object address ) : undefined
 
 /*
  * The connection is definitively lost ( after opt.reconnection.trials times ).
@@ -689,7 +710,7 @@ _[Back to ToC](#table-of-contents)_
  * The socket times out for inactivity.
  * It only notifies that the socket has been idle.
  */
-'timeout' : function ( Object address, Number timeout ) : undefined
+'timeout' : function ( Number timeout,  Object address ) : undefined
 ```
 
 ####PubSub Events
