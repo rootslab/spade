@@ -421,7 +421,7 @@ Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function
  * 
  * NOTE: 
  * - 'enable' option defaults to true.
- * - default 'logger' function prints the event name and its arguments.
+ * - default 'logger' function prints the event name and its arguments to console.
  */
 Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
 ```
