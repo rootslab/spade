@@ -12,7 +12,9 @@ var debug = !! true
     , util = require( 'util' )
     , Bolgia = require( 'bolgia' )
     , clone = Bolgia.clone
+    , test_utils = require( './deps/test-utils' )
     , inspect = util.inspect
+    , format = test_utils.format
     , Spade = require( '../' )
     , opt = {
         socket : {
@@ -30,37 +32,12 @@ var debug = !! true
 
 log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
-client.on( 'error', function () {
-    eresult.push( 'error' );
-    dbg( ' !error', inspect( arguments, false, 3, true ) );
-} );
+log( '- enable CLI logging.' );
 
-client.on( 'connect', function ( address ) {
-    eresult.push( 'connect' );
-    dbg( '  !connect', inspect( [ address.host, address.port ], false, 1, true ) );
+client.cli( true, function ( ename, args ) {
+    eresult.push( ename );
+    dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
-
-client.on( 'ready', function ( address ) {
-    eresult.push( 'ready' );
-    dbg( '  !ready', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'attempt', function ( attempt, address, interval ) {
-    eresult.push( 'attempt' );
-    dbg( '  !attempt', inspect( [ attempt, interval ], false, 1, true ) );
-} );
-
-client.on( 'offline', function ( address ) {
-    eresult.push( 'offline' );
-    dbg( '  !offline', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-client.on( 'lost', function ( address ) {
-    eresult.push( 'lost' );
-    dbg( '  !lost', inspect( [ address.host, address.port ], false, 1, true ) );
-} );
-
-log( '- added client listeners for socket connection events.' );
 
 log( '- opening client connection to a not existemt host:port to force reconnection.' );
 
@@ -83,7 +60,7 @@ setTimeout( function () {
             log( '- client disconnected.' );
 
             // push expected events
-            evts.push( 'connect', 'ready', 'offline', 'lost' );
+            evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'offline', 'lost' );
 
             log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
             assert.deepEqual( eresult, evts );

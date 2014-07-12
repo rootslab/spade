@@ -678,7 +678,7 @@ _[Back to ToC](#table-of-contents)_
  *
  * NOTE: 'millis' indicates the last interval of time between attempts.
  */
-'attempt' : function ( Number k, Object address, Number millis ) : undefined
+'attempt' : function ( Number k, Number millis, Object address ) : undefined
 
 /*
  * The connection is definitively lost ( after opt.reconnection.trials times ).
@@ -689,7 +689,7 @@ _[Back to ToC](#table-of-contents)_
  * The socket times out for inactivity.
  * It only notifies that the socket has been idle.
  */
-'timeout' : function ( Object address, Number timeout ) : undefined
+'timeout' : function ( Number timeout,  Object address ) : undefined
 ```
 
 ####PubSub Events
