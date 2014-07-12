@@ -48,6 +48,7 @@
    - __[Socket Connection Events](#socket-connection-events)__
    - __[PubSub Events](#pubsub-events)__
    - __[Monitor Events](#monitor-events)__
+   - __[Other Debug Events](#other-debug-events)__
 - __[MIT License](#mit-license)__
 
 -----------------------------------------------------------------------
@@ -417,7 +418,7 @@ Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function
  * like:
  * - 'reply' for Redis replies.
  * - 'scanqueue' when the "offline" command queue is processed.
- * - 'queued' for command when the client is offline.
+ * - 'queued' for commands executed when the client is offline.
  * 
  * NOTE: 
  * - 'enable' option defaults to true.
@@ -531,6 +532,7 @@ _[Back to ToC](#table-of-contents)_
 - __[Socket Connection Events](#socket-connection-events)__
 - __[PubSub Events](#pubsub-events)__
 - __[Monitor Events](#monitor-events)__
+- __[Other Debug Events](#other-debug-events)__
 
 ####Event Sequence Diagram
 
@@ -749,6 +751,28 @@ _[Back to ToC](#table-of-contents)_
  *
  */
 'monitor' : function ( String message, Function formatter ) : undefined
+```
+
+####Other Debug Events
+
+> __NOTE__: to enable logging for events below, execute __Spade#cli__ method.
+
+```javascript
+/*
+ * When the client will be online once again, this event is emitted
+ * before performing a scan for sending enqueued commands.
+ */
+'scanqueue' : function ( Number offline_queue_size ) : undefined
+
+/*
+ * the client receives a command reply from Redis.
+ */
+'reply' : function ( Boolean is_err, Object command, String reply ) : undefined
+
+/*
+ * When the client is offline, commands are not sent but queued.
+ */
+'queued' : function ( Object command, Number offline_queue_size ) : undefined
 ```
 
 _[Back to ToC](#table-of-contents)_
