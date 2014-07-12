@@ -419,6 +419,7 @@ Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function
  * - 'reply' for Redis replies.
  * - 'scanqueue' when the "offline" command queue is processed.
  * - 'queued' for commands executed when the client is offline.
+ * See "Other Debug Events" section.
  * 
  * NOTE: 
  * - 'enable' option defaults to true.
