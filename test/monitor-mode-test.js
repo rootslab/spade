@@ -46,7 +46,7 @@ client.connect( null, function () {
 
     client.initCache( null, null, function ( cache ) {
 
-        log( '- execute monitor command when cache is ready.' );
+        log( '- execute MONITOR command when cache is ready.' );
 
         client.commands.monitor( function ( is_err, reply, fn ) {
             log( '- MONITOR callback should execute and get OK.' );

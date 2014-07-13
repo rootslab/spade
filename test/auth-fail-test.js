@@ -32,7 +32,6 @@ var debug = !! true
 
 log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
 
-
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {

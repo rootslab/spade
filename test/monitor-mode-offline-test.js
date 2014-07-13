@@ -40,7 +40,7 @@ log( '- init client cache in offline mode.' );
 
 client.initCache();
 
-log( '- execute/enqueue monitor command in offline mode.' );
+log( '- execute/enqueue MONITOR command in offline mode.' );
 
 client.commands.monitor( function ( is_err, reply, fn ) {
     log( '- MONITOR callback should execute and get OK.' );
@@ -59,8 +59,6 @@ client.connect( null, function () {
     } );
 
 } );
-
-// 'connect', 'dbselected', 'ready', 'error', 'cacheinit', 'scriptfailure', 'cacheready', 'error'
 
 log( '- now waiting 1 secs to collect events..' );
 
@@ -84,4 +82,3 @@ setTimeout( function () {
     }, 1000 );
 
 }, 1000 );
-/**/
