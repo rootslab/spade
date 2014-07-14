@@ -734,15 +734,13 @@ _[Back to ToC](#table-of-contents)_
  */
 'message' : function ( Array message ) : undefined
 
-```javascript
 /*
  * An event to signal that the client is in PubSub mode. From now all
- * replies to (un)subscrition commands are recevied as messages.
+ * replies to (un)subscrition commands will be received as messages.
  * 
  */
 'listen' : function () : undefined
 
-```javascript
 /*
  * An event to signal that client is leaving PubSub mode after a
  * unsubscription command.
