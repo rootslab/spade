@@ -734,8 +734,8 @@ _[Back to ToC](#table-of-contents)_
 'message' : function ( Array message ) : undefined
 
 /*
- * An event to signal that the client is entering in PubSub mode, after a
- * subscription commands. From now, all replies to (un)subscrition commands
+ * An event to signal that the client is entering in PubSub mode after a
+ * subscription command. From now, all replies to (un)subscription commands
  * will be received as messages.
  */
 'listen' : function () : undefined
