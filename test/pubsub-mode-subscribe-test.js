@@ -9,7 +9,6 @@ var debug = !! true
     , log = console.log
     , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
-    , util = require( 'util' )
     , test_utils = require( './deps/test-utils' )
     , inspect = test_utils.inspect
     , format = test_utils.format
@@ -122,11 +121,11 @@ client.connect( null, function () {
 } );
 
 
-log( '- wait 2 seconds to collect events..' );
+log( '- wait 3 seconds to collect events..' );
 
 setTimeout( function () {
 
-    log( '- deep check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts );
+    log( '- deep check collected events, should be:', inspect( evts ), inspect( eresult ) );
+    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
 
-}, 2000 );
+}, 3000 );

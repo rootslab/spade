@@ -10,7 +10,6 @@ var debug = !! true
     , log = console.log
     , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
-    , util = require( 'util' )
     , test_utils = require( './deps/test-utils' )
     , inspect = test_utils.inspect
     , format = test_utils.format
