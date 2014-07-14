@@ -729,20 +729,20 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * A message was received from PubSub system when the client is in
- * PubSub mode.
+ * A message was received from PubSub system when the client is in PubSub mode.
  */
 'message' : function ( Array message ) : undefined
 
 /*
- * An event to signal that the client is in PubSub mode. From now all
- * replies to (un)subscrition commands will be received as messages.
+ * An event to signal that the client is entering in PubSub mode, after a
+ * subscription commands. From now, all replies to (un)subscrition commands
+ * will be received as messages.
  */
 'listen' : function () : undefined
 
 /*
- * An event to signal that client is leaving PubSub mode after a
- * unsubscription command.
+ * An event to signal that client is leaving PubSub mode after a unsubscription
+ * command.
  */
 'shutup' : function () : undefined
 ```
