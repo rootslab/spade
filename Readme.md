@@ -737,7 +737,6 @@ _[Back to ToC](#table-of-contents)_
 /*
  * An event to signal that the client is in PubSub mode. From now all
  * replies to (un)subscrition commands will be received as messages.
- * 
  */
 'listen' : function () : undefined
 
