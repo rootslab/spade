@@ -7,18 +7,12 @@
 var debug = !! true
     , emptyFn = function () {}
     , log = console.log
-    , dbg = debug ? log : emptyFn
+    , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
     , test_utils = require( './deps/test-utils' )
-    , inspect = util.inspect
+    , inspect = test_utils.inspect
     , format = test_utils.format
-    , iopt = {
-        showHidden : false
-        , depth : 3
-        , colors : true
-        , customInspect : true 
-    }
     , Spade = require( '../' )
     , client = Spade()
     // expected events

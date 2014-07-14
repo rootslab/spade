@@ -11,7 +11,7 @@ var debug = !! true
     , assert = require( 'assert' )
     , util = require( 'util' )
     , test_utils = require( './deps/test-utils' )
-    , inspect = util.inspect
+    , inspect = test_utils.inspect
     , format = test_utils.format
     , iopt = {
         showHidden : false
@@ -51,7 +51,7 @@ evts.push( 'queued', 'connect', 'dbselected', 'scanqueue', 'ready' );
 client.commands.subscribe( channels );
 
 client.connect( null, function () {
-    log( '- check collected events, should be:', inspect( evts, iopt ) );
+    log( '- check collected events, should be:', inspect( evts ) );
      assert.deepEqual( eresult, evts );
 
     log( '- try to execute a ping command in pubsub mode.' );
@@ -85,7 +85,7 @@ setTimeout( function () {
     evts.push( 'shutup' );
     // push expected cache event
     evts.push( 'cacheinit', 'cacheload', 'cacheready' );
-    log( '- check collected cache events, should be:', inspect( evts, iopt ) );
+    log( '- check collected cache events, should be:', inspect( evts ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts );
 
     log( '- now disconnecting client with QUIT.' );

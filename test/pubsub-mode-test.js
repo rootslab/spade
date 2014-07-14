@@ -7,18 +7,12 @@
 var debug = !! true
     , emptyFn = function () {}
     , log = console.log
-    , dbg = debug ? log : emptyFn
+    , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
     , test_utils = require( './deps/test-utils' )
-    , inspect = util.inspect
+    , inspect = test_utils.inspect
     , format = test_utils.format
-    , iopt = {
-        showHidden : false
-        , depth : 3
-        , colors : true
-        , customInspect : true 
-    }
     , Spade = require( '../' )
     , client = Spade()
     // expected events
@@ -50,7 +44,7 @@ evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 
 client.connect( null, function () {
 
-    log( '- check collected events, should be:', inspect( evts, iopt ) );
+    log( '- check collected events, should be:', inspect( evts ) );
     assert.deepEqual( eresult, evts );
 
     client.commands.subscribe( channels );
@@ -73,12 +67,12 @@ setTimeout( function () {
     // push expected message events
     evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
-    log( '- check collected message events, should be:', inspect( evts, iopt ) );
+    log( '- check collected message events, should be:', inspect( evts ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts );
 
     // push expected cache event
     evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
-    log( '- check collected cache events, should be:', inspect( evts, iopt ) );
+    log( '- check collected cache events, should be:', inspect( evts ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts );
 
     log( '- cache should be empty:', [ 0, 0 ] );
@@ -95,7 +89,7 @@ setTimeout( function () {
     evts.push( 'offline', 'lost' );
 
     setTimeout( function () {
-        log( '- check collected events for client disconnection, should be:', inspect( evts, iopt ) );
+        log( '- check collected events for client disconnection, should be:', inspect( evts ) );
         assert.deepEqual( eresult.slice( 0, evts.length ), evts );
     }, 1000 );
 

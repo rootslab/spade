@@ -3,6 +3,7 @@ var log = console.log
     , util = require( 'util' )
     , Bolgia = require( 'bolgia' )
     , doString = Bolgia.doString
+    , improve = Bolgia.improve
     , ooo = Bolgia.circles
     , ostr = ooo.str
     , oarr = ooo.arr
@@ -13,6 +14,9 @@ var log = console.log
         , depth : 3
         , colors : true
         , customInspect : true 
+    }
+    , inspect = function ( arg, opt ) {
+        return util.inspect( arg, improve( opt, iopt ) );
     }
     , format = function ( ename, args ) {
 
@@ -99,6 +103,7 @@ var log = console.log
 
     return {
         format : format
+        , inspect : inspect
     };
 
 } )();

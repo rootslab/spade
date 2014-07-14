@@ -7,13 +7,13 @@
 var debug = !! true
     , emptyFn = function () {}
     , log = console.log
-    , dbg = debug ? log : emptyFn
+    , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
     , util = require( 'util' )
     , Bolgia = require( 'bolgia' )
     , clone = Bolgia.clone
     , test_utils = require( './deps/test-utils' )
-    , inspect = util.inspect
+    , inspect = test_utils.inspect
     , format = test_utils.format
     , Spade = require( '../' )
     , opt = {
@@ -31,7 +31,7 @@ var debug = !! true
     , eresult = []
     ;
 
-log( '- created new Spade client with custom options:', inspect( opt, false, 3, true ) );
+log( '- created new Spade client with custom options:', inspect( opt ) );
 
 log( '- enable CLI logging.' );
 
@@ -51,7 +51,7 @@ client.connect( null, function () {
 log( '- wait 1 second to collect events..' );
 
 setTimeout( function () {
-    log( '- check collected events from client, should be: %s.', inspect( evts, false, 1, true ) );
+    log( '- check collected events from client, should be: %s.', inspect( evts ) );
     assert.deepEqual( eresult, evts, 'something goes wrong with client connection! got: "' + eresult + '"' );
 
     log( '- now disconnecting client.' );
@@ -61,7 +61,7 @@ setTimeout( function () {
         // push expected events
         evts.push( 'offline', 'lost' );
 
-        log( '- check collected events from client, should be: %s.', inspect( evts, false, 2, true ) );
+        log( '- check collected events from client, should be: %s.', inspect( evts ) );
         assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection! got: "' + eresult + '"' );
     } );
 
