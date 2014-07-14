@@ -718,12 +718,36 @@ _[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
+> __NOTE__: callbacks for (__P__)(__UN__)__SUBSCRIBE__ commands are disabled; it is
+> not always possible to mantain bindings between commands callbacks and messages
+> received through the _Pub/Sub_ system, when the client is in _Pub/Sub_ mode, all
+> commands replies will be received as messages.
+>
+> For example:
+>  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ] )_ produces 6 messages with 3 actual subscriptions.
+>  - _unsubscribe()_ produces 3 messages with 0 subscriptions.
+
 ```javascript
 /*
  * A message was received from PubSub system when the client is in
- * Subscrition (PubSub) mode.
+ * PubSub mode.
  */
 'message' : function ( Array message ) : undefined
+
+```javascript
+/*
+ * An event to signal that the client is in PubSub mode. From now all
+ * replies to (un)subscrition commands are recevied as messages.
+ * 
+ */
+'listen' : function () : undefined
+
+```javascript
+/*
+ * An event to signal that client is leaving PubSub mode after a
+ * unsubscription command.
+ */
+'shutup' : function () : undefined
 ```
 
 ####Monitor Events

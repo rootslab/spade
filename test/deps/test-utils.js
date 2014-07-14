@@ -72,6 +72,14 @@ var log = console.log
             case 'message':
                 return inspect( args.slice( 0, 1 ), iopt );
 
+            // listen
+            case 'listen':
+                return inspect( args, iopt );
+
+            // shutup
+            case 'shutup':
+                return inspect( args, iopt );
+
             case 'reply':
                 return inspect( [ args[ 0 ], args[ 1 ].cmd, args[ 2 ] ], iopt );
 

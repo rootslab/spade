@@ -53,18 +53,11 @@ client.connect( null, function () {
     log( '- check collected events, should be:', inspect( evts, iopt ) );
     assert.deepEqual( eresult, evts );
 
-    client.commands.subscribe( channels, function ( is_err, data, fn ) {
-        // push expected reply event
-        evts.push( 'reply' );
-        log( '- check collected events, should be:', inspect( evts, iopt ) );
-        assert.deepEqual( eresult, evts );
-        log( '- SUBSCRIBE callback should execute only for 1st message reply, and should be', inspect( [ 'subscribe', 'a', 1 ], iopt ) );
-        assert.deepEqual( fn( data ), [ 'subscribe', 'a', 1 ]  );
-    } );
+    client.commands.subscribe( channels );
 
     log( '- try to execute a ping command in pubsub mode.' );
     // push expected error event
-    evts.push( 'error' );
+    evts.push( 'error', 'reply' );
     client.commands.ping( function ( is_err, reply, fn ) {
         log( '- PING callback should get an error.' );
         assert.ok( is_err );
@@ -77,7 +70,8 @@ log( '- now waiting 1 secs to collect events..' );
 setTimeout( function () {
     var i = 0
         ;
-    // push expected message event
+    // push expected message events
+    evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
     log( '- check collected message events, should be:', inspect( evts, iopt ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts );
