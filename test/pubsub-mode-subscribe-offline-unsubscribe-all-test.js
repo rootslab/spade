@@ -12,12 +12,6 @@ var debug = !! true
     , test_utils = require( './deps/test-utils' )
     , inspect = test_utils.inspect
     , format = test_utils.format
-    , iopt = {
-        showHidden : false
-        , depth : 3
-        , colors : true
-        , customInspect : true 
-    }
     , Spade = require( '../' )
     , client = Spade()
     // expected events
