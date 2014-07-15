@@ -562,17 +562,17 @@ _[Back to ToC](#table-of-contents)_
   |           +        |     |                     +               |
   |           |        |     |                     |               |
   +           v        |     |                     v               |
-lost<-----(*attempt*)  |     +------------------+ready+------------+
+lost<----+(*attempt*)  |     +------------------+ready+------------+
   +           +        |                           +               |
-  |           |        +---(*monitor*)<--+         |               v
+  |           |        +--+(*monitor*)<--+         |               v
   |           |                          |         |      +--------+-------+
   +->connect<-+                          +---------+      |                |
         +                                |                v                v
-        |                    listen<-----+        (*scriptfailure*)   (*cacheload*)
+        |                   (listen)<----+        (*scriptfailure*)   (*cacheload*)
         v                       +                         +                +
        ...                      |                         |                |
                                 v                         +--------+-------+
-                           (*message*)---->(shutup)                |
+                           (*message*)+--->(shutup)                |
                                                                    v
                                                               (cacheready)
 ```
@@ -581,6 +581,9 @@ lost<-----(*attempt*)  |     +------------------+ready+------------+
 >  - events between __(__ __)__ could never happen, most of them depends on client configuration.
 >  - events within __*__ could be emitted more than once, namely _0_ or _k_ times with _k >= 1_.
 >  - __timeout__ could happen in _"any"_ moment after the __connect__ event.
+> - __listen__ signals that client is entering in subscription mode, __shutup__ signals that client
+>   is leaving subscription mode.
+> - __monitor__ mode could end only with a QUIT command (then 'offline').
 
 _[Back to ToC](#table-of-contents)_
 
