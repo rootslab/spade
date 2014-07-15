@@ -460,20 +460,19 @@ _[Back to ToC](#table-of-contents)_
 > __Every command mix-in accepts a callback__ function as the last argument, it will get __3__ arguments:
 
 ```javascript
-'callback' : function ( Boolean is_err_reply, Array data, Function reveal ) {
-    /*
-     * 'is_err_reply' is a Boolean that signals an ERROR reply from Redis,
-     * ( not a JS Error ), then reply data will contain the error message(s).
-     *
-     * 'data' is a list containing reply data Buffers ( or Strings if hiredis is used ).
-     *
-     * 'reveal' is a utility function that converts the raw Redis Reply in a simple and
-     * usable form.
-     *
-     * NOTE: The utility function is not the same for all command replies, because, as we
-     * surely know, some reply needs particular format and type conversions.
-     */
-}
+/*
+ * 'is_err_reply' is a Boolean that signals an ERROR reply from Redis,
+ * ( not a JS Error ), then reply data will contain the error message(s).
+ *
+ * 'data' is a list containing reply data Buffers ( or Strings if hiredis is used ).
+ *
+ * 'reveal' is a utility function that converts the raw Redis Reply in a simple
+ * and usable form.
+ *
+ * NOTE: The utility function is not the same for all command replies, because,
+ * as we surely know, some reply needs particular format and type conversions.
+ */
+'callback' : function ( Boolean is_err_reply, Array data, Function reveal ) : undefined
 ```
 > __Example Code__:
 
