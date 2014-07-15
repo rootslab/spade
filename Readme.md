@@ -457,7 +457,7 @@ _[Back to ToC](#table-of-contents)_
 
 #####Command Callback
 
-> __Every command mix-in accepts a callback__ function as the last argument, it __ will get __3__ arguments:
+> __Every command mix-in accepts a callback__ function as the last argument, it will get __3__ arguments:
 
 ```javascript
 'callback' : function ( Boolean is_err_reply, Array data, Function reveal ) {
