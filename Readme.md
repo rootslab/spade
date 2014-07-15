@@ -725,23 +725,24 @@ _[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
-> __NOTE__: callbacks for (__P__)(__UN__)__SUBSCRIBE__ commands are disabled; it is
-> not always possible to mantain bindings between commands callbacks and messages
-> received through the _Pub/Sub_ system, when the client is in _Pub/Sub_ mode, all
-> commands replies will be received as messages.
+> __NOTE__: __callbacks__ for (__P__)(__UN__)__SUBSCRIBE__ commands __are disabled__; it is
+> __not always possible to mantain bindings between commands callbacks and messages
+> received__ through the _Pub/Sub_ system, when the client is in _Pub/Sub_ mode, then __all
+> commands replies will be received as messages__.
 >
 > For example:
->  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ] )_ produces 6 messages with 3 actual subscriptions.
->  - _unsubscribe()_ produces 3 messages with 0 subscriptions.
+>  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ] )_ produces __6__ messages, __3__ actual subscriptions.
+>  - _unsubscribe()_ produces __3__ messages, __0__ subscriptions.
 
 ```javascript
 /*
  * A message was received from PubSub system when the client is in PubSub mode.
  *
  * NOTE: the 'formatter' function converts the received 'message' to an obj/hash.
- * For example, a message reply to a (P)(UN)SUBSCRIBE command issued by the client:
+ * For example, a message reply to a (P)(UN)SUBSCRIBE command issued by the client,
+ * could be:
  *
- * 'message' -> [ unsubscribe, 'channel', 0 ]
+ * 'message' -> [ 'unsubscribe', 'channel', 0 ]
  *
  * will be converted to:
  *
