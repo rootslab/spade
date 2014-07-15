@@ -51,7 +51,7 @@ setTimeout( function () {
         client.disconnect( function () {
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: "' + eresult + '"' );
+            assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
 
             log( '- re-opening client connection.' );
 
@@ -60,7 +60,7 @@ setTimeout( function () {
             client.connect( null, function () {
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: "' + eresult + '"' );
+                assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
 
                 log( '- reset results.' );
 

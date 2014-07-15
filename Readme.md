@@ -200,8 +200,11 @@ opt = {
     /*
      * Security options.
      *
-     * Two sample entries are already present in the cache, holding default values
-     * from redis.conf. An entry key could be a filepath or a network endpoint.
+     * Options for db selection and password sending when the client connects to a
+     * particular host.
+     * An entry will be automatically added with the socket.address or socket.path
+     * defined in the constructor option. However, two sample entries are already
+     * present in the cache, holding default values from redis.conf. 
      *
      * Every entry should be a file path ('/path/to/file.sock'), or a network path
      * ('ip:port'), and should contain a:
@@ -730,8 +733,36 @@ _[Back to ToC](#table-of-contents)_
 ```javascript
 /*
  * A message was received from PubSub system when the client is in PubSub mode.
+ *
+ * NOTE: the 'formatter' function converts the received 'message' to an obj/hash.
+ * For example, a message reply to a (P)(UN)SUBSCRIBE command issued by the client:
+ *
+ * 'message' -> [ unsubscribe, 'channel', 0 ]
+ *
+ * will be converted to:
+ *
+ * {
+ *  type : 'unsubscribe'
+ *  , chan : 'channel'
+ *  . subs : 0
+ * }
+ *
+ * a typical message received from publisher(s):
+ *
+ * 'message' -> [ 'message', 'channel', 'Hello folks!' ]
+ *
+ * will be converted to:
+ *
+ * {
+ *  type : 'message'
+ *  , chan : 'channel'
+ *  . msg : 'Hello folks!!'
+ * }
+ *
+ * See also Syllabus.formatters.
+ *
  */
-'message' : function ( Array message ) : undefined
+'message' : function ( Array message, Function formatter ) : undefined
 
 /*
  * An event to signal that the client is entering in PubSub mode after a
@@ -753,8 +784,8 @@ _[Back to ToC](#table-of-contents)_
 /*
  * A 'message' was received when the client is in Monitor mode.
  * 
- * NOTE: the 'formatter' function converts the 'message' to an
- * object/hash; for example, with an input like:
+ * NOTE: the 'formatter' function converts the 'message' to an obj/hash.
+ * For example, with an input like:
  *
  * 'monitor 1404871788.612598 [0 127.0.0.1:35604] "ping"',
  *

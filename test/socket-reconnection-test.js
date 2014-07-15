@@ -38,7 +38,7 @@ client.cli( true, function ( ename, args ) {
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
 
-log( '- opening client connection to a not existemt host:port to force reconnection.' );
+log( '- opening client connection to a not existent host to force reconnection: ', inspect( client.options.socket.address ) );
 
 // push expected events
 evts.push( 'offline', 'attempt', 'attempt', 'attempt', 'lost' );
@@ -62,7 +62,7 @@ setTimeout( function () {
             evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'offline', 'lost' );
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assert.deepEqual( eresult, evts );
+            assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
         } );
 
     } );

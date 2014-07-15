@@ -44,7 +44,7 @@ evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 client.connect( null, function () {
 
     log( '- check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts );
+    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
 
     client.commands.subscribe( channels );
 

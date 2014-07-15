@@ -120,12 +120,11 @@ client.connect( null, function () {
 
 } );
 
-
 log( '- wait 3 seconds to collect events..' );
 
 setTimeout( function () {
 
-    log( '- deep check collected events, should be:', inspect( evts ), inspect( eresult ) );
+    log( '- deep check collected events, should be:', inspect( evts ) );
     assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
 
 }, 3000 );

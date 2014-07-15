@@ -46,7 +46,7 @@ client.commands.subscribe( channels );
 client.connect( null, function () {
 
     log( '- check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts );
+    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
 
     log( '- try to execute a ping command in pubsub mode.' );
 
@@ -69,12 +69,12 @@ setTimeout( function () {
     evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
     log( '- check collected message events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts );
+    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
 
     // push expected cache event
     evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
     log( '- check collected cache events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts );
+    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
 
     log( '- cache should be empty:', [ 0, 0 ] );
     assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
@@ -91,7 +91,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client disconnection, should be:', inspect( evts ) );
-        assert.deepEqual( eresult.slice( 0, evts.length ), evts );
+        assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
     }, 1000 );
 
 }, 1000 );

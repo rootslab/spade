@@ -61,7 +61,7 @@ setTimeout( function () {
         evts.push( 'offline', 'lost' );
 
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
-        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection! got: "' + eresult + '"' );
+        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection! got: ' + inspect( eresult ) );
     } );
 
 }, 1000 );

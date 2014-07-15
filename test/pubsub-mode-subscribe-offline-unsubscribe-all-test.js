@@ -85,7 +85,7 @@ setTimeout( function () {
     // push expected cache event
     evts.push( 'cacheinit', 'cacheload', 'cacheready' );
     log( '- check collected cache events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts );
+    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
 
     log( '- now disconnecting client with QUIT.' );
 

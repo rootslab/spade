@@ -48,5 +48,5 @@ log( '- wait 1 second to collect events..' );
 
 setTimeout( function () {
     log( '- check collected events from client, should be: %s.', inspect( evts ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client db selection! got: "' + eresult + '"' );
+    assert.deepEqual( eresult, evts, 'something goes wrong with client db selection! got: ' + inspect( eresult ) );
 }, 1000 );

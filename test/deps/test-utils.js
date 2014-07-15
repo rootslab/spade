@@ -74,7 +74,7 @@ var log = console.log
 
             // message
             case 'message':
-                return inspect( args.slice( 0, 1 ), iopt );
+                return inspect( args[ 0 ], iopt );
 
             // listen
             case 'listen':

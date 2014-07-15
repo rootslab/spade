@@ -50,6 +50,6 @@ setTimeout( function () {
 
     log( '- check collected events from client, should be: %s.', inspect( evts ) );
 
-    assert.deepEqual( eresult, evts, 'something goes wrong with client authorization! got: "' + eresult + '"' );
+    assert.deepEqual( eresult, evts, 'something goes wrong with client authorization! got: ' + inspect( eresult ) );
 
 }, 1000 );
