@@ -40,7 +40,7 @@
    - __[Redis Commands](#redis-commands)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#events)__
-   - __[Event Sequence Diagram](#event-sequence-diagram)__
+   - __[Events Sequence Diagram](#events-sequence-diagram)__
    - __[Error Events](#error-events)__
    - __[Auth Events](#auth-events)__
    - __[Select Events](#select-events)__
@@ -528,7 +528,7 @@ _[Back to ToC](#table-of-contents)_
 
 ##Events
 
-- __[Event Sequence Diagram](#event-sequence-diagram)__
+- __[Events Sequence Diagram](#events-sequence-diagram)__
 - __[Error Events](#error-events)__
 - __[Auth Events](#auth-events)__
 - __[Select Events](#select-events)__
@@ -538,7 +538,7 @@ _[Back to ToC](#table-of-contents)_
 - __[Monitor Events](#monitor-events)__
 - __[Other Debug Events](#other-debug-events)__
 
-####Event Sequence Diagram
+####Events Sequence Diagram
 
 >  - the event emitted for first could be:
     - **_connect_** or **_offline_**, after the execution of __connect__ or __disconnect__ methods.
@@ -558,21 +558,21 @@ _[Back to ToC](#table-of-contents)_
               +         (authfailed)   +-----+-----+          (cacheinit)
               |              +         |           |               +
               v              |         v           v               |
-  +------->offline<----------+----+(dbfailed) (dbselected)         |
-  |           +              |                     +               |
-  |           |              |                     |               |
-  +           v              |                     v               |
-lost<-----(*attempt*)        +------------------+ready+------------+
-  +           +                                    +               |
-  |           |            (*monitor*)<--+         |               v
+  +------->offline<----+-----+----+(dbfailed) (dbselected)         |
+  |           +        |     |                     +               |
+  |           |        |     |                     |               |
+  +           v        |     |                     v               |
+lost<-----(*attempt*)  |     +------------------+ready+------------+
+  +           +        |                           +               |
+  |           |        +---(*monitor*)<--+         |               v
   |           |                          |         |      +--------+-------+
   +->connect<-+                          +---------+      |                |
         +                                |                v                v
-        |                  (*message*)<--+        (*scriptfailure*)   (*cacheload*)
-        v                                                 +                +
-       ...                                                |                |
-                                                          +--------+-------+
-                                                                   |
+        |                    listen<-----+        (*scriptfailure*)   (*cacheload*)
+        v                       +                         +                +
+       ...                      |                         |                |
+                                v                         +--------+-------+
+                           (*message*)---->(shutup)                |
                                                                    v
                                                               (cacheready)
 ```
@@ -812,20 +812,22 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
+ * When the client is offline, commands are not sent but queued.
+ */
+'queued' : function ( Object command, Number offline_queue_size ) : undefined
+
+/*
  * When the client will be online once again, this event is emitted
- * before performing a scan for sending enqueued commands.
+ * before performing a scan for sending enqueued commands, then always
+ * before the 'ready' event.
  */
 'scanqueue' : function ( Number offline_queue_size ) : undefined
 
 /*
- * the client receives a command reply from Redis.
+ * The client receives a command reply from Redis. It always happens after
+ * the 'ready' event.
  */
 'reply' : function ( Boolean is_err, Object command, String reply ) : undefined
-
-/*
- * When the client is offline, commands are not sent but queued.
- */
-'queued' : function ( Object command, Number offline_queue_size ) : undefined
 ```
 
 _[Back to ToC](#table-of-contents)_
