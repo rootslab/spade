@@ -92,14 +92,14 @@ $ npm test
 
 ```bash
 $ cd spade/
-$ npm run-script bench
+$ npm run bench
 ```
 > run benchmarks for **node_redis**.
 
 ```bash
 $ cd spade/
 $ npm install redis
-$ npm run-script node_redis_bench
+$ npm run node_redis_bench
 ```
 
 > __NOTE__:
@@ -487,7 +487,7 @@ client.connect();
 
 // execute TIME command
 client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
-    log( '\n- error reply:', is_err_reply );
+    log( '- error reply:', is_err_reply );
     log( '- raw reply:', reply_data_arr );
     log( '- converted reply:', reveal_fn( reply_data_arr ) );
 } );
@@ -622,8 +622,8 @@ _[Back to ToC](#table-of-contents)_
 ####Select Events
 
 > These events are emitted on every client (re)connection to __Redis__. If the __db__
-> property is set for the current connected host in the __security__ options/cache, the
-> __SELECT__ db command will be sent before all other commands in the queue.
+> property is set ( >== 0 ) in the __security__ options/cache, for the current Redis
+> connected host, __SELECT__ db will be sent before all other commands in the queue.
 >
 > __NOTE__:
 > When __Redis needs authentication__, __SELECT__ command will be sent __only after__

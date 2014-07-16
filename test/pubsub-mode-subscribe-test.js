@@ -25,8 +25,8 @@ var debug = !! true
     , evts = []
     // collected events
     , eresult = []
-    , // channels
-    channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
+    // channels
+    , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
     ;
 
 log( '- created new Spade client with default options.' );
