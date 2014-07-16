@@ -792,17 +792,17 @@ _[Back to ToC](#table-of-contents)_
  * NOTE: the 'formatter' function converts the 'message' to an obj/hash.
  * For example, with an input like:
  *
- * 'monitor 1404871788.612598 [0 127.0.0.1:35604] "ping"',
+ * message = '1405478664.248185 [0 127.0.0.1:47573] "ping"',
  *
- * it will output:
+ * executing formatter( message ) will output:
  *
  * {
- *  ip : '127.0.0.1'
- *  , port : 35604
- *  , utime : 1404871788612
- *  , msecs :  0.598
- *  , db : 0
- *  , cmd : '"ping"'
+ *  ip: '127.0.0.1',
+ *  port: 47573,
+ *  db: 0,
+ *  cmd: '"ping"',
+ *  utime: 1405478664248,
+ *  time: [ 1405478664, 248185 ]
  * }
  *
  * See also Syllabus.formatters.
