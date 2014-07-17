@@ -26,7 +26,7 @@
     "bolgia" : "=2.6.1",
     "hiboris" : "=1.1.0",
     "cocker" : "=0.13.2",
-    "libra" : "=0.12.3",
+    "libra" : "=0.13.0",
     "syllabus" : "=0.31.3"
   },
   "devDependencies": {

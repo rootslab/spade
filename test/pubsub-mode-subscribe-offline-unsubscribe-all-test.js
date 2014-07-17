@@ -20,6 +20,8 @@ var debug = !! true
     , eresult = []
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
+    , sub_cback_OK = 0
+    , unsub_cback_OK = 0
     ;
 
 log( '- created new Spade client with default options.' );
@@ -39,9 +41,14 @@ log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
 log( '- now connecting client.' );
 
+// push expected events
 evts.push( 'queued', 'connect', 'dbselected', 'scanqueue', 'ready' );
 
-client.commands.subscribe( channels );
+
+client.commands.subscribe( channels, function () {
+        log( '- I\'m SUBSCRIBE callback.' );
+        sub_cback_OK = 1;
+    }  );
 
 client.connect( null, function () {
     log( '- check collected events, should be:', inspect( evts ) );
@@ -49,7 +56,6 @@ client.connect( null, function () {
 
     log( '- try to execute a ping command in pubsub mode.' );
 
-    // push expected error event
     evts.push( 'error', 'reply' );
 
     client.commands.ping( function ( is_err, reply, fn ) {
@@ -59,12 +65,15 @@ client.connect( null, function () {
 
     log( '- call #unsubscribe without arguments' );
 
-    client.commands.unsubscribe();
+    client.commands.unsubscribe( null, function () {
+        log( '- I\'m UNSUBSCRIBE callback.' );
+        unsub_cback_OK = 1;
+    } );
 
 } );
 
 log( '- now waiting 1 secs to collect events..' );
-
+/**/
 setTimeout( function () {
     var i = 0
         ;
@@ -77,7 +86,7 @@ setTimeout( function () {
     for ( ; i < channels.length + 3; ++i ) evts.push( 'message' );
     evts.push( 'shutup' );
     // push expected cache event
-    evts.push( 'cacheinit', 'cacheload', 'cacheready' );
+    evts.push( 'cacheinit', 'cacheload', 'cacheready', 'reply' );
     log( '- check collected cache events, should be:', inspect( evts ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
 
@@ -88,4 +97,7 @@ setTimeout( function () {
         assert.ok( fn( reply )[ 0 ] === 'OK' );
     } );
 
-}, 1000 );
+   log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
+    assert.deepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
+
+}, 1000 );/**/

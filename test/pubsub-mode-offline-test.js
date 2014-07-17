@@ -68,10 +68,6 @@ setTimeout( function () {
     // push expected message events
     evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
-    log( '- check collected message events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
-
-    // push expected cache event
     evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
     log( '- check collected cache events, should be:', inspect( evts ) );
     assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );

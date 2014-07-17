@@ -580,11 +580,11 @@ lost<----+(*attempt*)  |     +------------------+ready+------------+
 
 > __NOTE__:
 >  - events between __(__ __)__ could never happen, most of them depends on client configuration.
->  - events within __*__ could be emitted more than once, namely _0_ or _k_ times with _k >= 1_.
+>  - events within __*__ could be emitted more than once, namely __0__ or __k__ times with _k >= 1_.
 >  - __timeout__ could happen in _"any"_ moment after the __connect__ event.
 >  - __listen__ signals that client is entering in subscription mode
 >  - __shutup__ signals that client is leaving subscription mode.
->  - __monitor__ mode could end only with a QUIT command (then 'offline').
+>  - __monitor__ mode could end only with a __QUIT__ command (then '_offline_').
 
 _[Back to ToC](#table-of-contents)_
 
@@ -725,14 +725,17 @@ _[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
-> __NOTE__: __callbacks__ for (__P__)(__UN__)__SUBSCRIBE__ commands __are disabled__; it is
-> __not always possible to mantain bindings between commands callbacks and messages
-> received__ through the _Pub/Sub_ system, when the client is in _Pub/Sub_ mode, then __all
-> commands replies will be received as messages__.
+> __NOTE__: for (__P__)(__UN__)__SUBSCRIBE__ commands is not always possible to mantain
+> bindings between commands callbacks and messages received through the _Pub/Sub_ system.
+> For multiple (un)subscriptions the __callback is executed only for the first command reply__,
+> it signals that the command was successfully processed by Redis, then __all command replies
+> will be received as messages__ through the _Pub/Sub_ system.
 >
 > For example:
->  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ] )_ produces __6__ messages, __3__ actual subscriptions.
->  - _unsubscribe()_ produces __3__ messages, __0__ subscriptions.
+>  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )_ produces __6__ messages, __3__ actual subscriptions.
+>  - _unsubscribe( null, cback )_ produces __3__ messages, __0__ subscriptions.
+>
+> the '_cback_' function will be executed only with the first command reply.
 
 ```javascript
 /*
