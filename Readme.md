@@ -734,8 +734,6 @@ _[Back to ToC](#table-of-contents)_
 > For example:
 >  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )_ produces __6__ messages, __3__ actual subscriptions.
 >  - _unsubscribe( null, cback )_ produces __3__ messages, __0__ subscriptions.
->
-> the '_cback_' function will be executed only with the first command reply.
 
 ```javascript
 /*
