@@ -27,6 +27,8 @@ var debug = !! true
     , eresult = []
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
+    , sub_cback_OK = 0
+    , unsub_cback_OK = 0
     ;
 
 log( '- created new Spade client with default options.' );
@@ -53,7 +55,10 @@ client.connect( null, function () {
     var i = 0
         ;
 
-    client.commands.subscribe( channels );
+    client.commands.subscribe( channels, function () {
+        log( '- I\'m SUBSCRIBE callback.' );
+        sub_cback_OK = 1;
+    } );
 
     log( '- try to execute a ping command in pubsub mode.' );
 
@@ -110,9 +115,11 @@ client.connect( null, function () {
             // push expected events, 3 unsubscribe messages + 1 published message
             for ( i = 0; i < 3 + 1; ++i ) evts.push( 'message' );
             evts.push( 'shutup' );
-
             log( '-  #unsubscribe client from all channels.' );
-            client.commands.unsubscribe();
+            client.commands.unsubscribe( null, function ( ) {
+                log( '- I\'m UNSUBSCRIBE callback.' );
+                unsub_cback_OK = 1;
+            } );
 
         } );
 
@@ -126,5 +133,8 @@ setTimeout( function () {
 
     log( '- deep check collected events, should be:', inspect( evts ) );
     assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+
+    log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
+    assert.deepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
 
 }, 3000 );
