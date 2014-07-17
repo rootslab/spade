@@ -74,7 +74,7 @@ client.connect( null, function () {
             // push expected monitor message
             evts = [ 'SELECT', 'PING', 'KEYS' ];
 
-            log( '- wait 2 seconds to collect monitor events' );
+            log( '- wait 1 second to collect monitor events' );
 
             setTimeout( function () {
                 var i = 0
@@ -95,7 +95,7 @@ client.connect( null, function () {
                 log( '- disconnect other client.' );
                 another_client.disconnect();
 
-            }, 2000 );
+            }, 1000 );
 
         } );
 

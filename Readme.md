@@ -833,7 +833,13 @@ _[Back to ToC](#table-of-contents)_
  * The client receives a command reply from Redis. It always happens after
  * the 'ready' event.
  */
-'reply' : function ( Boolean is_err, Object command, String reply ) : undefined
+'reply' : function ( Object command, String reply ) : undefined
+
+/*
+ * The client receives an error reply from Redis. It always happens after
+ * the 'ready' event.
+ */
+'error-reply' : function ( Object command, String err_reply ) : undefined
 ```
 
 _[Back to ToC](#table-of-contents)_

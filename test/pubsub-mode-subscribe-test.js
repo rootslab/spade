@@ -127,7 +127,7 @@ client.connect( null, function () {
 
 } );
 
-log( '- wait 3 seconds to collect events..' );
+log( '- wait 2 seconds to collect events..' );
 
 setTimeout( function () {
 
@@ -137,4 +137,4 @@ setTimeout( function () {
     log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
     assert.deepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
 
-}, 3000 );
+}, 2000 );

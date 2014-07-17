@@ -53,7 +53,7 @@ client.connect( null, function () {
 
 } );
 
-log( '- now waiting 1 secs to collect events..' );
+log( '- now waiting 1 sec to collect events..' );
 
 setTimeout( function () {
 

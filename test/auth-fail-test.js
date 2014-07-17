@@ -42,7 +42,7 @@ log( '- opening client connection.' );
 
 client.connect();
 
-evts.push( 'connect', 'authfailed', 'reply', 'offline', 'lost' );
+evts.push( 'connect', 'authfailed', 'error-reply', 'offline', 'lost' );
 
 log( '- wait 1 second to collect events..' );
 

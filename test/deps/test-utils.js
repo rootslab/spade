@@ -86,7 +86,8 @@ module.exports = ( function () {
                     return inspect( args, iopt );
 
                 case 'reply':
-                    return inspect( [ args[ 0 ], args[ 1 ].cmd, args[ 2 ] ], iopt );
+                case 'error-reply':
+                    return inspect( [ args[ 0 ].cmd, args[ 1 ] ], iopt );
 
                 // object commands, queue_size
                 case 'queued':
