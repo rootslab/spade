@@ -17,7 +17,7 @@ module.exports = ( function () {
             , customInspect : true 
         }
         , inspect = function ( arg, opt ) {
-            return util.inspect( arg, improve( opt, iopt ) );
+            return util.inspect( arg, opt ? improve( opt, iopt ) : iopt );
         }
         , format = function ( ename, args ) {
 
