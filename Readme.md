@@ -497,7 +497,7 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 ####Interactive Mode
 
 > Specifying a __semver__ option ( like __*__ or __1.0.0__ ) enables _Syllabus_
-> develop mode for commands.
+> development mode for commands.
 
 __Example Code for REPL__
 
@@ -542,7 +542,7 @@ $ node
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
 > these ones will also update the hidden cache for __LUA__ scripts.
-> The **_[initCache](#methods)_** method internally uses these method for loading script files
+> The **_[initCache](#methods)_** method internally uses these methods for loading script files
 > and for revealing the hidden __LUA__ cache.
 
 ```javascript
