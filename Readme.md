@@ -542,6 +542,8 @@ $ node
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
 > these ones will also update the hidden cache for __LUA__ scripts.
+> The **_[initCache](#methods)_** method internally uses these method for loading script files
+> and for revealing the hidden __LUA__ cache.
 
 ```javascript
 /*
@@ -563,8 +565,7 @@ Spade.lua.script#load( String key, String data [, Function cback [, Function lba
  */
 Spade.lua.script#flush( [ Function cback [, Function fback ] ] ) : undefined
 ```
-> See **_[initCache](#methods)_** method for loading script files and for revealing
-> the hidden __LUA__ cache, then also **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
+> See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
 
 _[Back to ToC](#table-of-contents)_
 
