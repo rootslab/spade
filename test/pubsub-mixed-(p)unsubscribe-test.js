@@ -58,7 +58,7 @@ client.connect( null, function () {
                 evts.push( 'message' );
                 client.commands.punsubscribe( null, function () {
                     // push expected event
-                    evts.push( 'message' );
+                    evts.push( 'message', 'shutup' );
                 } );
             } );
         } );
