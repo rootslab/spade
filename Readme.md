@@ -38,7 +38,8 @@
 - __[Properties](#properties)__
 - __[Methods](#methods)__
    - __[Redis Commands](#redis-commands)__
-      - __[Command Callback](#command-callback)__
+   - __[Command Callback](#command-callback)__
+   - __[Interactive Mode](#interactive-mode)__
    - __[LUA Cache and SCRIPT Methods](#lua-cache-and-script-methods)__
 - __[Events](#events)__
    - __[Events Sequence Diagram](#events-sequence-diagram)__
@@ -440,22 +441,22 @@ _[Back to ToC](#table-of-contents)_
 > via the __Syllabus__ module.
 
 > __Brief List of Redis Command Types:__
-> - __Keys__ : _23 commands_.
-> - __Strings__ : _26 commands_.
-> - __Hashes__ : _14 commands_.
-> - __Lists__ : _17 commands_.
-> - __Sets__ : _15 commands_.
-> - __Sorted Sets__ : _20 commands_.
-> - __HyperLogLog__ : _3 commands_.
-> - __PubSub__ : _8 commands_.
-> - __Transactions__ : _5 commands_.
-> - __Scripting__ : _6 commands_.
-> - __Connection__ : _5 commands_.
-> - __Server__ : _27 commands_.
+> - [__Keys__](https://github.com/rootslab/syllabus#keys) : _23 commands_.
+> - [__Strings__](https://github.com/rootslab/syllabus#strings) : _26 commands_.
+> - [__Hashes__](https://github.com/rootslab/syllabus#hashes) : _14 commands_.
+> - [__Lists__](https://github.com/rootslab/syllabus#lists) : _17 commands_.
+> - [__Sets__](https://github.com/rootslab/syllabus#sets) : _15 commands_.
+> - [__Sorted Sets__](https://github.com/rootslab/syllabus#sorted-sets) : _20 commands_.
+> - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _3 commands_.
+> - [__PubSub__](https://github.com/rootslab/syllabus#pubsub) : _8 commands_.
+> - [__Transactions__](https://github.com/rootslab/syllabus#transactions) : _5 commands_.
+> - [__Scripting__](https://github.com/rootslab/syllabus#scripting) : _6 commands_.
+> - [__Connection__](https://github.com/rootslab/syllabus#connection) : _5 commands_.
+> - [__Server__](https://github.com/rootslab/syllabus#server) : _27 commands_.
 
 > See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
-#####Command Callback
+####Command Callback
 
 > __Every command mix-in accepts a callback__ function as the last argument, it will get __3__ arguments:
 
@@ -493,6 +494,50 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 } );
 ```
 
+####Interactive Mode
+
+> Specifying a __semver__ option ( like __*__ or __1.0.0__ ) enables _Syllabus_
+> develop mode for commands.
+
+__Example Code for REPL__
+
+```bash
+$ cd spade/
+$ node
+
+# you can directly load the interactive example file executing:
+# > .load example/repl-example.js
+
+# create a client instance with all commands (*)
+> var client = require( './' )( { semver : '*' } )
+..
+# enable automatic console logging for events
+> client.cli()
+..
+# get info about a command via mixins (Syllabus) property
+> client.mixins.info('CoNfiG')
+
+# you can also stick the #info method to all available commands
+> client.mixins.stick()
+..
+# now get info about a method/command
+> client.commands.ping.info()
+..
+# now get info about a nested method/command
+> client.commands.pubsub.numpat.info()
+..
+# ok stop, now execute the command
+> client.commands.pubsub.numpat()
+..
+# ops, command is not sent but queued, then open client connection..
+> client.connect()
+..
+# read your reply, then quit or disconnect
+> client.commands.quit()
+..
+```
+> See **_[Syllabus Properties and Methods Section](https://github.com/rootslab/syllabus#properties-methods)_** and _[repl-example.js](example/repl-example.js)_.
+
 ####LUA Cache and SCRIPT Methods
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
@@ -518,10 +563,8 @@ Spade.lua.script#load( String key, String data [, Function cback [, Function lba
  */
 Spade.lua.script#flush( [ Function cback [, Function fback ] ] ) : undefined
 ```
-> __See__ **_[initCache](#methods)_** method for loading script files and for revealing
-> the hidden __LUA__ cache.
-
-> __See__ also **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
+> See **_[initCache](#methods)_** method for loading script files and for revealing
+> the hidden __LUA__ cache, then also **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
 
 _[Back to ToC](#table-of-contents)_
 
