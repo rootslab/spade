@@ -1,16 +1,16 @@
 ###♠ Spade
 
-[![NPM version](http://img.shields.io/npm/v/spade.svg)](http://img.shields.io/npm/v/spade.svg)
-[![build status](http://img.shields.io/david/rootslab/spade.svg)](http://img.shields.io/david/rootslab/spade.svg)
-[![devDependency Status](http://img.shields.io/david/dev/rootslab/spade.svg)](http://img.shields.io/david/dev/rootslab/spade.svg)
-
-[![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
-
 [![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](http://img.shields.io/github/tag/rootslab/spade.svg)
 [![Travis build](http://img.shields.io/travis/rootslab/spade.svg)](http://img.shields.io/travis/rootslab/spade.svg)
 [![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](http://img.shields.io/github/issues/rootslab/spade.svg)
 [![NPM downloads](http://img.shields.io/npm/dm/spade.svg)](http://img.shields.io/npm/dm/spade.svg)
 [![GitTip](http://img.shields.io/gittip/rootslab.svg)](http://img.shields.io/gittip/rootslab.svg)
+
+[![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
+
+[![NPM version](http://img.shields.io/npm/v/spade.svg)](http://img.shields.io/npm/v/spade.svg)
+[![build status](http://img.shields.io/david/rootslab/spade.svg)](http://img.shields.io/david/rootslab/spade.svg)
+[![devDependency Status](http://img.shields.io/david/dev/rootslab/spade.svg)](http://img.shields.io/david/dev/rootslab/spade.svg)
 
 [![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
