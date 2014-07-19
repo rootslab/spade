@@ -348,14 +348,18 @@ _[Back to ToC](#table-of-contents)_
 
 ####connect
 
-> Open a connection to the Redis Server, when it is fully established,
-> the '_ready_' event will be emitted. You can optionally use a cback
-> that will be executed on the 'ready' event. It accepts an optional
-> socket confguration object. It returns the current Spade instance.
+> __Open a connection to the Redis Server__.
+
+> When the connection is fully established, the '__ready__' event will be emitted.
+
+> You can optionally use a callback that will be executed on the '__ready__' event.
+
+> It accepts an optional socket confguration object.
+
+> It returns the current Spade instance.
 
 ```javascript
 /*
- *
  * socket_opt = {
  *      address : {
  *          host : '127.0.0.1'
@@ -380,9 +384,12 @@ _[Back to ToC](#table-of-contents)_
 
 ####disconnect
 
-> Disconnect client from the Redis Server.
+> __Disconnect client from the Redis Server__.
+
 > You can optionally use a cback that will be executed after socket
-> disconnection. It returns the current Spade instance.
+> disconnection.
+
+> It returns the current Spade instance.
 
 ```javascript
 Spade#disconnect( [ Function cback ] ) : Spade
@@ -395,11 +402,12 @@ _[Back to ToC](#table-of-contents)_
 
 ####initCache
 
-> Initialize or reveal the (hidden) __LUA __script cache.
-> It loads and sends all the files found in the '_./node_modules/syllabus/lib/lua/scripts_'
-> directory, to the Redis Server ( after the 'ready' event ).
-> It triggers '_cacheinit_', '_cacheload_', '_cacheready_' and '_scriptfailure_'
-> events.
+> __Initialize or reveal the (hidden) LUA script cache__.
+
+> It loads and sends all the files found in the '__./node_modules/syllabus/lib/lua/scripts__'
+> directory, to the Redis Server, always after the 'ready' event.
+
+> It triggers '__cacheinit__', '__cacheload__', '_cacheready_' and '__scriptfailure__' events.
 
 > Optionally you could specify:
 > - a custom loading path with something like : { filepath : '/my/scripts/dir' }.
