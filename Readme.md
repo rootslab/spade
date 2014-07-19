@@ -445,14 +445,15 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 >  - __scanqueue__ when the "offline" command queue is processed.
 >  - __queued__ for commands executed when the client is offline.
 
-> __NOTE__: 
+> __NOTE__:
 >  - the _'enable'_ option defaults to true.
 >  - the default _'logger'_ prints event name and arguments to console.
-> See "__[Other Debug Events](#other-debug-events)__" section.
 
 ```javascript
 Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
 ```
+> See "__[Other Debug Events](#other-debug-events)__" section.
+
 _[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
