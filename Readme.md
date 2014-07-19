@@ -530,7 +530,8 @@ $ cd spade/
 $ node
 
 # you can directly load the interactive example file executing:
-# > .load example/repl-example.js
+# > cd spade/example
+# > .load repl-example.js
 
 # create a client instance with all commands (*)
 > var client = require( './' )( { semver : '*' } )
@@ -541,18 +542,60 @@ $ node
 # get info about a command via mixins (Syllabus) property
 > client.mixins.info('CoNfiG')
 
+{ req: 'CoNfiG',
+  name: 'config',
+  args: -1,
+  type: 'server',
+  cmd: 'CONFIG',
+  sub: 
+   [ 'GET',
+     'RESETSTAT',
+     'REWRITE',
+     'SET' ] }
+
 # you can also stick the #info method to all available commands
 > client.mixins.stick()
-..
+169
 # now get info about a method/command
 > client.commands.ping.info()
-..
+
+{ req: 'ping',
+  name: 'ping',
+  args: 0,
+  type: 'connection',
+  cmd: 'PING',
+  sub: [],
+  url: 'http://redis.io/commands/ping',
+  rtype: '+',
+  since: '1.0.0',
+  hint: 'PING',
+  descr: 'Ping the server.' }
+
 # now get info about a nested method/command
 > client.commands.pubsub.numpat.info()
-..
+
+{ req: 'pubsub numpat',
+  name: 'pubsub.numpat',
+  args: 0,
+  type: 'pubsub',
+  cmd: 'PUBSUB NUMPAT',
+  sub: [],
+  url: 'http://redis.io/commands/pubsub',
+  rtype: ':',
+  since: '2.8.0',
+  hint: 'PUBSUB NUMPAT',
+  descr: 'Returns the total number of patterns all the clients are subscribed to.' }
+
 # ok stop, now execute the command
 > client.commands.pubsub.numpat()
-..
+
+!queued: [ { bulks: 2,
+    cmd: 'PUBSUB',
+    ecmd: '*2\r\n$6\r\nPUBSUB\r\n$6\r\nNUMPAT\r\n',
+    fn: [Function],
+    zn: [Function] },
+  1 ]
+
 # ops, command is not sent but queued, then open client connection..
 > client.connect()
 ..

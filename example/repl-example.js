@@ -3,7 +3,7 @@
  */
 
 // create a client instance with all commands (*)
-var client = require( './' )( { semver : '*' } )
+var client = require( '../' )( { semver : '*' } )
 
 //enable automatic console logging for events
 client.cli()
