@@ -386,7 +386,7 @@ __Disconnect client from the Redis Server__:
 >    disconnection.
 >  - It returns the current Spade instance.
 
-> __NOTE__: From the client point of view executing disconnect, has the same
+> __NOTE__: From the client point of view, executing disconnect has the same
 > effect of sending and executing the Redis **_QUIT_** command. Connection will
 > be closed and no other re-connection attempts will be made.
 
@@ -405,7 +405,7 @@ __Initialize or reveal the (hidden) LUA script cache__:
 >  - Optionally you could specify:
 >    - a custom loading path with something like : _{ filepath : '/my/scripts/dir' }_.
 >    - a custom init configuration for the Camphora costructor to (re)build the cache.
->    - a cback that will be executed on 'cacheready' passing the current cache instance
+>    - a cback that will be executed on __cacheready__ passing the current cache instance
 >      as argument.
 
 > __NOTE__: Empty files and scripts processed and refused by Redis with
