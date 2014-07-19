@@ -349,13 +349,13 @@ _[Back to ToC](#table-of-contents)_
 ####connect
 
 > __Open a connection to the Redis Server__:
->  - When the connection is fully established, the '__ready__' event will be emitted.
->  - You can optionally use a callback that will be executed on the '__ready__' event.
+>  - When the connection is fully established, the __ready__ event will be emitted.
+>  - You can optionally use a callback that will be executed on the __ready__ event.
 >  - It accepts an optional socket confguration object.
 >  - It returns the current Spade instance.
 
-> __NOTE__: You don't need to listen for the '_ready_' event, commands
-> will be queued in "offline mode" and written to socket when the
+> __NOTE__: You don't need to listen for the __ready__ event, commands
+> will be queued in _"offline mode"_ and written to socket when the
 > connection will be ready.
 
 ```javascript
@@ -386,7 +386,7 @@ _[Back to ToC](#table-of-contents)_
 >  - It returns the current Spade instance.
 
 > __NOTE__: From the client point of view it has the same effect of
-> sending and executing the Redis __QUIT __command. Connection will be
+> sending and executing the Redis __QUIT__ command. Connection will be
 > closed and no other re-connection attempts will be made.
 
 ```javascript
@@ -396,11 +396,11 @@ Spade#disconnect( [ Function cback ] ) : Spade
 ####initCache
 
 > __Initialize or reveal the (hidden) LUA script cache__:
->  - It loads and sends all the files found in the '__./node_modules/syllabus/lib/lua/scripts__'
+>  - It loads and sends all the files found in the __./node_modules/syllabus/lib/lua/scripts__
 >    directory, to the Redis Server, always after the 'ready' event.
->  - It triggers '__cacheinit__', '__cacheload__', '_cacheready_' and '__scriptfailure__' events.
+>  - It triggers __cacheinit__, __cacheload___, __cacheready__ and __scriptfailure__ events.
 >  - Optionally you could specify:
->    - a custom loading path with something like : { filepath : '/my/scripts/dir' }.
+>    - a custom loading path with something like : _{ filepath : '/my/scripts/dir' }_.
 >    - a custom init configuration for the Camphora costructor to (re)build the cache.
 >    - a cback that will be executed on 'cacheready' passing the current cache instance
 >      as argument.
@@ -436,9 +436,9 @@ Spade#initCache( [ Object file_load_opt [, Object cache_opt, [ Function cback ] 
 > __Enable event logging to console__.
 
 > This method enables/logs some extra event for debugging/testing purpose:
->  - 'reply' for Redis replies.
->  - 'scanqueue' when the "offline" command queue is processed.
->  - 'queued' for commands executed when the client is offline.
+>  - __reply__ for Redis replies.
+>  - __scanqueue__ when the "offline" command queue is processed.
+>  - __queued__ for commands executed when the client is offline.
 
 > __NOTE__: 
 >  - the _'enable'_ option defaults to true.
