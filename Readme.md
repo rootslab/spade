@@ -44,6 +44,10 @@
    - __[Options](#options)__
 - __[Properties](#properties)__
 - __[Methods](#methods)__
+   - __[#connect](#connect)__
+   - __[#disconnect](#disconnect)__
+   - __[#initCache](#initCache)__
+   - __[#cli](#cli)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
    - __[Interactive Mode](#interactive-mode)__
@@ -342,16 +346,19 @@ _[Back to ToC](#table-of-contents)_
 
 > Arguments within [ ] are optional.
 
+####connect
+
+> Open a connection to the Redis Server, when it is fully established,
+> the '_ready_' event will be emitted. You can optionally use a cback
+> that will be executed on the 'ready' event. It accepts an optional
+> socket confguration object. It returns the current Spade instance.
+
+> __NOTE__: You don't need to listen for the '_ready_' event, commands
+> will be queued in "offline mode" and written to socket when the
+> connection will be ready.
+
 ```javascript
 /*
- * Connect to Redis Server, when the connection is fully established,
- * 'ready' event will be emitted. You can optionally use a cback that
- * will be executed on the 'ready' event.
- * It returns the current Spade instance.
- *
- * NOTE: You don't need to listen for the 'ready' event, commands
- * will be queued in "offline mode" and written to socket when the
- * connection will be ready.
  *
  * socket_opt = {
  *      address : {
@@ -368,42 +375,49 @@ _[Back to ToC](#table-of-contents)_
  *  }
  */
 Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
+```
+_[Back to ToC](#table-of-contents)_
 
-/*
- * Disconnect from Redis Server.
- * You can optionally use a cback that will be executed after socket
- * disconnection.
- * It returns the current Spade instance.
- *
- * NOTE: From the client point of view it has the same effect of
- * sending and executing the Redis QUIT command. Connection will be
- * closed and no other re-connection attempts will be made.
- */
+####disconnect
+
+> Disconnect client from the Redis Server.
+> You can optionally use a cback that will be executed after socket
+> disconnection. It returns the current Spade instance.
+
+> __NOTE__: From the client point of view it has the same effect of
+> sending and executing the Redis __QUIT __command. Connection will be
+> closed and no other re-connection attempts will be made.
+
+```javascript
 Spade#disconnect( [ Function cback ] ) : Spade
+```
+_[Back to ToC](#table-of-contents)_
 
+####initCache
+
+> Initialize or reveal the (hidden) __LUA __script cache.
+> It loads and sends all the files found in the '_./node_modules/syllabus/lib/lua/scripts_'
+> directory, to the Redis Server ( after the 'ready' event ).
+> It triggers '_cacheinit_', '_cacheload_', '_cacheready_' and '_scriptfailure_'
+> events.
+
+> Optionally you could specify:
+> - a custom loading path with something like : { filepath : '/my/scripts/dir' }.
+> - a custom init configuration for the Camphora costructor to (re)build the cache.
+> - a cback that will be executed on 'cacheready' passing the current cache instance
+>   as argument.
+
+> __NOTE__: Empty files and scripts processed and refused by Redis with
+> an error reply, they are automatically evicted from the cache.
+
+> __NOTE__: If 'cache_opt' is set, the cache will be re-initialized; it happens
+> only if the cache is ready, or when no other script commands are already been
+> queued and not yet been sent to Redis ( for example, when the client is offline );
+> otherwise option object will be ignored and cache will remain intact.
+
+```javascript
 /*
- * Initialize or reveal the (hidden) LUA script cache. It loads and sends
- * all the files found in the './node_modules/syllabus/lib/lua/scripts'
- * directory, to the Redis Server ( after the 'ready' event ).
- * It triggers 'cacheinit', 'cacheload', 'cacheready' and 'scriptfailure'
- * events. See "Script Cache Events" Section.
- *
- * Optionally you could specify:
- *
- * - A custom loading path with 'file_load_opt':
- *  {
- *   filepath : '/my/scripts/dir'
- *  };
- *
- *   See Camphora#load for a list of available options:
- *   https://github.com/rootslab/camphora#options
- *
- *   NOTE: Empty files and scripts processed and refused by Redis with
- *   an error reply, are automatically evicted from the cache.
- *
- * - A custom init configuration for the Camphora costructor to build or
- *   rebuild the cache.
- *   Default values for 'cache_opt' are:
+ *  Default values for 'cache_opt' are:
  *  {
  *    capacity : 128
  *    , encrypt_keys : false
@@ -411,40 +425,40 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *    , output_encoding : 'hex'
  *    , input_encoding : 'binary'
  *  }
- *
- * - You can optionally use a cback that will be executed on 'cacheready',
- *   with the current cache instance as argument.
- *   See also "Script Cache Events" section.
- *
- *   NOTE: if 'camphora_cache_opt' is set, cache will be re-initialized;
- *   it happens only if the cache is ready, or when no other script commands
- *   are already been queued and not yet been sent to Redis ( for example, when
- *   the client is offline ); otherwise option object will be ignored and cache
- *   will remain intact.
  */
 Spade#initCache( [ Object file_load_opt [, Object cache_opt, [ Function cback ] ] ] ) : undefined
+```
 
-/*
- * Enable event logging to console.
- * This method enables/logs some extra event for debugging/testing purpose,
- * like:
- * - 'reply' for Redis replies.
- * - 'scanqueue' when the "offline" command queue is processed.
- * - 'queued' for commands executed when the client is offline.
- *
- * See "Other Debug Events" section.
- * 
- * NOTE: 
- * - 'enable' option defaults to true.
- * - default 'logger' function prints the event name and its arguments to console.
- */
+> See [Camphora#load](https://github.com/rootslab/camphora#options) for a list of available
+> options for cache.
+
+> See "- __[Script Cache Events](#script-cache-events)__" Section for the list of events.
+
+_[Back to ToC](#table-of-contents)_
+
+####cli
+
+> Enable event logging to console.
+
+> This method enables/logs some extra event for debugging/testing purpose:
+>  - 'reply' for Redis replies.
+>  - 'scanqueue' when the "offline" command queue is processed.
+>  - 'queued' for commands executed when the client is offline.
+
+> __NOTE__: 
+>  - the _'enable'_ option defaults to true.
+>  - the default _'logger'_ prints event name and arguments to console.
+
+```javascript
 Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
 ```
+> See "- __[Other Debug Events](#other-debug-events)__" section.
+
 _[Back to ToC](#table-of-contents)_
 
 ####Redis Commands
 
-> __Spade.commands__ property contains all methods to encode and send __Redis__ commands,
+> The __Spade.commands__ property contains all methods to encode and send __Redis__ commands,
 > via the __Syllabus__ module.
 
 > __Brief List of Redis Command Types:__
@@ -461,7 +475,7 @@ _[Back to ToC](#table-of-contents)_
 > - [__Connection__](https://github.com/rootslab/syllabus#connection) : _5 commands_.
 > - [__Server__](https://github.com/rootslab/syllabus#server) : _27 commands_.
 
-> See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
+> See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands (__169__).
 
 ####Command Callback
 
@@ -500,6 +514,7 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
     log( '- converted reply:', reveal_fn( reply_data_arr ) );
 } );
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Interactive Mode
 
@@ -545,13 +560,15 @@ $ node
 ```
 > See **_[Syllabus Properties and Methods Section](https://github.com/rootslab/syllabus#properties-methods)_** and _[repl-example.js](example/repl-example.js)_.
 
+_[Back to ToC](#table-of-contents)_
+
 ####LUA Cache and SCRIPT Methods
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
 > _**Spade.lua.script**_ will also update the hidden cache for __LUA__ scripts.
 
-> __NOTE__: **[initCache](#methods)** method internally uses these mix-ins for loading script files
-> and for revealing the hidden __LUA__ cache.
+> __NOTE__: these mix-ins are used internally by the **[initCache](#methods)** method ,
+> for loading script files and for revealing the hidden __LUA__ cache.
 
 ##### Spade.lua.script property
 
@@ -672,6 +689,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'authorized' : function ( String password, Array reply, Object address ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Select Events
 
@@ -696,6 +714,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'dbselected' : function ( String db, Array reply, Object address ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Script Cache Events
 
@@ -730,6 +749,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'cacheready' : function ( Camphora lua_script_cache ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Socket Connection Events
 
@@ -776,6 +796,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'timeout' : function ( Number timeout,  Object address ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
@@ -837,6 +858,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'shutup' : function () : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Monitor Events
 
@@ -865,6 +887,7 @@ _[Back to ToC](#table-of-contents)_
  */
 'monitor' : function ( String message, Function formatter ) : undefined
 ```
+_[Back to ToC](#table-of-contents)_
 
 ####Other Debug Events
 
@@ -895,7 +918,6 @@ _[Back to ToC](#table-of-contents)_
  */
 'error-reply' : function ( Object command, String err_reply ) : undefined
 ```
-
 _[Back to ToC](#table-of-contents)_
 
 -------------------------------------------------------------------------------
