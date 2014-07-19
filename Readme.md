@@ -381,7 +381,7 @@ Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
 
 ####disconnect
 
-> __Disconnect client from the Redis Server__:
+__Disconnect client from the Redis Server__:
 >  - You can optionally use a cback that will be executed after socket
 >    disconnection.
 >  - It returns the current Spade instance.
@@ -398,7 +398,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
 
 ####initCache
 
-> __Initialize or reveal the (hidden) LUA script cache__:
+__Initialize or reveal the (hidden) LUA script cache__:
 >  - It loads and sends all the files found in the __./node_modules/syllabus/lib/lua/scripts__
 >    directory, to the Redis Server, always after the __ready__ event.
 >  - It triggers __cacheinit__, __cacheload__, __cacheready__ and __scriptfailure__ events.
@@ -432,13 +432,13 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 > See [Camphora#load](https://github.com/rootslab/camphora#options) for a list of available
 > options for cache.
 
-> See "__[Script Cache Events](#script-cache-events)__" Section for the list of events.
+> See "[Script Cache Events](#script-cache-events)" Section for the list of events.
 
 ---------------------------------------------------------------------------------------
 
 ####cli
 
-> __Enable event logging to console__.
+__Enable event logging to console__.
 
 > This method enables/logs some extra event for debugging/testing purpose:
 >  - __reply__ for Redis replies.
@@ -452,7 +452,7 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 ```javascript
 Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
 ```
-> See "__[Other Debug Events](#other-debug-events)__" section.
+> See "[Other Debug Events](#other-debug-events)" section.
 
 _[Back to ToC](#table-of-contents)_
 
