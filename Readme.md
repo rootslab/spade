@@ -8,12 +8,11 @@
 
 [![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
+[![NPM version](http://img.shields.io/npm/v/spade.svg)](http://img.shields.io/npm/v/spade.svg)
 [![build status](http://img.shields.io/david/rootslab/spade.svg)](http://img.shields.io/david/rootslab/spade.svg)
 [![devDependency Status](http://img.shields.io/david/dev/rootslab/spade.svg)](http://img.shields.io/david/dev/rootslab/spade.svg)
 
 [![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
-
-[![NPM version](https://badge.fury.io/js/spade.png)](http://badge.fury.io/js/spade)
 
 > ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
