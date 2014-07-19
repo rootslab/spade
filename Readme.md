@@ -11,6 +11,7 @@
 [![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
 [![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
 [![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
+[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
 
 [![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
