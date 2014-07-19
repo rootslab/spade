@@ -427,7 +427,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *    , input_encoding : 'binary'
  *  }
  */
-Spade#initCache( [ Object fload_opt [, Object cache_opt, [ Function cback ] ] ] ) : undefined
+Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : undefined
 ```
 > See [Camphora#load](https://github.com/rootslab/camphora#options) for a list of available
 > options for cache.
