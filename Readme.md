@@ -1,18 +1,18 @@
 ###♠ Spade
 
-[![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](http://img.shields.io/github/tag/rootslab/spade.svg)
-[![Travis build](http://img.shields.io/travis/rootslab/spade.svg)](http://img.shields.io/travis/rootslab/spade.svg)
-[![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](http://img.shields.io/github/issues/rootslab/spade.svg)
-[![NPM downloads](http://img.shields.io/npm/dm/spade.svg)](http://img.shields.io/npm/dm/spade.svg)
-[![GitTip](http://img.shields.io/gittip/rootslab.svg)](http://img.shields.io/gittip/rootslab.svg)
+[![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](https://github.com/rootslab/spade/tags)
+[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg)](http://travis-ci.org/rootslab/spade)
+[![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](https://github.com/rootslab/spade/issues)
+[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://img.shields.io/npm/dm/spade.svg)
+[![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
 
-[![NPM](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
+[![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-[![NPM version](http://img.shields.io/npm/v/spade.svg)](http://img.shields.io/npm/v/spade.svg)
-[![build status](http://img.shields.io/david/rootslab/spade.svg)](http://img.shields.io/david/rootslab/spade.svg)
-[![devDependency Status](http://img.shields.io/david/dev/rootslab/spade.svg)](http://img.shields.io/david/dev/rootslab/spade.svg)
+[![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
+[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
+[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
 
-[![NPM](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
+[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
 
 > ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
