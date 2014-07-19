@@ -348,7 +348,7 @@ _[Back to ToC](#table-of-contents)_
 
 ####connect
 
-> __Open a connection to the Redis Server__:
+__Open a connection to the Redis Server__:
 >  - When the connection is fully established, the __ready__ event will be emitted.
 >  - You can optionally use a callback that will be executed on the __ready__ event.
 >  - It accepts an optional socket confguration object.
