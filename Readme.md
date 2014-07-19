@@ -348,15 +348,15 @@ _[Back to ToC](#table-of-contents)_
 
 ####connect
 
-> __Open a connection to the Redis Server__.
+> __Open a connection to the Redis Server__:
+>  - When the connection is fully established, the '__ready__' event will be emitted.
+>  - You can optionally use a callback that will be executed on the '__ready__' event.
+>  - It accepts an optional socket confguration object.
+>  - It returns the current Spade instance.
 
-> When the connection is fully established, the '__ready__' event will be emitted.
-
-> You can optionally use a callback that will be executed on the '__ready__' event.
-
-> It accepts an optional socket confguration object.
-
-> It returns the current Spade instance.
+> __NOTE__: You don't need to listen for the '_ready_' event, commands
+> will be queued in "offline mode" and written to socket when the
+> connection will be ready.
 
 ```javascript
 /*
@@ -376,44 +376,42 @@ _[Back to ToC](#table-of-contents)_
  */
 Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
 ```
-> __NOTE__: You don't need to listen for the '_ready_' event, commands
-> will be queued in "offline mode" and written to socket when the
-> connection will be ready.
-
 _[Back to ToC](#table-of-contents)_
 
 ####disconnect
 
-> __Disconnect client from the Redis Server__.
+> __Disconnect client from the Redis Server__:
+>  - You can optionally use a cback that will be executed after socket
+>    disconnection.
+>  - It returns the current Spade instance.
 
-> You can optionally use a cback that will be executed after socket
-> disconnection.
-
-> It returns the current Spade instance.
-
-```javascript
-Spade#disconnect( [ Function cback ] ) : Spade
-```
 > __NOTE__: From the client point of view it has the same effect of
 > sending and executing the Redis __QUIT __command. Connection will be
 > closed and no other re-connection attempts will be made.
 
-_[Back to ToC](#table-of-contents)_
+```javascript
+Spade#disconnect( [ Function cback ] ) : Spade
+```
 
 ####initCache
 
-> __Initialize or reveal the (hidden) LUA script cache__.
+> __Initialize or reveal the (hidden) LUA script cache__:
+>  - It loads and sends all the files found in the '__./node_modules/syllabus/lib/lua/scripts__'
+>    directory, to the Redis Server, always after the 'ready' event.
+>  - It triggers '__cacheinit__', '__cacheload__', '_cacheready_' and '__scriptfailure__' events.
+>  - Optionally you could specify:
+>    - a custom loading path with something like : { filepath : '/my/scripts/dir' }.
+>    - a custom init configuration for the Camphora costructor to (re)build the cache.
+>    - a cback that will be executed on 'cacheready' passing the current cache instance
+>      as argument.
 
-> It loads and sends all the files found in the '__./node_modules/syllabus/lib/lua/scripts__'
-> directory, to the Redis Server, always after the 'ready' event.
+> __NOTE__: Empty files and scripts processed and refused by Redis with
+> an error reply, they are automatically evicted from the cache.
 
-> It triggers '__cacheinit__', '__cacheload__', '_cacheready_' and '__scriptfailure__' events.
-
-> Optionally you could specify:
-> - a custom loading path with something like : { filepath : '/my/scripts/dir' }.
-> - a custom init configuration for the Camphora costructor to (re)build the cache.
-> - a cback that will be executed on 'cacheready' passing the current cache instance
->   as argument.
+> __NOTE__: If 'cache_opt' is set, the cache will be re-initialized; it happens
+> only if the cache is ready, or when no other script commands are already been
+> queued and not yet been sent to Redis ( for example, when the client is offline );
+> otherwise option object will be ignored and cache will remain intact.
 
 ```javascript
 /*
@@ -428,19 +426,10 @@ _[Back to ToC](#table-of-contents)_
  */
 Spade#initCache( [ Object file_load_opt [, Object cache_opt, [ Function cback ] ] ] ) : undefined
 ```
-> __NOTE__: Empty files and scripts processed and refused by Redis with
-> an error reply, they are automatically evicted from the cache.
-
-> __NOTE__: If 'cache_opt' is set, the cache will be re-initialized; it happens
-> only if the cache is ready, or when no other script commands are already been
-> queued and not yet been sent to Redis ( for example, when the client is offline );
-> otherwise option object will be ignored and cache will remain intact.
-
 > See [Camphora#load](https://github.com/rootslab/camphora#options) for a list of available
 > options for cache.
 
 > See "__[Script Cache Events](#script-cache-events)__" Section for the list of events.
-
 
 ####cli
 
@@ -451,14 +440,14 @@ Spade#initCache( [ Object file_load_opt [, Object cache_opt, [ Function cback ] 
 >  - 'scanqueue' when the "offline" command queue is processed.
 >  - 'queued' for commands executed when the client is offline.
 
-```javascript
-Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
-```
 > __NOTE__: 
 >  - the _'enable'_ option defaults to true.
 >  - the default _'logger'_ prints event name and arguments to console.
 > See "__[Other Debug Events](#other-debug-events)__" section.
 
+```javascript
+Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
+```
 _[Back to ToC](#table-of-contents)_
 
 ####Redis Commands
