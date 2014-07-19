@@ -403,7 +403,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *
  * - A custom init configuration for the Camphora costructor to build or
  *   rebuild the cache.
- *   Default values for 'camphora_cache_opt' are:
+ *   Default values for 'cache_opt' are:
  *  {
  *    capacity : 128
  *    , encrypt_keys : false
@@ -422,7 +422,7 @@ Spade#disconnect( [ Function cback ] ) : Spade
  *   the client is offline ); otherwise option object will be ignored and cache
  *   will remain intact.
  */
-Spade#initCache( [ Object file_load_opt [, Object camphora_cache_opt, [ Function cback ] ] ] ) : undefined
+Spade#initCache( [ Object file_load_opt [, Object cache_opt, [ Function cback ] ] ] ) : undefined
 
 /*
  * Enable event logging to console.
