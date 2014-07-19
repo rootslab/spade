@@ -548,29 +548,32 @@ $ node
 ####LUA Cache and SCRIPT Methods
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
-> these ones will also update the hidden cache for __LUA__ scripts.
-> The **_[initCache](#methods)_** method internally uses these methods for loading script files
+> _**Spade.lua.script**_ will also update the hidden cache for __LUA__ scripts.
+
+> __NOTE__: **[initCache](#methods)** method internally uses these mix-ins for loading script files
 > and for revealing the hidden __LUA__ cache.
+
+##### Spade.lua.script property
 
 ```javascript
 /*
  * Get a script from the cache and send it to Redis.
- * It executes an EVALSHA command with the digest of the current script ( if it exists ).
+ * It executes an EVALSHA command with the digest of the current script, if it exists.
  */
-Spade.lua.script#run( String name, Array keys, Array args [, Function cback ] ) : undefined
+#run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
  * Manually load a script into the cache and send it to Redis. It executes a SCRIPT LOAD 
  * command. 'lback' function will be called with an argument that represents the entry
  * loaded in the cache, or undefined if an error occurs.
  */
-Spade.lua.script#load( String key, String data [, Function cback [, Function lback ] ] ) : undefined
+#load( String key, String data [, Function cback [, Function lback ] ] ) : undefined
  
 /*
  * Clear Spade and Redis cache. It executes a SCRIPT FLUSH command.
  * 'fback' function will be called with the number of elements flushed from the cache.
  */
-Spade.lua.script#flush( [ Function cback [, Function fback ] ] ) : undefined
+#flush( [ Function cback [, Function fback ] ] ) : undefined
 ```
 > See **_[Syllabus.lua](https://github.com/rootslab/syllabus#properties-methods)_**.
 
