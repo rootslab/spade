@@ -32,10 +32,6 @@ client.cli( true, function ( ename, args ) {
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
 
-log( '- init client cache in offline mode.' );
-
-client.initCache();
-
 log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
 log( '- now connecting client.' );
@@ -70,12 +66,6 @@ setTimeout( function () {
     // push expected message events
     evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
-    evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
-    log( '- check collected cache events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
-
-    log( '- cache should be empty:', [ 0, 0 ] );
-    assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
 
     log( '- now disconnecting client with QUIT.' );
     client.commands.quit( function ( is_err, reply, fn ) {

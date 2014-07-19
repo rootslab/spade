@@ -555,7 +555,9 @@ $ node
 
 # you can also stick the #info method to all available commands
 > client.mixins.stick()
+
 169
+
 # now get info about a method/command
 > client.commands.ping.info()
 
@@ -857,7 +859,7 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * A message was received from PubSub system when the client is in PubSub mode.
+ * A message was received through the PubSub system when the client is in PubSub mode.
  *
  * NOTE: the 'formatter' function converts the received 'message' to an obj/hash.
  * For example, a message reply to a (P)(UN)SUBSCRIBE command issued by the client,
@@ -898,8 +900,9 @@ _[Back to ToC](#table-of-contents)_
 'listen' : function () : undefined
 
 /*
- * An event to signal that client is leaving PubSub mode after a unsubscription
- * command.
+ * An event to signal that client is leaving PubSub mode after a successfull
+ * execution of a unsubscription command.
+ * It doesn't happen if the client disconnects while in PubSub mode.
  */
 'shutup' : function () : undefined
 ```
