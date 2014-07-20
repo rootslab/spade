@@ -849,18 +849,17 @@ _[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
-> __NOTE__: for multiple (__P__)(__UN__)__SUBSCRIBE__ commands, __callbacks__ are executed
-> __for every message reply__ ( the first reply signals that the command was successfully
-> processed by Redis ), then __all command replies will be also received as messages__
-> through the _Pub/Sub_ system.
+> __NOTE__: for multiple (__P__)(__UN__)__SUBSCRIBE__ commands, __callbacks are executed
+> one time for every message reply__ those messages will be received also through the _Pub/Sub_
+> system.
 >
 > For example:
->  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )_ :
->    - executes callback 6 times
+>  - __subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )__ :
+>    - executes callback __6__ times
 >    - produces __6__ messages
 >    - __3__ actual subscriptions
->  - _unsubscribe( null, cback )_:
->    - executes cback 3 times
+>  - __unsubscribe( null, cback )__:
+>    - executes cback __3__ times
 >    - produces __3__ messages
 >    - __0__ subscriptions.
 
