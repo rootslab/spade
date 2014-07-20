@@ -66,7 +66,8 @@ setTimeout( function () {
     // push expected message events
     evts.push( 'listen' );
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
-
+    // push expected message events
+    evts.push( 'reply' );
     log( '- now disconnecting client with QUIT.' );
     client.commands.quit( function ( is_err, reply, fn ) {
         log( '- QUIT callback.', fn( reply ) );
@@ -82,7 +83,7 @@ setTimeout( function () {
         assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
     }, 1000 );
 
-    log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK ] ) );
+    log( '- check execution of SUBSCRIBE callback:', inspect( [ sub_cback_OK ] ) );
     assert.deepEqual( [ sub_cback_OK ], [ 1 ] );
 
 }, 2000 );

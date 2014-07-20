@@ -75,6 +75,8 @@ setTimeout( function () {
     log( '- cache should be empty:', [ 0, 0 ] );
     assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
 
+    // push expected connection event
+    evts.push( 'reply' );
     log( '- now disconnecting client with QUIT.' );
     client.commands.quit( function ( is_err, reply, fn ) {
         log( '- QUIT callback.', fn( reply ) );

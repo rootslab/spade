@@ -849,15 +849,20 @@ _[Back to ToC](#table-of-contents)_
 
 ####PubSub Events
 
-> __NOTE__: for (__P__)(__UN__)__SUBSCRIBE__ commands is not always possible to mantain
-> bindings between commands callbacks and messages received through the _Pub/Sub_ system.
-> For multiple (un)subscriptions the __callback is executed only for the first command reply__,
-> it signals that the command was successfully processed by Redis, then __all command replies
-> will be received as messages__ through the _Pub/Sub_ system.
+> __NOTE__: for multiple (__P__)(__UN__)__SUBSCRIBE__ commands, __callbacks__ are executed
+> __for every message reply__ ( the first reply signals that the command was successfully
+> processed by Redis ), then __all command replies will be also received as messages__
+> through the _Pub/Sub_ system.
 >
 > For example:
->  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )_ produces __6__ messages, __3__ actual subscriptions.
->  - _unsubscribe( null, cback )_ produces __3__ messages, __0__ subscriptions.
+>  - _subscribe( [ 'a', 'a', 'b', 'b', 'c', 'c' ], cback )_ :
+>    - executes callback 6 times
+>    - produces __6__ messages
+>    - __3__ actual subscriptions
+>  - _unsubscribe( null, cback )_:
+>    - executes cback 3 times
+>    - produces __3__ messages
+>    - __0__ subscriptions.
 
 ```javascript
 /*
