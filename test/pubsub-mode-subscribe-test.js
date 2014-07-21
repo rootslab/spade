@@ -40,10 +40,6 @@ client.cli( true, function ( ename, args ) {
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
 
-log( '- init client cache in offline mode.' );
-
-client.initCache();
-
 log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
 log( '- now connecting client.' );
@@ -102,8 +98,7 @@ client.connect( null, function () {
 
     } );
 
-    // push expected cache event
-    evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
+
 
     log( '- now connecting another client.' );
 
