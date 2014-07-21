@@ -11,7 +11,6 @@
 
 [![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
 [![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://npm-stat.com/charts.html?package=spade)
-
 [![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](https://github.com/rootslab/spade/tags)
 [![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](https://github.com/rootslab/spade/issues)
 
