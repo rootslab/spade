@@ -27,7 +27,7 @@
     "hiboris" : "=1.2.0",
     "cocker" : "=0.14.0",
     "libra" : "=0.16.2",
-    "syllabus" : "=0.32.1"
+    "syllabus" : "=0.32.2"
   },
   "devDependencies": {
       "hiredis" : ">=0.1.17"
