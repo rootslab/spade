@@ -3,5 +3,3 @@ services:
  - redis-server
 node_js:
   - "0.10"
-
-  
