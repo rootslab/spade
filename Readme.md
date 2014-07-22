@@ -1,20 +1,19 @@
 ###♠ Spade
 
-[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
-
-[![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
-[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg)](http://travis-ci.org/rootslab/spade)
-[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
-[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
-
-[![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
-
+[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/deuces#mit-license)
 [![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](https://github.com/rootslab/spade/tags)
-[![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](https://github.com/rootslab/spade/issues)
+[![ISSUES](http://img.shields.io/github/issues/rootslab/deuces.svg)](https://github.com/rootslab/deuces/issues)
 [![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
-[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://npm-stat.com/charts.html?package=spade)
+[![NPM DOWNLOADS](http://img.shields.io/npm/dm/deuces.svg)](http://npm-stat.com/charts.html?package=deuces)
 
-[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
+[![NPM VERSION](http://img.shields.io/npm/v/deuces.svg)](https://www.npmjs.org/package/deuces)
+[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/deuces.svg)](http://travis-ci.org/rootslab/deuces)
+[![BUILD STATUS](http://img.shields.io/david/rootslab/deuces.svg)](https://david-dm.org/rootslab/deuces)
+[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/deuces.svg)](https://david-dm.org/rootslab/deuces#info=devDependencies)
+
+[![NPM GRAPH1](https://nodei.co/npm-dl/deuces.png)](https://nodei.co/npm/deuces/)
+
+[![NPM GRAPH2](https://nodei.co/npm/deuces.png?downloads=true&stars=true)](https://nodei.co/npm/deuces/)
 
 > ♠ _**Spade**_, a full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
