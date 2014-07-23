@@ -480,7 +480,7 @@ _[Back to ToC](#table-of-contents)_
 > - [__Connection__](https://github.com/rootslab/syllabus#connection) : _5 commands_.
 > - [__Server__](https://github.com/rootslab/syllabus#server) : _27 commands_.
 
-> See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands (__169__).
+> See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
 ####Command Callback
 
@@ -559,7 +559,7 @@ $ node
 # you can also stick the #info method to all available commands
 > client.mixins.stick()
 
-169
+..returns a number..
 
 # now get info about a method/command
 > client.commands.ping.info()

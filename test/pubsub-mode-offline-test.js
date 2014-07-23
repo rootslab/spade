@@ -48,15 +48,16 @@ client.connect( null, function () {
     log( '- check collected events, should be:', inspect( evts ) );
     assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
 
-    log( '- try to execute a ping command in pubsub mode.' );
+      log( '- try to execute a TIME command in pubsub mode.' );
 
     // push expected error event
     evts.push( 'error', 'reply' );
 
-    client.commands.ping( function ( is_err, reply, fn ) {
-        log( '- PING callback should get an error.' );
+    client.commands.time( function ( is_err, reply, fn ) {
+        log( '- TIME callback should get an error.' );
         assert.ok( is_err );
     } );
+
 
 } );
 
