@@ -10,7 +10,6 @@ var debug = !! true
     , dbg = debug ? console.log : emptyFn
     , assert = require( 'assert' )
     , Bolgia = require( 'bolgia' )
-    , clone = Bolgia.clone
     , test_utils = require( './deps/test-utils' )
     , inspect = test_utils.inspect
     , format = test_utils.format

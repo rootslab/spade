@@ -1,8 +1,6 @@
 ###♠ Spade
 
 [![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
-[![GITHUB tag](http://img.shields.io/github/tag/rootslab/spade.svg)](https://github.com/rootslab/spade/tags)
-[![ISSUES](http://img.shields.io/github/issues/rootslab/spade.svg)](https://github.com/rootslab/spade/issues)
 [![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
 [![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://npm-stat.com/charts.html?package=spade)
 
@@ -22,13 +20,16 @@
  - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
    not voluntarily interrupted.
  - It collects commands in the __queue__ also when the client is __offline__.
- - It implements an automatic __command rollback__ mechanism for __subscriptions__ and __incomplete
-   transactions__, when connection is lost and becames ready again.
+ - It implements an automatic __command rollback__ mechanism for __subscriptions__ and 
+   __incomplete   transactions__, when connection is lost and becames ready again.
  - It implements __AUTH__ logic and __automatic db SELECT__ on socket (re)connection, configurable
    via the _**security**_ constructor option.
  - It offers automatic __LUA scripts caching__, using a simple __NFU__ with __linear aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
-
+ - It __correctly handles multiple (p)(un)subscriptions__ command as we will expect _(1 command : multiple replies : multiple callback execution); it was well tested against some weird edge cases.
+ See _[tests](#run-tests)_ for pubsub.
+ - It supports the new __PING__ command signature also in __PubSub mode__.
+ 
 > ♠ __Spade__ makes use of some __well tested__ modules:
  - __[Σ Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it  also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
  > Internally it uses __[Hoar](https://github.com/rootslab/hoar)__ module to handle __Semantic Versioning 2.0__, __[Sermone](https://github.com/rootslab/sermone)__ to encode commands, __[Abaco](https://github.com/rootslab/abaco)__ and __[Bolgia](https://github.com/rootslab/bolgia)__ modules to get some utilities. Moreover, __Syllabus__ mantains a __cache__ for __LUA__ scripts, using the __[Camphora](https://github.com/rootslab/camphora)__ module.

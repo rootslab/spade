@@ -27,8 +27,6 @@ var debug = !! true
     , evts = []
     // collected events
     , eresult = []
-    , channels = [ 1, 2, 3 ]
-    , i = 0
     ;
 
 log( '- created new Spade client with custom options:', inspect( opt ) );
@@ -45,63 +43,38 @@ log( '- opening client connection.' );
 client.connect( null, function () {
 
     log( '- now client is connected and ready to send.' );
-
     // push expected events
-    evts.push( 'connect', 'scanqueue', 'ready' );
+    evts.push( 'connect', 'scanqueue', 'ready', 'listen' );
 
-    log( '- send unsubscribe without arguments when the client is not in PubSub mode.' );
-
-    // push expected event
-    evts.push( 'message' );
-    for ( ; i < channels.length; ++i ) evts.push( 'message' );
-
-    client.commands.unsubscribe( [], function ( is_err_reply, reply, fn ) {
-
-        log( '- check, no "listen" or "shutup" events should be present.' );
-        assert.ok( eresult.indexOf( 'listen' ) < 0 );
-        assert.ok( eresult.indexOf( 'shutup' ) < 0 );
-
-        log( '- client should not be in PubSub mode, now send PING and check reply, should be "OK".' );
-
-        client.commands.unsubscribe( channels, function ( is_err_reply, reply, fn ) {
-
-            log( '- UNSUBSCRIBE callback, check, no "listen" or "shutup" events should be present.' );
-            assert.ok( eresult.indexOf( 'listen' ) < 0 );
-            assert.ok( eresult.indexOf( 'shutup' ) < 0 );
-
-
-            // execute code only on the final callback
-            if ( --i === 0 ) {
-
+    client.commands.subscribe( 'channel', function () {
+        // push expected event
+        evts.push( 'message' );
+        client.commands.psubscribe( 'chan*', function () {
+            // push expected event
+            evts.push( 'message' );
+            client.commands.unsubscribe( null, function () {
                 // push expected event
-                evts.push( 'reply' );
-
-                client.commands.ping( function ( is_err_reply, reply, fn ) {
-
-                    log( '- check PING reply, it should not be an error.' );
-                    assert.ok( ! is_err_reply );
-
-                    log( '- PING reply is:', inspect( fn( reply ) ) );
-                    assert.deepEqual( fn( reply ), [ 'PONG' ] );
-
+                evts.push( 'message' );
+                client.commands.punsubscribe( null, function () {
+                    // push expected event
+                    evts.push( 'message', 'shutup' );
                 } );
-
-            }
-
+            } );
         } );
-
     } );
 
 } );
+
 
 log( '- now waiting 2 secs to collect events..' );
 
 setTimeout( function () {
 
-    log( '- check the number of executions for multiple UNSUBSCRIBE command callback.' );
-    assert.ok( i === 0 );
+    var i = 0
+        ;
 
     log( '- now disconnecting client with QUIT.' );
+
     // push expected connection event
     evts.push( 'reply', 'offline', 'lost' );
 
@@ -113,7 +86,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client, should be:', inspect( evts ) );
-         assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+        assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
     }, 1000 );
 
 }, 2000 );

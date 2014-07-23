@@ -44,60 +44,68 @@ setTimeout( function () {
 
     client.connect( null, function () {
 
-        evts.push( 'offline', 'lost' );
+        log( '- now client is connect, wait 2 seconds before disconnecting..' );
 
-        log( '- now close client connection.' );
+        setTimeout( function () {
 
-        client.disconnect( function () {
+            evts.push( 'offline', 'lost' );
 
-            log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
+            log( '- now close client connection.' );
 
-            log( '- re-opening client connection.' );
-
-            evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
-
-            client.connect( null, function () {
+            client.disconnect( function () {
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
                 assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
 
-                log( '- reset results.' );
+                log( '- re-opening client connection.' );
 
-                log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
+                evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 
-                // 'scriptfailure', 'cacheload' events could be happen in any order
-                evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
+                client.connect( null, function () {
 
-                log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
-                client.initCache( custom_path );
+                    log( '- check collected events from client, should be: %s.', inspect( evts ) );
+                    assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
 
-                log( '- wait 2 seconds to load files and collect events..' );
+                    log( '- reset results.' );
 
-                setTimeout( function () {
+                    log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
 
-                    log( '- check collected events from client' );
+                    // 'scriptfailure', 'cacheload' events could be happen in any order
+                    evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
 
-                    log( '- "cacheinit" should be the first event collected/emitted.' );
-                    assert.ok( eresult[ 0 ] === 'cacheinit', 'got: ' + eresult[ 0 ] );
+                    log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
+                    client.initCache( custom_path );
 
-                    log( '- there should be a "scriptfailure" event.' );
-                    assert.ok( ~ eresult.indexOf( 'scriptfailure' ) );
+                    log( '- wait 2 seconds to load files and collect events..' );
 
-                    log( '- there should be a "cacheload" event.' );
-                    assert.ok( ~ eresult.indexOf( 'cacheload' ) );
+                    setTimeout( function () {
 
-                    log( '- "there should be a "cacheready" event..' );
-                    assert.ok( eresult.indexOf( 'cacheready' ) );
+                        log( '- check collected events from client' );
 
-                    log( '- now close client connection.' );
+                        log( '- "cacheinit" should be the first event collected/emitted.' );
+                        assert.ok( eresult[ 0 ] === 'cacheinit', 'got: ' + eresult[ 0 ] );
 
-                    client.disconnect();
+                        log( '- there should be a "scriptfailure" event.' );
+                        assert.ok( ~ eresult.indexOf( 'scriptfailure' ) );
 
-                }, 2000 );
+                        log( '- there should be a "cacheload" event.' );
+                        assert.ok( ~ eresult.indexOf( 'cacheload' ) );
 
-            } );
+                        log( '- "there should be a "cacheready" event..' );
+                        assert.ok( eresult.indexOf( 'cacheready' ) );
+
+                        log( '- now close client connection.' );
+
+                        client.disconnect();
+
+                    }, 2000 );
+
+                } );
+
+            }, 3000 );
+
         } );
+
     } );
 
 }, 2000 );
