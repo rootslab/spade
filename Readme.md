@@ -26,7 +26,7 @@
    via the _**security**_ constructor option.
  - It offers automatic __LUA scripts caching__, using a simple __NFU__ with __linear aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
- - It __correctly handles multiple (p)(un)subscriptions__ command as we will expect _(1 command : multiple replies : multiple callback execution); it was well tested against some weird edge cases.
+ - It __correctly handles multiple (p)(un)subscriptions__ command as we will expect (1 command : multiple replies : multiple callback execution); it was well tested against some weird edge cases.
  See [tests](#run-tests) for pubsub.
  - It supports the new __PING__ command signature also in __PubSub mode__.
  
