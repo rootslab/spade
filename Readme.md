@@ -853,7 +853,7 @@ _[Back to ToC](#table-of-contents)_
 ####PubSub Events
 
 > __NOTE__: for multiple (__P__)(__UN__)__SUBSCRIBE__ commands, __callbacks are executed
-> one time for every message reply__ those messages will be received also through the _Pub/Sub_
+> one time for every message reply__, those __messages__ will be received also through the _Pub/Sub_
 > system. However the first callback signals that the command is succesfully processed by Redis.
 >
 > For example:
