@@ -27,6 +27,7 @@ var debug = !! true
     , evts = []
     // collected events
     , eresult = []
+    , on = 1
     ;
 
 log( '- created new Spade client with custom options:', inspect( opt ) );
@@ -38,60 +39,59 @@ client.cli( true, function ( ename, args ) {
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
 } );
 
-// push expected events
-evts.push( 'queued', 'queued', 'error', 'queued', 'queued' );
-
-log( '- #push MULTI, PING, TIME, SUBSCRIBE, MULTI in offline mode.' );
-
-client.commands.multi();
-
-client.commands.ping();
-
-log( '- #pushing SUBSCRIBE in Transaction mode. should return immediately an error.' );
-
-client.commands.subscribe( 'a', function ( is_err, reply, fn ) {
-    log( '- check SUBSCRIBE callback error.' );
-    assert.ok( is_err );
-} );
-
-client.commands.time();
-
-client.commands.multi( function ( is_err, reply, fn ) {
-
-    log( ' - 2nd MULTI should get an -ERR reply.' );
-    assert.ok( is_err );
-
-    client.commands.exec( function ( is_err, reply, fn ) {
-
-        // push expected events
-        evts.push( 'reply', 'reply', 'error-reply', 'reply', 'error-reply' );
-
-        log( ' - check results for the EXEC reply.' );
-
-        assert.ok( fn( reply )[ 0 ] === 'PONG' );
-        assert.ok( fn( reply )[ 1 ].length === 2 );
-
-        log( ' send EXEC without MULTI, should return an error reply.' );
-
-        client.commands.exec( function ( is_err, reply, fn ) {
-            log( ' - 2nd EXEC should get an -ERR reply.' );
-            assert.ok( is_err );
-        } );
-
-    } );
-} );
-
 log( '- opening client connection.' );
 
 client.connect( null, function () {
     // push expected events
-    evts.push( 'connect', 'scanqueue', 'ready', 'reply' );
+    evts.push( 'connect', 'scanqueue', 'ready' );
 
     log( '- now client is connected and ready to send.' );
+    log( '- #push MULTI, PING, TIME.' );
+
+    // push expected events
+    evts.push( 'reply', 'reply', 'reply' );
+
+    client.commands.multi();
+
+    client.commands.ping();
+
+    client.commands.time( function () {
+        // simulate an accidental client disconnection, after TIME 1st execution
+        if ( on ) {
+            // re-push expected events for rollbacks
+            evts.push('offline', 'attempt', 'connect', 'scanqueue', 'ready' );
+            evts.push( 'reply', 'reply', 'reply' );
+            client.socket.end();
+            return on = 0;
+        }
+
+        log( ' now send EXEC.' );
+
+        // push expected events
+        evts.push( 'reply' );
+
+        client.commands.exec( function ( is_err, reply, fn ) {
+
+            log( ' - check results for the EXEC reply.' );
+
+            assert.ok( fn( reply )[ 0 ] === 'PONG' );
+            assert.ok( fn( reply )[ 1 ].length === 2 );
+
+            // push expected events
+            evts.push( 'error-reply' );
+
+            client.commands.exec( function ( is_err, reply, fn ) {
+                log( ' - 2nd EXEC should get an -ERR reply.' );
+                assert.ok( is_err );
+            } );
+
+        } );
+
+    } );
 
 } );
 
-log( '- now waiting 2 secs to collect events..' );
+log( '- now waiting 4 secs to collect events..' );
 
 setTimeout( function () {
 
@@ -114,4 +114,4 @@ setTimeout( function () {
         assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
     }, 1000 );
 
-}, 2000 );
+}, 4000 );
