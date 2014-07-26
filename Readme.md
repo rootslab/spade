@@ -474,12 +474,12 @@ _[Back to ToC](#table-of-contents)_
 > - [__Lists__](https://github.com/rootslab/syllabus#lists) : _17 commands_.
 > - [__Sets__](https://github.com/rootslab/syllabus#sets) : _15 commands_.
 > - [__Sorted Sets__](https://github.com/rootslab/syllabus#sorted-sets) : _20 commands_.
-> - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _3 commands_.
+> - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _4 commands_.
 > - [__PubSub__](https://github.com/rootslab/syllabus#pubsub) : _8 commands_.
 > - [__Transactions__](https://github.com/rootslab/syllabus#transactions) : _5 commands_.
 > - [__Scripting__](https://github.com/rootslab/syllabus#scripting) : _6 commands_.
 > - [__Connection__](https://github.com/rootslab/syllabus#connection) : _5 commands_.
-> - [__Server__](https://github.com/rootslab/syllabus#server) : _27 commands_.
+> - [__Server__](https://github.com/rootslab/syllabus#server) : _32 commands_.
 
 > See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
