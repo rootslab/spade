@@ -45,6 +45,9 @@ client.connect( null, function () {
     // push expected events
     evts.push( 'connect', 'scanqueue', 'ready' );
 
+    log( '- execute queue #rollUp.');
+    client.queue.rollUp();
+
     log( '- now client is connected and ready to send.' );
     log( '- #push MULTI, PING, TIME.' );
 

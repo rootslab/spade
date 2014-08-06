@@ -68,7 +68,7 @@ log( '- now check if current Redis version supports PING in pubsub mode, wait 2 
 setTimeout( function () {
     var i = 0
         ;
-    log( 'ok, now test is running..' );
+    log( '- ok, now test is running..' );
 
     log( '- now waiting 2 secs to collect events..' );
  
