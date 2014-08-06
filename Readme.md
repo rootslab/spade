@@ -37,6 +37,7 @@
  - __[Cocker](https://github.com/rootslab/cocker)__ module to properly handle __socket reconnection__ when the connection is lost. 
  - __[Hiboris](https://github.com/rootslab/hiboris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ string protocol; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
  - __[Cucu](https://github.com/rootslab/cucu)__, a tiny module to handle the scheduled execution of repetitive methods/tasks.
+ - __[Gerry](https://github.com/rootslab/gerry)__, a tiny module to handle event logging to console, for debugging and testing purpose.
 
 > __NOTE__ : If you need a __minimal Redis client__ based on __♠ Spade__ code, __specific for PubSub and Monitor mode__ try 🂢 __[Deuces](https://github.com/rootslab/deuces)__.
 
