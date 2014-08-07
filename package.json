@@ -33,7 +33,7 @@
   },
   "devDependencies": {
       "hiredis" : ">=0.1.17"
-      , "deuces" : ">=0.8.1"
+      , "deuces" : ">=0.9.0"
     },
   "main": "index",
   "engines": {
