@@ -449,7 +449,7 @@ __Initialize or reveal the (hidden) LUA script cache__:
 >    - a cback that will be executed on __cacheready__ passing the current cache instance
 >      as argument.
 
-> __NOTE__: Empty files and scripts processed and refused by Redis with
+> __NOTE__: Empty files and scripts processed and then refused by Redis, with
 > an error reply, are automatically evicted from the cache.
 
 > __NOTE__: If **_cache_opt_** is set, the cache will be re-initialized; it happens

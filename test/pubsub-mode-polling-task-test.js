@@ -22,7 +22,7 @@ var debug = !! true
     , times = 5
     , intval = 1000
     , args = []
-    , channels = [ 'channel-0', 'channel-1', 'channel-2' ]
+    , channels = [ 'channel-0' , 'channel-1', 'channel-2' ]
     ;
 
 log( '- created new Spade client with default options:', inspect( client.options ) );

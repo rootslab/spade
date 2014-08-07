@@ -20,7 +20,8 @@ module.exports = ( function () {
             return util.inspect( arg, opt ? improve( opt, iopt ) : iopt );
         }
         , format = function ( ename, args ) {
-
+            var fn = null
+                ;
             if ( doString( ename ) !== ostr ) return;
             if ( doString( args ) !== oarr ) return;
 
@@ -87,7 +88,8 @@ module.exports = ( function () {
 
                 case 'reply':
                 case 'error-reply':
-                    return inspect( [ args[ 0 ].cmd, args[ 1 ] ], iopt );
+                    fn = args[ 2 ];
+                    return inspect( [ args[ 0 ].cmd, fn( args[ 1 ] ) ], iopt );
 
                 // object commands, queue_size
                 case 'queued':
