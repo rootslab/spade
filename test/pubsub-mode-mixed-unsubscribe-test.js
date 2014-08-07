@@ -92,7 +92,6 @@ setTimeout( function () {
 
     var i = 0
         ;
-        ;
     /*
      * push expected reply events form PING, unsubscribe callback will be executed
      * 5 times for the first unsubscriptions + 5 times for all empty unsubscriptions,

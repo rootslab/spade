@@ -52,7 +52,8 @@
 - __[Methods](#methods)__
    - __[#connect](#connect)__
    - __[#disconnect](#disconnect)__
-   - __[#initCache](#initCache)__
+   - __[#initCache](#initcache)__
+   - __[#initTasks](#inittasks)__
    - __[#cli](#cli)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
@@ -478,10 +479,13 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 
 ####initTasks
 
-> Load default methods/tasks from _'lib/tasks'_ dir, it returns the current Spade.tasks property.
+> Load default methods/tasks from _'spade/lib/tasks'_ dir, you could restrict files to load,
+> specifying some filenames. It returns the current Spade.tasks (Cucu.ttable) property.
+
+> __NOTE__: for now, there is only one task, 'polling', contained in the 'connection' file.
 
 ```javascript
-Spade#initTasks() : Cucu
+Spade#initTasks( [ Array file_list ] ) : Cucu
 ```
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
 
