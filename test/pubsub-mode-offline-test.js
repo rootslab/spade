@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
     ;
@@ -27,9 +27,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- init client cache in offline mode.' );
 
@@ -46,7 +45,7 @@ client.commands.subscribe( channels );
 client.connect( null, function () {
 
     log( '- check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+    assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
       log( '- try to execute a TIME command in pubsub mode.' );
 
@@ -71,7 +70,7 @@ setTimeout( function () {
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
     evts.push( 'cacheinit', 'scriptfailure', 'cacheready', 'error' );
     log( '- check collected cache events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
+    assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
 
     log( '- cache should be empty:', [ 0, 0 ] );
     assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
@@ -90,7 +89,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client disconnection, should be:', inspect( evts ) );
-        assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
+        assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
     }, 1000 );
 
 }, 1000 );

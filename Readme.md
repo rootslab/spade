@@ -376,7 +376,7 @@ Spade.qq : Cucu
  * Gerry module to handle events logging.
  * See https://github.com/rootslab/gerry
  */
-Spade.cli_events : Gerry
+Spade.logger : Gerry
 
 ```
 _[Back to ToC](#table-of-contents)_
@@ -505,7 +505,7 @@ __Enable event logging to console__.
 >  - the default _'logger'_ prints event name and arguments to console.
 
 ```javascript
-Spade#cli( [ Boolean enable [, Function logger ] ] ) : undefined
+Spade#cli( [ Boolean enable [, Function logger [, Boolean collect_events ] ] ] ) : undefined
 ```
 > See "[Other Debug Events](#other-debug-events)" section.
 

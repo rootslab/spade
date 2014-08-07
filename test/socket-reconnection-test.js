@@ -25,7 +25,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     ;
 
 log( '- created new Spade client with custom options:', inspect( opt ) );
@@ -33,9 +33,8 @@ log( '- created new Spade client with custom options:', inspect( opt ) );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- opening client connection to a not existent host to force reconnection: ', inspect( client.options.socket.address ) );
 
@@ -48,7 +47,7 @@ log( '- wait 16 seconds to collect events..' );
 
 setTimeout( function () {
     log( '- check collected events from client, should be: %s.', inspect( evts ) );
-    assert.deepEqual( eresult, evts );
+    assert.deepEqual( collected.events, evts );
 
     log( '- opening connection to default Redis host:port.' );
     client.connect( { address : { port : 6379 } }, function () {
@@ -61,7 +60,7 @@ setTimeout( function () {
             evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'offline', 'lost' );
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
         } );
 
     } );

@@ -26,7 +26,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     , channels = [ 1, 2, 3 ]
     , i = 0
     ;
@@ -36,9 +36,8 @@ log( '- created new Spade client with custom options:', inspect( opt ) );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- opening client connection.' );
 
@@ -58,16 +57,16 @@ client.connect( null, function () {
     client.commands.unsubscribe( [], function ( is_err_reply, reply, fn ) {
 
         log( '- check, no "listen" or "shutup" events should be present.' );
-        assert.ok( eresult.indexOf( 'listen' ) < 0 );
-        assert.ok( eresult.indexOf( 'shutup' ) < 0 );
+        assert.ok( collected.events.indexOf( 'listen' ) < 0 );
+        assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
 
         log( '- client should not be in PubSub mode, now send PING and check reply, should be "OK".' );
 
         client.commands.unsubscribe( channels, function ( is_err_reply, reply, fn ) {
 
             log( '- UNSUBSCRIBE callback, check, no "listen" or "shutup" events should be present.' );
-            assert.ok( eresult.indexOf( 'listen' ) < 0 );
-            assert.ok( eresult.indexOf( 'shutup' ) < 0 );
+            assert.ok( collected.events.indexOf( 'listen' ) < 0 );
+            assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
 
 
             // execute code only on the final callback
@@ -113,7 +112,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client, should be:', inspect( evts ) );
-         assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+         assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
     }, 1000 );
 
 }, 2000 );

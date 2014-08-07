@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     , custom_path = { filepath : __dirname + '/deps/dummy-lua-scripts' }
     ;
 
@@ -26,9 +26,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- call #initCache before #connect, with no options, to emit only "cacheinit" event.' );
 
@@ -55,7 +54,7 @@ setTimeout( function () {
             client.disconnect( function () {
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
+                assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
                 log( '- re-opening client connection.' );
 
@@ -64,7 +63,7 @@ setTimeout( function () {
                 client.connect( null, function () {
 
                     log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                    assert.deepEqual( eresult, evts, 'something goes wrong with script load! got: ' + inspect( eresult ) );
+                    assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
                     log( '- reset results.' );
 
@@ -83,16 +82,16 @@ setTimeout( function () {
                         log( '- check collected events from client' );
 
                         log( '- "cacheinit" should be the first event collected/emitted.' );
-                        assert.ok( eresult[ 0 ] === 'cacheinit', 'got: ' + eresult[ 0 ] );
+                        assert.ok( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
 
                         log( '- there should be a "scriptfailure" event.' );
-                        assert.ok( ~ eresult.indexOf( 'scriptfailure' ) );
+                        assert.ok( ~ collected.events.indexOf( 'scriptfailure' ) );
 
                         log( '- there should be a "cacheload" event.' );
-                        assert.ok( ~ eresult.indexOf( 'cacheload' ) );
+                        assert.ok( ~ collected.events.indexOf( 'cacheload' ) );
 
                         log( '- "there should be a "cacheready" event..' );
-                        assert.ok( eresult.indexOf( 'cacheready' ) );
+                        assert.ok( collected.events.indexOf( 'cacheready' ) );
 
                         log( '- now close client connection.' );
 

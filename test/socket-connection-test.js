@@ -26,7 +26,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     ;
 
 log( '- created new Spade client with custom options:', inspect( opt ) );
@@ -34,9 +34,8 @@ log( '- created new Spade client with custom options:', inspect( opt ) );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- opening client connection.' );
 
@@ -50,7 +49,7 @@ log( '- wait 1 second to collect events..' );
 
 setTimeout( function () {
     log( '- check collected events from client, should be: %s.', inspect( evts ) );
-    assert.deepEqual( eresult, evts, 'something goes wrong with client connection! got: "' + eresult + '"' );
+    assert.deepEqual( collected.events, evts, 'something goes wrong with client connection! got: "' + collected.events + '"' );
 
     log( '- now disconnecting client.' );
     client.disconnect( function () {
@@ -60,7 +59,7 @@ setTimeout( function () {
         evts.push( 'offline', 'lost' );
 
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
-        assert.deepEqual( eresult, evts, 'something goes wrong with client disconnection! got: ' + inspect( eresult ) );
+        assert.deepEqual( collected.events, evts, 'something goes wrong with client disconnection! got: ' + inspect( collected.events ) );
     } );
 
 }, 1000 );

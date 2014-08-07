@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     ;
 
 log( '- created new Spade client with default options.' );
@@ -25,9 +25,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- init client cache in offline mode.' );
 
@@ -58,7 +57,7 @@ log( '- now waiting 1 sec to collect events..' );
 setTimeout( function () {
 
     log( '- check default script, should be refused.' );
-    assert.ok( ~eresult.indexOf( 'scriptfailure' ) );
+    assert.ok( ~collected.events.indexOf( 'scriptfailure' ) );
 
     log( '- cache should be empty:', [ 0, 0 ] );
     assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
@@ -70,8 +69,8 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client disconnection.' );
-        assert.ok( ~eresult.indexOf( 'offline' ) );
-        assert.ok( ~eresult.indexOf( 'lost' ) );
+        assert.ok( ~collected.events.indexOf( 'offline' ) );
+        assert.ok( ~collected.events.indexOf( 'lost' ) );
     }, 1000 );
 
 }, 1000 );

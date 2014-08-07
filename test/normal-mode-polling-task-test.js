@@ -18,7 +18,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     , times = 5
     , intval = 1000
     , args = []
@@ -29,9 +29,8 @@ log( '- created new Spade client with default options:', inspect( client.options
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- opening client connection.' );
 
@@ -74,7 +73,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client, should be:', inspect( evts ) );
-        assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+        assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
     }, 1000 );
 
 }, 2 * intval * times );

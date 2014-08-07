@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
     , sub_cback_OK = 0
@@ -29,9 +29,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- init client cache in offline mode.' );
 
@@ -52,7 +51,7 @@ client.commands.subscribe( channels, function () {
 
 client.connect( null, function () {
     log( '- check collected events, should be:', inspect( evts ) );
-     assert.deepEqual( eresult, evts );
+     assert.deepEqual( collected.events, evts );
 
     log( '- try to execute a TIME command in pubsub mode.' );
 
@@ -88,7 +87,7 @@ setTimeout( function () {
     // push expected cache event
     evts.push( 'cacheinit', 'cacheload', 'cacheready', 'reply' );
     log( '- check collected cache events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
+    assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
 
     log( '- now disconnecting client with QUIT.' );
 

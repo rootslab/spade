@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
     , sub_cback_OK = 0
@@ -28,9 +28,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
@@ -41,7 +40,7 @@ evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 client.connect( null, function () {
 
     log( '- check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+    assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
     client.commands.subscribe( channels, function ( ) {
         log( '- I\'m SUBSCRIBE callback.' );
@@ -82,7 +81,7 @@ setTimeout( function () {
 
     setTimeout( function () {
         log( '- check collected events for client disconnection, should be:', inspect( evts ) );
-        assert.deepEqual( eresult.slice( 0, evts.length ), evts, 'got: ' + inspect( eresult ) );
+        assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
     }, 1000 );
 
     log( '- check execution of SUBSCRIBE callback:', inspect( [ sub_cback_OK ] ) );

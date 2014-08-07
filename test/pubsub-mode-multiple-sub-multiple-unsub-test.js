@@ -17,7 +17,7 @@ var debug = !! true
     // expected events
     , evts = []
     // collected events
-    , eresult = []
+    , collected = client.logger.collected
     // channels
     , channels = [ 'a', 'a', 'b', 'b', 'c', 'c' ]
     ;
@@ -27,9 +27,8 @@ log( '- created new Spade client with default options.' );
 log( '- enable CLI logging.' );
 
 client.cli( true, function ( ename, args ) {
-    eresult.push( ename );
     dbg( '  !%s %s', ename, format( ename, args || [] ) );
-} );
+}, true );
 
 log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
@@ -91,6 +90,6 @@ log( '- wait 2 seconds to collect events..' );
 setTimeout( function () {
 
     log( '- deep check collected events, should be:', inspect( evts ) );
-    assert.deepEqual( eresult, evts, 'got: ' + inspect( eresult ) );
+    assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
 }, 2000 );
