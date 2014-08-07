@@ -450,7 +450,7 @@ __Initialize or reveal the (hidden) LUA script cache__:
 >      as argument.
 
 > __NOTE__: Empty files and scripts processed and refused by Redis with
-> an error reply, they are automatically evicted from the cache.
+> an error reply, are automatically evicted from the cache.
 
 > __NOTE__: If **_cache_opt_** is set, the cache will be re-initialized; it happens
 > only if the cache is ready, or when no other script commands are already been
