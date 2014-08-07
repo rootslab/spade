@@ -14,15 +14,7 @@ var debug = !! true
     , inspect = test_utils.inspect
     , format = test_utils.format
     , Spade = require( '../' )
-    , opt = {
-        security : {
-            '127.0.0.1:6379' : {
-                // disable db selection
-                db : -1
-            }
-        }
-    }
-    , client = Spade( opt )
+    , client = Spade()
     // expected events
     , evts = []
     // collected events
@@ -32,7 +24,7 @@ var debug = !! true
     , args = []
     ;
 
-log( '- created new Spade client with custom options:', inspect( opt ) );
+log( '- created new Spade client with default options:', inspect( client.options ) );
 
 log( '- enable CLI logging.' );
 
@@ -48,7 +40,7 @@ client.connect( null, function () {
         ;
     log( '- now client is connected and ready to send.' );
     // push expected events
-    evts.push( 'connect', 'scanqueue', 'ready' );
+    evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply' );
 
     log( '- now #initTasks.' );
     client.initTasks();
