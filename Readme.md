@@ -176,7 +176,7 @@ opt = {
             // 'localhost'
             host : '127.0.0.1'
             , port : 6379
-            , family : 'Ipv4'
+            , family : null
         }
         , reconnection : {
             trials : 3
