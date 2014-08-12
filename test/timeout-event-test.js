@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 /* 
- * Spade, polling task test.
+ * Spade, auth failing test.
  */
+
 exports.test = function ( done ) {
 
     var debug = !! true
@@ -15,19 +16,28 @@ exports.test = function ( done ) {
         , inspect = test_utils.inspect
         , format = test_utils.format
         , Spade = require( '../' )
-        , client = Spade()
+        , opt = {
+            security : {
+                '127.0.0.1:6379' : {
+                    requirepass : null
+                    , db : -1
+                }
+            }
+            , socket : {
+                connection : {
+                    timeout : 2000
+                }
+            }
+        }
+        , client = Spade( opt )
         // expected events
         , evts = []
         // collected events
         , collected = client.logger.collected
-        , times = 5
-        , intval = 1000
-        , args = []
-        , channels = [ 'channel-0' , 'channel-1', 'channel-2' ]
         , exit = typeof done === 'function' ? done : function () {}
         ;
 
-    log( '- created new Spade client with default options:', inspect( client.options ) );
+    log( '- created new Spade client with custom options:', inspect( client.options ) );
 
     log( '- enable CLI logging.' );
 
@@ -37,38 +47,21 @@ exports.test = function ( done ) {
 
     log( '- opening client connection.' );
 
+
+    evts.push( 'connect', 'scanqueue', 'ready' );
+
     client.connect( null, function () {
-        var i = 0
-            , cnt = 0
-            ;
-        log( '- now client is connected and ready to send.' );
-        // push expected events
-        evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'listen' );
-
-        log( '- now #initTasks.' );
-        client.initTasks();
-
-        log( '- enable PubSub mode subscribing to channels: %s', inspect( channels ) );
-        // push expected message events
-        for ( ; i < channels.length; ++i ) evts.push( 'message' );
-        client.commands.subscribe( channels, function () {
-            if ( ++cnt === 1 ) {
-                // push expected events
-                for ( i = 0; i < times; ++i ) evts.push( 'polling', 'message' );
-                // start polling, ping without message for Redis < 2.8.x
-                log( '- start polling, interval: %s, args: %s, times: %s.', inspect( intval ), inspect( args ), inspect( times ) );
-                client.tasks.polling.run( intval, args, times );
-            }
-        } );
-
+        evts.push( 'timeout', 'reply' );
+        setTimeout( function () {
+            client.commands.ping( function () {
+                evts.push( 'timeout' );
+            } );
+        }, 3000 );
     } );
 
-    log( '- now waiting %s secs to collect events..', inspect( 2.5 * intval * times / 1000 ) );
+    log( '- wait 6 seconds to collect events..' );
 
     setTimeout( function () {
-
-        var i = 0
-            ;
 
         log( '- now disconnecting client with QUIT.' );
 
@@ -90,6 +83,6 @@ exports.test = function ( done ) {
 
         }, 1000 );
 
-    }, 2.5 * intval * times );
+    }, 6000 );
 
 };

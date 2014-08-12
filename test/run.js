@@ -50,8 +50,11 @@
                 log( ' \n time elapsed: %s secs.\n', inspect( + ( ( etime - stime ) / 1000 ).toFixed( 2 ) ) );
             }
             , next = function () {
+                var t = qpos + 2 >>> 1
+                    , tot = queue.length >>> 1
+                    ;
                 if ( qpos < queue.length ) {
-                    log( '\n[ %s v%s - %s ]\n', mname, mver, inspect( queue[ qpos++ ] ) );
+                    log( '\n[%s/%s][ %s v%s - %s ]\n', inspect( t ), inspect( tot ), mname, mver, inspect( queue[ qpos++ ] ) );
                     queue[ qpos++ ]( done );
                 }
             }

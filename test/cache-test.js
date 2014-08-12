@@ -4,107 +4,112 @@
  * Spade, cache events test.
  */
 
-var debug = !! true
-    , emptyFn = function () {}
-    , log = console.log
-    , dbg = debug ? console.log : emptyFn
-    , assert = require( 'assert' )
-    , test_utils = require( './deps/test-utils' )
-    , inspect = test_utils.inspect
-    , format = test_utils.format
-    , Spade = require( '../' )
-    , client = Spade()
-    // expected events
-    , evts = []
-    // collected events
-    , collected = client.logger.collected
-    , custom_path = { filepath : __dirname + '/deps/dummy-lua-scripts' }
-    ;
+exports.test = function ( done ) {
 
-log( '- created new Spade client with default options.' );
+    var debug = !! true
+        , emptyFn = function () {}
+        , log = console.log
+        , dbg = debug ? console.log : emptyFn
+        , assert = require( 'assert' )
+        , test_utils = require( './deps/test-utils' )
+        , inspect = test_utils.inspect
+        , format = test_utils.format
+        , Spade = require( '../' )
+        , client = Spade()
+        // expected events
+        , evts = []
+        // collected events
+        , collected = client.logger.collected
+        , custom_path = { filepath : __dirname + '/deps/dummy-lua-scripts' }
+        , exit = typeof done === 'function' ? done : function () {}
+        ;
 
-log( '- enable CLI logging.' );
+    log( '- created new Spade client with default options.' );
 
-client.cli( true, function ( ename, args ) {
-    dbg( '  !%s %s', ename, format( ename, args || [] ) );
-}, true );
+    log( '- enable CLI logging.' );
 
-log( '- call #initCache before #connect, with no options, to emit only "cacheinit" event.' );
+    client.cli( true, function ( ename, args ) {
+        dbg( '  !%s %s', ename, format( ename, args || [] ) );
+    }, true );
 
-client.initCache();
+    log( '- call #initCache before #connect, with no options, to emit only "cacheinit" event.' );
 
-evts.push( 'cacheinit', 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready', 'reply' );
+    client.initCache();
 
-log( '- wait 2 seconds to load files and collect events..' );
+    evts.push( 'cacheinit', 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready', 'reply' );
 
-setTimeout( function () {
+    log( '- wait 2 seconds to load files and collect events..' );
 
-    log( '- opening client connection.' );
+    setTimeout( function () {
 
-    client.connect( null, function () {
+        log( '- opening client connection.' );
 
-        log( '- now client is connect, wait 2 seconds before disconnecting..' );
+        client.connect( null, function () {
 
-        setTimeout( function () {
+            log( '- now client is connect, wait 2 seconds before disconnecting..' );
 
-            evts.push( 'offline', 'lost' );
+            setTimeout( function () {
 
-            log( '- now close client connection.' );
+                evts.push( 'offline', 'lost' );
 
-            client.disconnect( function () {
+                log( '- now close client connection.' );
 
-                log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
-
-                log( '- re-opening client connection.' );
-
-                evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
-
-                client.connect( null, function () {
+                client.disconnect( function () {
 
                     log( '- check collected events from client, should be: %s.', inspect( evts ) );
                     assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
-                    log( '- reset results.' );
+                    log( '- re-opening client connection.' );
 
-                    log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
+                    evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 
-                    // 'scriptfailure', 'cacheload' events could be happen in any order
-                    evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
+                    client.connect( null, function () {
 
-                    log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
-                    client.initCache( custom_path );
+                        log( '- check collected events from client, should be: %s.', inspect( evts ) );
+                        assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
-                    log( '- wait 2 seconds to load files and collect events..' );
+                        log( '- reset results.' );
 
-                    setTimeout( function () {
+                        log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
 
-                        log( '- check collected events from client' );
+                        // 'scriptfailure', 'cacheload' events could be happen in any order
+                        evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
 
-                        log( '- "cacheinit" should be the first event collected/emitted.' );
-                        assert.ok( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
+                        log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
+                        client.initCache( custom_path );
 
-                        log( '- there should be a "scriptfailure" event.' );
-                        assert.ok( ~ collected.events.indexOf( 'scriptfailure' ) );
+                        log( '- wait 2 seconds to load files and collect events..' );
 
-                        log( '- there should be a "cacheload" event.' );
-                        assert.ok( ~ collected.events.indexOf( 'cacheload' ) );
+                        setTimeout( function () {
 
-                        log( '- "there should be a "cacheready" event..' );
-                        assert.ok( collected.events.indexOf( 'cacheready' ) );
+                            log( '- check collected events from client' );
 
-                        log( '- now close client connection.' );
+                            log( '- "cacheinit" should be the first event collected/emitted.' );
+                            assert.ok( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
 
-                        client.disconnect();
+                            log( '- there should be a "scriptfailure" event.' );
+                            assert.ok( ~ collected.events.indexOf( 'scriptfailure' ) );
 
-                    }, 2000 );
+                            log( '- there should be a "cacheload" event.' );
+                            assert.ok( ~ collected.events.indexOf( 'cacheload' ) );
 
-                } );
+                            log( '- "there should be a "cacheready" event..' );
+                            assert.ok( collected.events.indexOf( 'cacheready' ) );
 
-            }, 3000 );
+                            log( '- now close client connection.' );
+
+                            client.disconnect( exit );
+
+                        }, 2000 );
+
+                    } );
+
+                }, 3000 );
+
+            } );
 
         } );
 
-    } );
+    }, 2000 );
 
-}, 2000 );
+};
