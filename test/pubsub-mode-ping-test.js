@@ -46,14 +46,13 @@ client.connect( null, function () {
     for ( ; i < channels.length; ++i ) evts.push( 'message' );
 
     // push expected reply events form PING, 6 messages
-    for ( i = 0; i < channels.length; ++i ) evts.push( 'reply' );
 
     client.commands.subscribe( channels, function () {
         client.commands.ping( 'Eila', function ( is_err, reply, fn ) {
             if ( is_err ) {
-                log( '- this Redis not support ping in PubSub mode, no matter..' )
-                return process.exit( 0 );
-            }
+                log( '- this Redis not support ping in PubSub mode, no matter..' );
+                evts.push( 'error-reply' );
+            } else evts.push( 'reply' );
             ++p;
         } );
     } );
