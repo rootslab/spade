@@ -88,7 +88,7 @@ var add = function () {
     s.connect();
 };
 
-log( '\n> Spade benchmark, %d subscribers / 1 publisher', tclients );
+log( '> Spade benchmark, %d subscribers / 1 publisher', tclients );
 
 log( '\n-> using: "%s" parser.', Spade( spade_opt ).parser.hreader ? 'HIREDIS NATIVE' : 'BORIS JS' );
 log( '-> message length: (%d bytes)\n', small_string.length );

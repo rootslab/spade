@@ -81,7 +81,7 @@ var add = function () {
     } );
 };
 
-log( '\n> node_redis benchmark benchmark, %d subscribers / 1 publisher', tclients );
+log( '> node_redis benchmark, %d subscribers / 1 publisher', tclients );
 
 
 try {
