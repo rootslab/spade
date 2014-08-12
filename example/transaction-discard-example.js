@@ -3,13 +3,11 @@
  */
 
 var log = console.log
-    , util = require( 'util' )
-    , Spade = require( '../' )
+    ,Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, fn ) {
         log( 'ex.: cback gets:', err, fn( data[ 0 ] ) );
     }
-    , i = 0
     ;
 
 client.on( 'error', function ( ocmd ) {

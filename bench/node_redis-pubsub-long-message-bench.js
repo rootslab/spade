@@ -89,7 +89,6 @@ var add = function () {
 
 log( '> node_redis benchmark, %d subscribers / 1 publisher', tclients );
 
-
 try {
     hiredis = require( 'hiredis' );
     log( '-> using: "HIREDIS NATIVE" parser.' );
