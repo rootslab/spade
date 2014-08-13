@@ -3,13 +3,12 @@
 /* 
  * Spade, monitor mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -38,7 +37,7 @@ exports.test = function ( done ) {
 
     client.commands.monitor( function ( is_err, reply, fn ) {
         log( '- MONITOR callback should execute and get OK.' );
-        assert.ok( fn( reply )[ 0 ] === 'OK' );
+        assertions.isOK( fn( reply )[ 0 ] === 'OK' );
     } );
 
     log( '- now connecting client.' );
@@ -49,7 +48,7 @@ exports.test = function ( done ) {
 
         client.commands.ping( function ( is_err, reply, fn ) {
             log( '- PING callback should get an error.' );
-            assert.ok( is_err );
+            assertions.isOK( is_err );
         } );
 
     } );
@@ -59,10 +58,10 @@ exports.test = function ( done ) {
     setTimeout( function () {
 
         log( '- check default script, should be refused.' );
-        assert.ok( ~collected.events.indexOf( 'scriptfailure' ) );
+        assertions.isOK( ~ collected.events.indexOf( 'scriptfailure' ) );
 
         log( '- cache should be empty:', [ 0, 0 ] );
-        assert.deepEqual( client.lua.cache.size(), [ 0, 0 ] );
+        assertions.isDeepEqual( client.lua.cache.size(), [ 0, 0 ] );
 
         log( '- now disconnecting client with QUIT.' );
         client.commands.quit( function () {
@@ -72,8 +71,8 @@ exports.test = function ( done ) {
         setTimeout( function () {
 
             log( '- check collected events for client disconnection.' );
-            assert.ok( ~collected.events.indexOf( 'offline' ) );
-            assert.ok( ~collected.events.indexOf( 'lost' ) );
+            assertions.isOK( ~ collected.events.indexOf( 'offline' ) );
+            assertions.isOK( ~ collected.events.indexOf( 'lost' ) );
             exit();
         }, 1000 );
 

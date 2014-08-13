@@ -3,13 +3,12 @@
 /* 
  * Spade, pubsub mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -42,7 +41,7 @@ exports.test = function ( done ) {
     client.connect( null, function () {
 
         log( '- check collected events, should be:', inspect( evts ) );
-        assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+        assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
         client.commands.subscribe( channels, function ( ) {
             log( '- I\'m SUBSCRIBE callback.' );
@@ -56,7 +55,7 @@ exports.test = function ( done ) {
 
         client.commands.time( function ( is_err, reply, fn ) {
             log( '- TIME callback should get an error.' );
-            assert.ok( is_err );
+            assertions.isOK( is_err );
         } );
 
     } );
@@ -74,7 +73,7 @@ exports.test = function ( done ) {
         log( '- now disconnecting client with QUIT.' );
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assert.ok( fn( reply )[ 0 ] === 'OK' );
+            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
@@ -82,12 +81,12 @@ exports.test = function ( done ) {
         evts.push( 'offline', 'lost' );
 
         log( '- check execution of SUBSCRIBE callback:', inspect( [ sub_cback_OK ] ) );
-        assert.deepEqual( [ sub_cback_OK ], [ 1 ] );
+        assertions.isDeepEqual( [ sub_cback_OK ], [ 1 ] );
 
         setTimeout( function () {
 
             log( '- check collected events for client disconnection, should be:', inspect( evts ) );
-            assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
+            assertions.isDeepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 

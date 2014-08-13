@@ -3,13 +3,12 @@
 /* 
  * Spade, socket re-connection events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
@@ -49,7 +48,7 @@ exports.test = function ( done ) {
 
     setTimeout( function () {
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
-        assert.deepEqual( collected.events, evts );
+        assertions.isDeepEqual( collected.events, evts );
 
         log( '- opening connection to default Redis host:port.' );
         client.connect( { address : { port : 6379 } }, function () {
@@ -62,7 +61,7 @@ exports.test = function ( done ) {
                 evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'offline', 'lost' );
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+                assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
                 exit();
 

@@ -13,3 +13,6 @@ node_js:
 #addons:
 # code_climate:
 #  repo_token: 8df1db9ce3b83822e3d97a72b57c3813495f22f3143965a5cdeb02fc6ef3732e
+#matrix:
+# allow_failures:
+#  - node_js: "0.11"

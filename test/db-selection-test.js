@@ -3,13 +3,12 @@
 /* 
  * Spade, db selection events test.
  */
-    exports.test = function ( done ) {
+    exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
@@ -46,7 +45,7 @@
     setTimeout( function () {
 
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
-        assert.deepEqual( collected.events, evts, 'something goes wrong with db selection! got: ' + inspect( collected.events ) );
+        assertions.isDeepEqual( collected.events, evts, 'something goes wrong with db selection! got: ' + inspect( collected.events ) );
 
         log( '- now disconnecting client.' );
 
@@ -57,7 +56,7 @@
             evts.push( 'offline', 'lost' );
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assert.deepEqual( collected.events, evts, 'something goes wrong with client disconnection! got: ' + inspect( collected.events ) );
+            assertions.isDeepEqual( collected.events, evts, 'something goes wrong with client disconnection! got: ' + inspect( collected.events ) );
 
             exit();
 

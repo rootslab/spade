@@ -3,13 +3,12 @@
 /* 
  * Spade, pubsub mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
@@ -69,24 +68,24 @@ exports.test = function ( done ) {
                 return on = 0;
             }
 
-            log( ' now send EXEC.' );
+            log( '- now send EXEC.' );
 
             // push expected events
             evts.push( 'reply' );
 
             client.commands.exec( function ( is_err, reply, fn ) {
 
-                log( ' - check results for the EXEC reply.' );
+                log( '- check results for the EXEC reply.' );
 
-                assert.ok( fn( reply )[ 0 ] === 'PONG' );
-                assert.ok( fn( reply )[ 1 ].length === 2 );
+                assertions.isOK( fn( reply )[ 0 ] === 'PONG' );
+                assertions.isOK( fn( reply )[ 1 ].length === 2 );
 
                 // push expected events
                 evts.push( 'error-reply' );
 
                 client.commands.exec( function ( is_err, reply, fn ) {
-                    log( ' - 2nd EXEC should get an -ERR reply.' );
-                    assert.ok( is_err );
+                    log( '- 2nd EXEC should get an -ERR reply.' );
+                    assertions.isOK( is_err );
                 } );
 
             } );
@@ -106,14 +105,14 @@ exports.test = function ( done ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assert.ok( fn( reply )[ 0 ] === 'OK' );
+            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
         setTimeout( function () {
 
             log( '- check collected events for client, should be:', inspect( evts ) );
-            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+            assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 

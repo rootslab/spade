@@ -4,13 +4,12 @@
  * Spade, monitor mode events test.
  * Send monitor commands on 'cacheready', specifying the callback.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -50,14 +49,14 @@ exports.test = function ( done ) {
 
             client.commands.monitor( function ( is_err, reply, fn ) {
                 log( '- MONITOR callback should execute and get OK.' );
-                assert.ok( fn( reply )[ 0 ] === 'OK' );
+                assertions.isOK( fn( reply )[ 0 ] === 'OK' );
             } );
 
             log( '- try to execute a ping command in monitor mode.' );
 
             client.commands.ping( function ( is_err, reply, fn ) {
                 log( '- PING callback should get an error.' );
-                assert.ok( is_err );
+                assertions.isOK( is_err );
             } );
 
             log( '- connecting another client to Redis for sending commands.' );
@@ -89,7 +88,7 @@ exports.test = function ( done ) {
                         if ( isArray( el ) ) {
                             log( '- check if %s exists in monitor messages.', evts[ i ] );
                             log( el [ 0 ])
-                            assert.ok( ~ el[ 0 ].indexOf( evts[ i++ ] ), 'monitor messages should contain these commands: ' + evts );
+                            assertions.isOK( ~ el[ 0 ].indexOf( evts[ i++ ] ), 'monitor messages should contain these commands: ' + evts );
                         }
                     };
 
@@ -109,11 +108,11 @@ exports.test = function ( done ) {
     setTimeout( function () {
 
         log( '- check default script, should be accepted before monitor.' );
-        assert.ok( ~collected.events.indexOf( 'cacheload' ) );
-        assert.ok( ! ~collected.events.indexOf( 'scriptfailure' ) );
+        assertions.isOK( ~ collected.events.indexOf( 'cacheload' ) );
+        assertions.isOK( ! ~ collected.events.indexOf( 'scriptfailure' ) );
 
         log( '- cache should not be empty.', client.lua.cache.size() );
-        assert.ok( client.lua.cache.size()[ 0 ] > 0 );
+        assertions.isOK( client.lua.cache.size()[ 0 ] > 0 );
 
         log( '- now disconnecting client with QUIT.' );
         client.commands.quit( function () {
@@ -124,8 +123,8 @@ exports.test = function ( done ) {
 
             // end test
             log( '- check collected events for client disconnection.' );
-            assert.ok( ~collected.events.indexOf( 'offline' ) );
-            assert.ok( ~collected.events.indexOf( 'lost' ) );
+            assertions.isOK( ~collected.events.indexOf( 'offline' ) );
+            assertions.isOK( ~collected.events.indexOf( 'lost' ) );
 
             exit();
 

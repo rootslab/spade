@@ -3,13 +3,12 @@
 /* 
  * Spade, pubsub mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -66,7 +65,7 @@ exports.test = function ( done ) {
 
         client.commands.time( function ( is_err, reply, fn ) {
             log( '- TIME callback should get an error.' );
-            assert.ok( is_err );
+            assertions.isOK( is_err );
         } );
 
         client.on( 'shutup', function () {
@@ -76,7 +75,7 @@ exports.test = function ( done ) {
 
             client.commands.ping( function ( is_err, reply, fn ) {
                 log( '- PING callback should get PONG reply, got:', fn( reply )[ 0 ] );
-                assert.equal( fn( reply )[ 0 ], 'PONG' );
+                assertions.isOK( fn( reply )[ 0 ] === 'PONG' );
 
                 log( '- now disconnecting clients with QUIT.' );
                 // push expected reply event from QUIT
@@ -86,13 +85,13 @@ exports.test = function ( done ) {
 
                 client.commands.quit( function ( is_err, reply, fn ) {
                     log( '- client QUIT callback.', fn( reply ) );
-                    assert.ok( fn( reply )[ 0 ] === 'OK' );
+                    assertions.isOK( fn( reply )[ 0 ] === 'OK' );
                 } );
 
                 // quit other client
                 another_client.commands.quit( function ( is_err, reply, fn ) {
                     log( '- another client QUIT callback.', fn( reply ) );
-                    assert.ok( fn( reply )[ 0 ] === 'OK' );
+                    assertions.isOK( fn( reply )[ 0 ] === 'OK' );
                 } );
 
             } );
@@ -128,10 +127,10 @@ exports.test = function ( done ) {
     setTimeout( function () {
 
         log( '- deep check collected events, should be:', inspect( evts ) );
-        assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+        assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
         log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
-        assert.deepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
+        assertions.isDeepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
 
         exit();
 

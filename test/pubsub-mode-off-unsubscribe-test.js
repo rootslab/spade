@@ -3,13 +3,12 @@
 /* 
  * Spade, pubsub mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
@@ -59,16 +58,16 @@ exports.test = function ( done ) {
         client.commands.unsubscribe( [], function ( is_err_reply, reply, fn ) {
 
             log( '- check, no "listen" or "shutup" events should be present.' );
-            assert.ok( collected.events.indexOf( 'listen' ) < 0 );
-            assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
+            assertions.isOK( collected.events.indexOf( 'listen' ) < 0 );
+            assertions.isOK( collected.events.indexOf( 'shutup' ) < 0 );
 
             log( '- client should not be in PubSub mode, now send PING and check reply, should be "OK".' );
 
             client.commands.unsubscribe( channels, function ( is_err_reply, reply, fn ) {
 
                 log( '- UNSUBSCRIBE callback, check, no "listen" or "shutup" events should be present.' );
-                assert.ok( collected.events.indexOf( 'listen' ) < 0 );
-                assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
+                assertions.isOK( collected.events.indexOf( 'listen' ) < 0 );
+                assertions.isOK( collected.events.indexOf( 'shutup' ) < 0 );
 
 
                 // execute code only on the final callback
@@ -80,10 +79,10 @@ exports.test = function ( done ) {
                     client.commands.ping( function ( is_err_reply, reply, fn ) {
 
                         log( '- check PING reply, it should not be an error.' );
-                        assert.ok( ! is_err_reply );
+                        assertions.isOK( ! is_err_reply );
 
                         log( '- PING reply is:', inspect( fn( reply ) ) );
-                        assert.deepEqual( fn( reply ), [ 'PONG' ] );
+                        assertions.isDeepEqual( fn( reply ), [ 'PONG' ] );
 
                     } );
 
@@ -100,7 +99,7 @@ exports.test = function ( done ) {
     setTimeout( function () {
 
         log( '- check the number of executions for multiple UNSUBSCRIBE command callback.' );
-        assert.ok( i === 0 );
+        assertions.isOK( i === 0 );
 
         log( '- now disconnecting client with QUIT.' );
         // push expected connection event
@@ -108,14 +107,14 @@ exports.test = function ( done ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assert.ok( fn( reply )[ 0 ] === 'OK' );
+            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
         setTimeout( function () {
 
             log( '- check collected events for client, should be:', inspect( evts ) );
-            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+            assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 

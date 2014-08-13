@@ -3,13 +3,12 @@
 /* 
  * Spade, pubsub mode events test.
  */
-exports.test = function ( done ) {
+exports.test = function ( done, assertions ) {
 
     var debug = !! true
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , assert = require( 'assert' )
         , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
@@ -80,14 +79,14 @@ exports.test = function ( done ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assert.ok( fn( reply )[ 0 ] === 'OK' );
+            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
         setTimeout( function () {
 
             log( '- check collected events for client, should be:', inspect( evts ) );
-            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+            assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 
