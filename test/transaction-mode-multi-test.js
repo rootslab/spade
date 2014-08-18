@@ -50,7 +50,7 @@ exports.test = function ( done, assertions ) {
     log( '- #pushing SUBSCRIBE in Transaction mode. should return immediately an error.' );
 
     client.commands.subscribe( 'a', function ( is_err, reply, fn ) {
-        log( '- check SUBSCRIBE callback error.' );
+        log( '- check SUBSCRIBE callback error.', is_err );
         assertions.isOK( is_err );
     } );
 

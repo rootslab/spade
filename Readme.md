@@ -505,7 +505,7 @@ __Enable event logging to console__.
 
 > __NOTE__:
 >  - the _'enable'_ option defaults to true.
->  - the default _'logger'_ prints event name and arguments to console.
+>  - the _'logger'_ fn gets event name and event arguments.
 
 ```javascript
 Spade#cli( [ Boolean enable [, Function logger [, Boolean collect_events ] ] ] ) : undefined
