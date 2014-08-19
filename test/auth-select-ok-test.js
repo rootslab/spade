@@ -14,7 +14,7 @@ exports.test = function ( done, assertions ) {
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
-        , Spade = require( 'spade' )
+        , Spade = require( '../' )
         , opt = {
             socket : {
                 address : {
