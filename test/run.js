@@ -118,7 +118,7 @@
         // load file list
         for ( ; f < flen; fname = files[ ++f ] ) {
             // load only test files
-            if ( ~ fname.indexOf( '-test-.js' ) ) {
+            if ( ~ fname.indexOf( '-test.js' ) ) {
                 ++loaded;
                 try { 
                     // load script
