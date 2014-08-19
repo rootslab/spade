@@ -98,6 +98,7 @@
                 log( ' %s test %s executed.', inspect( success ), success > 1 ? 'files were' : 'file was' );
                 if ( err_counter ) log( err_counter === 1 ? ' %s error was encountered in:  %s.' : ' %s errors were encountered in %s.', inspect( err_counter ), inspect( Object.keys( failed ) ) );
                 log( ' \n time elapsed: %s secs.\n', inspect( + ( ( etime - stime ) / 1000 ).toFixed( 2 ) ) );
+                if ( err_counter ) process.exit( 1 );
             }
             , next = function () {
                 var t = qpos + 2 >>> 1
@@ -117,7 +118,7 @@
         // load file list
         for ( ; f < flen; fname = files[ ++f ] ) {
             // load only test files
-            if ( ~ fname.indexOf( '-test.js' ) ) {
+            if ( ~ fname.indexOf( '-test-.js' ) ) {
                 ++loaded;
                 try { 
                     // load script

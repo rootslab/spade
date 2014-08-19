@@ -37,78 +37,72 @@ exports.test = function ( done, assertions ) {
 
     evts.push( 'cacheinit', 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready', 'reply' );
 
-    log( '- wait 2 seconds to load files and collect events..' );
+    log( '- opening client connection.' );
+
+    setTimeout( function () {
+        client.connect();
+    }, 2000 );
+
+    log( '- wait 4 seconds to load files and collect events..' );
 
     setTimeout( function () {
 
-        log( '- opening client connection.' );
+        evts.push( 'offline', 'lost' );
 
-        client.connect( null, function () {
+        log( '- now close client connection.' );
 
-            log( '- now client is connect, wait 2 seconds before disconnecting..' );
+        client.disconnect( function () {
 
-            setTimeout( function () {
+            log( '- check collected events from client, should be: %s.', inspect( evts ) );
+            assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
-                evts.push( 'offline', 'lost' );
+            log( '- re-opening client connection.' );
 
-                log( '- now close client connection.' );
+            evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
 
-                client.disconnect( function () {
+            client.connect( null, function () {
 
-                    log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                    assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
+                log( '- check collected events from client, should be: %s.', inspect( evts ) );
+                assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
-                    log( '- re-opening client connection.' );
+                log( '- reset results.' );
 
-                    evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
+                log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
 
-                    client.connect( null, function () {
+                // 'scriptfailure', 'cacheload' events could be happen in any order
+                evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
 
-                        log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                        assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
+                log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
+                client.initCache( custom_path );
 
-                        log( '- reset results.' );
+                log( '- wait 2 seconds to load files and collect events..' );
 
-                        log( '- executing #initCache on "ready" event, with custom filepath for loading scripts.' );
+                setTimeout( function () {
 
-                        // 'scriptfailure', 'cacheload' events could be happen in any order
-                        evts.push( 'reply', 'cacheinit', 'scriptfailure', 'cacheload', 'cacheready', 'reply' );
+                    log( '- check collected events from client' );
 
-                        log( '- call #initCache after #connect, with custom filepath:', inspect( custom_path ) );
-                        client.initCache( custom_path );
+                    log( '- "cacheinit" should be the first event collected/emitted.' );
+                    assertions.isOK( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
 
-                        log( '- wait 2 seconds to load files and collect events..' );
+                    log( '- there should be a "scriptfailure" event.' );
+                    assertions.isOK( ~ collected.events.indexOf( 'scriptfailure' ) );
 
-                        setTimeout( function () {
+                    log( '- there should be a "cacheload" event.' );
+                    assertions.isOK( ~ collected.events.indexOf( 'cacheload' ) );
 
-                            log( '- check collected events from client' );
+                    log( '- "there should be a "cacheready" event..' );
+                    assertions.isOK( collected.events.indexOf( 'cacheready' ) );
 
-                            log( '- "cacheinit" should be the first event collected/emitted.' );
-                            assertions.isOK( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
+                    log( '- now close client connection.' );
 
-                            log( '- there should be a "scriptfailure" event.' );
-                            assertions.isOK( ~ collected.events.indexOf( 'scriptfailure' ) );
+                    client.disconnect( exit );
 
-                            log( '- there should be a "cacheload" event.' );
-                            assertions.isOK( ~ collected.events.indexOf( 'cacheload' ) );
-
-                            log( '- "there should be a "cacheready" event..' );
-                            assertions.isOK( collected.events.indexOf( 'cacheready' ) );
-
-                            log( '- now close client connection.' );
-
-                            client.disconnect( exit );
-
-                        }, 2000 );
-
-                    } );
-
-                }, 3000 );
+                }, 2000 );
 
             } );
 
         } );
 
-    }, 2000 );
+    }, 4000 );
 
 };
