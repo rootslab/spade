@@ -106,9 +106,9 @@ var Spade = require( 'spade' );
 $ cd spade/
 $ npm test
 ```
-> __NOTE__: tests need a running __Redis__ server instance, with default/stock configuration.
-
-> __NOTE__: for some connection tests you need the __[Vapid](https://github.com/rootslab/vapid)__ devDependency, a vacuous Redis server module.
+> __NOTE__:
+>  - tests need a running __Redis__ server instance, with default/stock configuration (port __6379__ ).
+>  - for some connection tests you need the __[Vapid](https://github.com/rootslab/vapid)__ _devDependency_, a vacuous __Redis__ server module ( port __6380__ ).
 
 ###Run Benchmarks
 
