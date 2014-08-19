@@ -108,6 +108,8 @@ $ npm test
 ```
 > __NOTE__: tests need a running __Redis__ server instance, with default/stock configuration.
 
+> __NOTE__: for some connection tests you need the __[Vapid](https://github.com/rootslab/vapid)__ devDependency, a vacuous Redis server module.
+
 ###Run Benchmarks
 
 > run benchmarks for __spade__.
@@ -786,13 +788,13 @@ _[Back to ToC](#table-of-contents)_
  * happens when AUTH is not required by Redis but issued by the client. No 'ready'
  * event could be launched.
  */
-'authfailed' : function ( String password, Array reply, Object address ) : undefined
+'authfailed' : function ( String password, Array reply, Object address )
 
 /*
  * Client authorization is successful. After that the command queue will be processed.
  * and the 'ready' event could be launched.
  */
-'authorized' : function ( String password, Array reply, Object address ) : undefined
+'authorized' : function ( String password, Array reply, Object address )
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -812,13 +814,13 @@ _[Back to ToC](#table-of-contents)_
  * The reply to SELECT command is an Error, then client will be disconnected.
  * No 'ready' event could be launched.
  */
-'dbfailed' : function ( String db, Array reply, Object address ) : undefined
+'dbfailed' : function ( String db, Array reply, Object address )
 
 /*
  * Client authorization is successful. Now the command queue will be processed,
  * the 'ready' event could be launched.
  */
-'dbselected' : function ( String db, Array reply, Object address ) : undefined
+'dbselected' : function ( String db, Array reply, Object address )
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -831,18 +833,18 @@ _[Back to ToC](#table-of-contents)_
  * Now that script commands are queued, it is possible to use and send
  * these and other commands.
  */
-'cacheinit' : function ( Array script_load_commands ) : undefined
+'cacheinit' : function ( Array script_load_commands )
 
 /*
  * A script was processed and refused by Redis with an error reply.
  * Errored scripts are not added to local cache.
  */
-'scriptfailure' : function ( String script_name, String error_message ) : undefined
+'scriptfailure' : function ( String script_name, String error_message )
 
 /*
  * A script was loaded in the cache and was successfully processed by Redis.
  */
-'cacheload' : function ( String script_name, Buffer data, String txt ) : undefined
+'cacheload' : function ( String script_name, Buffer data, String txt )
 
 /*
  * All scripts, found in the Syllabus scripts directory, are written to socket
@@ -853,7 +855,7 @@ _[Back to ToC](#table-of-contents)_
  *
  * NOTE: cache for LUA scripts is an instance of Camphora module.
  */
-'cacheready' : function ( Camphora lua_script_cache ) : undefined
+'cacheready' : function ( Camphora lua_script_cache )
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -870,7 +872,7 @@ _[Back to ToC](#table-of-contents)_
  * will be enqueued in 'offline mode' and sent/written to socket when
  * 'ready' will be emitted.
  */
-'ready' : function ( Object address ) : undefined
+'ready' : function ( Object address )
 
 /*
  * A client connection is fully established with Redis host. This event
@@ -881,7 +883,7 @@ _[Back to ToC](#table-of-contents)_
 /*
  * Connection is currently down ( on the first 'close' event from the socket ).
  */
-'offline' : function ( Object address ) : undefined
+'offline' : function ( Object address )
 
 /*
  * Client is trying to reconnect to Redis server, k is the number of current
@@ -889,18 +891,18 @@ _[Back to ToC](#table-of-contents)_
  *
  * NOTE: 'millis' indicates the last interval of time between attempts.
  */
-'attempt' : function ( Number k, Number millis, Object address ) : undefined
+'attempt' : function ( Number k, Number millis, Object address )
 
 /*
  * The connection is definitively lost ( after opt.reconnection.trials times ).
  */
-'lost' : function ( Object address ) : undefined
+'lost' : function ( Object address )
 
 /*
  * The socket times out for inactivity.
  * It only notifies that the socket has been idle.
  */
-'timeout' : function ( Number timeout,  Object address ) : undefined
+'timeout' : function ( Number timeout,  Object address )
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -953,21 +955,21 @@ _[Back to ToC](#table-of-contents)_
  * See also Syllabus.formatters.
  *
  */
-'message' : function ( Array message, Function formatter ) : undefined
+'message' : function ( Array message, Function formatter )
 
 /*
  * An event to signal that the client is entering in PubSub mode after a
  * subscription command. From now, all replies to (un)subscription commands
  * will be received as messages.
  */
-'listen' : function () : undefined
+'listen' : function ()
 
 /*
  * An event to signal that client is leaving PubSub mode after a successfull
  * execution of a unsubscription command.
  * It doesn't happen if the client disconnects while in PubSub mode.
  */
-'shutup' : function () : undefined
+'shutup' : function ()
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -996,7 +998,7 @@ _[Back to ToC](#table-of-contents)_
  * See also Syllabus.formatters.
  *
  */
-'monitor' : function ( String message, Function formatter ) : undefined
+'monitor' : function ( String message, Function formatter )
 ```
 _[Back to ToC](#table-of-contents)_
 
@@ -1008,26 +1010,26 @@ _[Back to ToC](#table-of-contents)_
 /*
  * When the client is offline, commands are not sent but queued.
  */
-'queued' : function ( Object command, Number offline_queue_size ) : undefined
+'queued' : function ( Object command, Number offline_queue_size )
 
 /*
  * When the client will be online once again, this event is emitted
  * before performing a scan for sending enqueued commands, then always
  * before the 'ready' event.
  */
-'scanqueue' : function ( Number offline_queue_size ) : undefined
+'scanqueue' : function ( Number offline_queue_size )
 
 /*
  * The client receives a command reply from Redis. It always happens after
  * the 'ready' event.
  */
-'reply' : function ( Object command, String reply ) : undefined
+'reply' : function ( Object command, String reply )
 
 /*
  * The client receives an error reply from Redis. It always happens after
  * the 'ready' event.
  */
-'error-reply' : function ( Object command, String err_reply ) : undefined
+'error-reply' : function ( Object command, String err_reply )
 ```
 _[Back to ToC](#table-of-contents)_
 

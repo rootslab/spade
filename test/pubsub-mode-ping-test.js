@@ -25,7 +25,7 @@ exports.test = function ( done, assertions ) {
         , exit = typeof done === 'function' ? done : function () {}
         ;
 
-    log( '- created new Spade client with custom options:', inspect( client.options ) );
+    log( '- a new Spade client was created with custom options:', inspect( client.options ) );
 
     log( '- enable CLI logging.' );
 
