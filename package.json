@@ -34,7 +34,7 @@
   , "devDependencies": {
       "hiredis" : ">=0.1.17"
       , "deuces" : ">=0.11.4"
-      , "vapid" : ">=0.3.3"
+      , "vapid" : ">=0.3.4"
     }
   , "main": "index"
   , "engines": {
