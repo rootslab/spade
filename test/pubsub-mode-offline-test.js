@@ -61,7 +61,7 @@ exports.test = function ( done, assertions ) {
 
     } );
 
-    log( '- now waiting 1 sec to collect events..' );
+    log( '- now waiting 2 secs to collect events..' );
 
     setTimeout( function () {
         var i = 0
@@ -95,8 +95,8 @@ exports.test = function ( done, assertions ) {
 
             exit();
 
-        }, 1000 );
+        }, 1500 );
 
-    }, 1000 );
+    }, 2000 );
 
     };
