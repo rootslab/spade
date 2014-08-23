@@ -33,10 +33,6 @@ exports.test = function ( done, assertions ) {
         dbg( '  !%s %s', ename, format( ename, args || [] ) );
     }, true );
 
-    log( '- init client cache in offline mode.' );
-
-    client.initCache();
-
     log( '- execute/enqueue SUBSCRIBE command in offline mode.' );
 
     log( '- now connecting client.' );
@@ -73,7 +69,7 @@ exports.test = function ( done, assertions ) {
 
     } );
 
-    log( '- now waiting 5 secs to collect events..' );
+    log( '- now waiting 2 secs to collect events..' );
 
     setTimeout( function () {
         var i = 0
@@ -86,23 +82,26 @@ exports.test = function ( done, assertions ) {
         evts.push( 'listen' );
         for ( ; i < channels.length + 3; ++i ) evts.push( 'message' );
         evts.push( 'shutup' );
-        // push expected cache event
-        evts.push( 'cacheinit', 'cacheload', 'cacheready', 'reply' );
-        log( '- check collected cache events, should be:', inspect( evts ) );
-        assertions.isDeepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
 
         log( '- now disconnecting client with QUIT.' );
+
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
             assertions.isOK( fn( reply )[ 0 ] === 'OK' );
-        } );
 
-        log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
-        assertions.isDeepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
+            // push expected cache event
+            evts.push( 'reply' );
+            log( '- check collected cache events, should be:', inspect( evts ) );
+            assertions.isDeepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
+
+            log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
+            assertions.isDeepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
+
+        } );
 
         exit();
 
-    }, 5000 );
+    }, 2000 );
 
 };
