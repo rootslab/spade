@@ -51,7 +51,8 @@ exports.test = function ( done, assertions ) {
         }  );
 
     client.connect( null, function () {
-        log( '- check collected events, should be:', inspect( evts ) );
+
+        log( '- check collected events, should be: %s.', inspect( evts ) );
          assertions.isDeepEqual( collected.events, evts );
 
         log( '- try to execute a TIME command in pubsub mode.' );
@@ -63,7 +64,7 @@ exports.test = function ( done, assertions ) {
             assertions.isOK( is_err );
         } );
 
-        log( '- call #unsubscribe without arguments' );
+        log( '- call #unsubscribe without arguments.' );
 
         client.commands.unsubscribe( null, function () {
             log( '- I\'m UNSUBSCRIBE callback.' );
@@ -72,7 +73,7 @@ exports.test = function ( done, assertions ) {
 
     } );
 
-    log( '- now waiting 3 secs to collect events..' );
+    log( '- now waiting 5 secs to collect events..' );
 
     setTimeout( function () {
         var i = 0
@@ -102,6 +103,6 @@ exports.test = function ( done, assertions ) {
 
         exit();
 
-    }, 3000 );
+    }, 5000 );
 
 };
