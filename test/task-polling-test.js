@@ -32,6 +32,9 @@ exports.test = function ( done, assertions ) {
         dbg( '  !%s %s', ename, format( ename, args || [] ) );
     }, true );
 
+    log( '- now #initTasks.' );
+    client.initTasks();
+
     log( '- opening client connection.' );
 
     client.connect( null, function () {
@@ -40,9 +43,6 @@ exports.test = function ( done, assertions ) {
         log( '- now client is connected and ready to send.' );
         // push expected events
         evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply' );
-
-        log( '- now #initTasks.' );
-        client.initTasks();
 
         // push expected events
         for ( ; i < times; ++i ) evts.push( 'polling', 'reply' );
