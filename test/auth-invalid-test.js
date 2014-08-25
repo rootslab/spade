@@ -10,7 +10,6 @@ exports.test = function ( done, assertions ) {
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -29,6 +28,7 @@ exports.test = function ( done, assertions ) {
         }
         , client = Spade( opt )
         , Vapid = null
+        , vp = null
         , vapid_opt = {
             secret : 'secret'
             , maxdb : 16
@@ -39,11 +39,12 @@ exports.test = function ( done, assertions ) {
         // collected events
         , collected = client.logger.collected
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
 
     try {
         Vapid = require( 'vapid' );
-        vapid = Vapid( opt );
+        vp = Vapid( vapid_opt );
     } catch ( e ) {
         log( '- this test needs Vapid devDependency(see Readme): %s.', e.message );
         return;
@@ -54,7 +55,7 @@ exports.test = function ( done, assertions ) {
     log( '- enable Vapid server, now it is listening on port: %s.', inspect( vport ) );
 
     // vapid.cli();
-    vapid.listen( vport );
+    vp.listen( vport );
 
     log( '- enable CLI logging.' );
 
@@ -76,12 +77,15 @@ exports.test = function ( done, assertions ) {
 
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
 
-        assertions.isDeepEqual( collected.events, evts, 'something goes wrong with client authorization! got: ' + inspect( collected.events ) );
+        assert.deepEqual( collected.events, evts, 'something goes wrong with client authorization! got: ' + inspect( collected.events ) );
 
-        vapid.close()
+        vp.close();
 
         exit();
 
     }, 1000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

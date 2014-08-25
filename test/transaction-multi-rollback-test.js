@@ -9,7 +9,6 @@ exports.test = function ( done, assertions ) {
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -29,8 +28,8 @@ exports.test = function ( done, assertions ) {
         , collected = client.logger.collected
         , on = 1
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with custom options:', inspect( opt ) );
 
     log( '- enable CLI logging.' );
@@ -77,15 +76,15 @@ exports.test = function ( done, assertions ) {
 
                 log( '- check results for the EXEC reply.' );
 
-                assertions.isOK( fn( reply )[ 0 ] === 'PONG' );
-                assertions.isOK( fn( reply )[ 1 ].length === 2 );
+                assert.ok( fn( reply )[ 0 ] === 'PONG' );
+                assert.ok( fn( reply )[ 1 ].length === 2 );
 
                 // push expected events
                 evts.push( 'error-reply' );
 
                 client.commands.exec( function ( is_err, reply, fn ) {
                     log( '- 2nd EXEC should get an -ERR reply.' );
-                    assertions.isOK( is_err );
+                    assert.ok( is_err );
                 } );
 
             } );
@@ -105,14 +104,14 @@ exports.test = function ( done, assertions ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
+            assert.ok( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
         setTimeout( function () {
 
             log( '- check collected events for client, should be:', inspect( evts ) );
-            assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 
@@ -121,3 +120,6 @@ exports.test = function ( done, assertions ) {
     }, 4000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

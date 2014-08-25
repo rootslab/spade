@@ -21,8 +21,8 @@ exports.test = function ( done, assertions ) {
         , collected = client.logger.collected
         , custom_path = { filepath : __dirname + '/deps/dummy-lua-scripts' }
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with default options.' );
 
     log( '- enable CLI logging.' );
@@ -54,7 +54,7 @@ exports.test = function ( done, assertions ) {
         client.disconnect( function () {
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
+            assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
             log( '- re-opening client connection.' );
 
@@ -63,7 +63,7 @@ exports.test = function ( done, assertions ) {
             client.connect( null, function () {
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
-                assertions.isDeepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
+                assert.deepEqual( collected.events, evts, 'something goes wrong with script load! got: ' + inspect( collected.events ) );
 
                 log( '- reset results.' );
 
@@ -82,16 +82,16 @@ exports.test = function ( done, assertions ) {
                     log( '- check collected events from client' );
 
                     log( '- "cacheinit" should be the first event collected/emitted.' );
-                    assertions.isOK( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
+                    assert.ok( collected.events[ 0 ] === 'cacheinit', 'got: ' + collected.events[ 0 ] );
 
                     log( '- there should be a "scriptfailure" event.' );
-                    assertions.isOK( ~ collected.events.indexOf( 'scriptfailure' ) );
+                    assert.ok( ~ collected.events.indexOf( 'scriptfailure' ) );
 
                     log( '- there should be a "cacheload" event.' );
-                    assertions.isOK( ~ collected.events.indexOf( 'cacheload' ) );
+                    assert.ok( ~ collected.events.indexOf( 'cacheload' ) );
 
                     log( '- "there should be a "cacheready" event..' );
-                    assertions.isOK( collected.events.indexOf( 'cacheready' ) );
+                    assert.ok( collected.events.indexOf( 'cacheready' ) );
 
                     log( '- now close client connection.' );
 
@@ -106,3 +106,6 @@ exports.test = function ( done, assertions ) {
     }, 4000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

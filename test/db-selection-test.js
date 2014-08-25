@@ -9,7 +9,6 @@
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -20,8 +19,8 @@
         // collected events
         , collected = client.logger.collected
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with default options.' );
 
     log( '- enable CLI logging.' );
@@ -45,7 +44,7 @@
     setTimeout( function () {
 
         log( '- check collected events from client, should be: %s.', inspect( evts ) );
-        assertions.isDeepEqual( collected.events, evts, 'something goes wrong with db selection! got: ' + inspect( collected.events ) );
+        assert.deepEqual( collected.events, evts, 'something goes wrong with db selection! got: ' + inspect( collected.events ) );
 
         log( '- now disconnecting client.' );
 
@@ -56,7 +55,7 @@
             evts.push( 'offline', 'lost' );
 
             log( '- check collected events from client, should be: %s.', inspect( evts ) );
-            assertions.isDeepEqual( collected.events, evts, 'something goes wrong with client disconnection! got: ' + inspect( collected.events ) );
+            assert.deepEqual( collected.events, evts, 'something goes wrong with client disconnection! got: ' + inspect( collected.events ) );
 
             exit();
 
@@ -65,3 +64,6 @@
     }, 1000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

@@ -102,9 +102,16 @@ var Spade = require( 'spade' );
 
 ###Run Tests
 
+> __to run all test files:__
+
 ```bash
 $ cd spade/
 $ npm test
+```
+> __to execute a single test file simply do__:
+
+```bash
+$ node test/file-name.js 1
 ```
 > __NOTE__:
 >  - tests need a running __Redis__ server instance, with default/stock configuration ( port __6379__ ).

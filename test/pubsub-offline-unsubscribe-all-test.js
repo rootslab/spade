@@ -23,8 +23,8 @@ exports.test = function ( done, assertions ) {
         , sub_cback_OK = 0
         , unsub_cback_OK = 0
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with default options.' );
 
     log( '- enable CLI logging.' );
@@ -49,7 +49,7 @@ exports.test = function ( done, assertions ) {
     client.connect( null, function () {
 
         log( '- check collected events, should be: %s.', inspect( evts ) );
-         assertions.isDeepEqual( collected.events, evts );
+         assert.deepEqual( collected.events, evts );
 
         log( '- try to execute a TIME command in pubsub mode.' );
 
@@ -57,7 +57,7 @@ exports.test = function ( done, assertions ) {
 
         client.commands.time( function ( is_err, reply, fn ) {
             log( '- TIME callback should get an error.' );
-            assertions.isOK( is_err );
+            assert.ok( is_err );
         } );
 
         log( '- call #unsubscribe without arguments.' );
@@ -76,7 +76,7 @@ exports.test = function ( done, assertions ) {
             ;
         client.commands.ping( function ( is_err, reply, fn ) {
             log( '- PING callback should get PONG reply, got:', fn( reply )[ 0 ] );
-            assertions.isOK( fn( reply )[ 0 ] === 'PONG' );
+            assert.ok( fn( reply )[ 0 ] === 'PONG' );
         } );
         // push expected message events ( + 3 unsubscribe replies )
         evts.push( 'listen' );
@@ -88,15 +88,15 @@ exports.test = function ( done, assertions ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
+            assert.ok( fn( reply )[ 0 ] === 'OK' );
 
             // push expected cache event
             evts.push( 'reply' );
             log( '- check collected cache events, should be:', inspect( evts ) );
-            assertions.isDeepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
+            assert.deepEqual( collected.events.slice( 0, evts.length ), evts, 'got: ' + inspect( collected.events ) );
 
             log( '- check execution of SUBSCRIBE and UNSUBSCRIBE callbacks:', inspect( [ sub_cback_OK, unsub_cback_OK ] ) );
-            assertions.isDeepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
+            assert.deepEqual( [ sub_cback_OK, unsub_cback_OK ], [ 1, 1 ] );
 
         } );
 
@@ -105,3 +105,6 @@ exports.test = function ( done, assertions ) {
     }, 2000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

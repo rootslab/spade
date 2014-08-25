@@ -11,7 +11,6 @@ exports.test = function ( done, assertions ) {
         , log = console.log
         , dbg = debug ? console.log : emptyFn
         , test_utils = require( './deps/test-utils' )
-        , inspect = test_utils.inspect
         , format = test_utils.format
         , Spade = require( '../' )
         , client = Spade()
@@ -27,8 +26,8 @@ exports.test = function ( done, assertions ) {
         // collected events
         , collected = client.logger.collected
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with default options.' );
 
     log( '- enable CLI logging.' );
@@ -49,14 +48,14 @@ exports.test = function ( done, assertions ) {
 
             client.commands.monitor( function ( is_err, reply, fn ) {
                 log( '- MONITOR callback should execute and get OK.' );
-                assertions.isOK( fn( reply )[ 0 ] === 'OK' );
+                assert.ok( fn( reply )[ 0 ] === 'OK' );
             } );
 
             log( '- try to execute a ping command in monitor mode.' );
 
             client.commands.ping( function ( is_err, reply, fn ) {
-                log( '- PING callback should get an error.' );
-                assertions.isOK( is_err );
+                log( '- PING callback should get an error: %s.', fn( reply ) );
+                assert.ok( is_err );
             } );
 
             log( '- connecting another client to Redis for sending commands.' );
@@ -87,10 +86,10 @@ exports.test = function ( done, assertions ) {
                         el = collected.events[ r ];
                         if ( isArray( el ) ) {
                             log( '- check if %s exists in monitor messages.', evts[ i ] );
-                            log( el [ 0 ])
-                            assertions.isOK( ~ el[ 0 ].indexOf( evts[ i++ ] ), 'monitor messages should contain these commands: ' + evts );
+                            log( el [ 0 ] );
+                            assert.ok( ~ el[ 0 ].indexOf( evts[ i++ ] ), 'monitor messages should contain these commands: ' + evts );
                         }
-                    };
+                    }
 
                     log( '- disconnect other client.' );
                     another_client.disconnect();
@@ -108,11 +107,11 @@ exports.test = function ( done, assertions ) {
     setTimeout( function () {
 
         log( '- check default script, should be accepted before monitor.' );
-        assertions.isOK( ~ collected.events.indexOf( 'cacheload' ) );
-        assertions.isOK( ! ~ collected.events.indexOf( 'scriptfailure' ) );
+        assert.ok( ~ collected.events.indexOf( 'cacheload' ) );
+        assert.ok( ! ~ collected.events.indexOf( 'scriptfailure' ) );
 
         log( '- cache should not be empty.', client.lua.cache.size() );
-        assertions.isOK( client.lua.cache.size()[ 0 ] > 0 );
+        assert.ok( client.lua.cache.size()[ 0 ] > 0 );
 
         log( '- now disconnecting client with QUIT.' );
         client.commands.quit( function () {
@@ -123,8 +122,8 @@ exports.test = function ( done, assertions ) {
 
             // end test
             log( '- check collected events for client disconnection.' );
-            assertions.isOK( ~collected.events.indexOf( 'offline' ) );
-            assertions.isOK( ~collected.events.indexOf( 'lost' ) );
+            assert.ok( ~collected.events.indexOf( 'offline' ) );
+            assert.ok( ~collected.events.indexOf( 'lost' ) );
 
             exit();
 
@@ -133,3 +132,6 @@ exports.test = function ( done, assertions ) {
     }, 6000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();

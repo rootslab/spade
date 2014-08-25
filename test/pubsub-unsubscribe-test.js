@@ -9,7 +9,6 @@ exports.test = function ( done, assertions ) {
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
-        , Bolgia = require( 'bolgia' )
         , test_utils = require( './deps/test-utils' )
         , inspect = test_utils.inspect
         , format = test_utils.format
@@ -30,8 +29,8 @@ exports.test = function ( done, assertions ) {
         , channels = [ 1, 2, 3 ]
         , i = 0
         , exit = typeof done === 'function' ? done : function () {}
+        , assert = assertions || require( 'assert' )
         ;
-
     log( '- a new Spade client was created with custom options:', inspect( opt ) );
 
     log( '- enable CLI logging.' );
@@ -57,17 +56,20 @@ exports.test = function ( done, assertions ) {
 
         client.commands.unsubscribe( [], function ( is_err_reply, reply, fn ) {
 
-            log( '- check, no "listen" or "shutup" events should be present.' );
-            assertions.isOK( collected.events.indexOf( 'listen' ) < 0 );
-            assertions.isOK( collected.events.indexOf( 'shutup' ) < 0 );
+            log( '- check unsubscribe reply, channel should be %s.', inspect( null ) );
+            assert.ok( reply[ 1 ] === null );
 
-            log( '- client should not be in PubSub mode, now send PING and check reply, should be "OK".' );
+            log( '- check, no "listen" or "shutup" events should be present.' );
+            assert.ok( collected.events.indexOf( 'listen' ) < 0 );
+            assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
+
+            log( '- client should not be in PubSub mode, now send PING, reply should be "PONG".' );
 
             client.commands.unsubscribe( channels, function ( is_err_reply, reply, fn ) {
 
                 log( '- UNSUBSCRIBE callback, check, no "listen" or "shutup" events should be present.' );
-                assertions.isOK( collected.events.indexOf( 'listen' ) < 0 );
-                assertions.isOK( collected.events.indexOf( 'shutup' ) < 0 );
+                assert.ok( collected.events.indexOf( 'listen' ) < 0 );
+                assert.ok( collected.events.indexOf( 'shutup' ) < 0 );
 
 
                 // execute code only on the final callback
@@ -79,10 +81,10 @@ exports.test = function ( done, assertions ) {
                     client.commands.ping( function ( is_err_reply, reply, fn ) {
 
                         log( '- check PING reply, it should not be an error.' );
-                        assertions.isOK( ! is_err_reply );
+                        assert.ok( ! is_err_reply );
 
                         log( '- PING reply is:', inspect( fn( reply ) ) );
-                        assertions.isDeepEqual( fn( reply ), [ 'PONG' ] );
+                        assert.deepEqual( fn( reply ), [ 'PONG' ] );
 
                     } );
 
@@ -99,7 +101,7 @@ exports.test = function ( done, assertions ) {
     setTimeout( function () {
 
         log( '- check the number of executions for multiple UNSUBSCRIBE command callback.' );
-        assertions.isOK( i === 0 );
+        assert.ok( i === 0 );
 
         log( '- now disconnecting client with QUIT.' );
         // push expected connection event
@@ -107,14 +109,14 @@ exports.test = function ( done, assertions ) {
 
         client.commands.quit( function ( is_err, reply, fn ) {
             log( '- QUIT callback.', fn( reply ) );
-            assertions.isOK( fn( reply )[ 0 ] === 'OK' );
+            assert.ok( fn( reply )[ 0 ] === 'OK' );
             log( '- OK, client was disconnected.' );
         } );
 
         setTimeout( function () {
 
             log( '- check collected events for client, should be:', inspect( evts ) );
-            assertions.isDeepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
+            assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );
 
             exit();
 
@@ -123,3 +125,6 @@ exports.test = function ( done, assertions ) {
     }, 2000 );
 
 };
+
+// single test execution with node
+if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();
