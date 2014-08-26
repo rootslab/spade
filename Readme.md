@@ -111,7 +111,7 @@ $ npm test
 > __to execute a single test file simply do__:
 
 ```bash
-$ node test/file-name.js 1
+$ node test/file-name.js
 ```
 > __NOTE__:
 >  - tests need a running __Redis__ server instance, with default/stock configuration ( port __6379__ ).
