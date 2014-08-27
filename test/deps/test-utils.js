@@ -5,6 +5,7 @@ module.exports = ( function () {
         , Bolgia = require( 'bolgia' )
         , doString = Bolgia.doString
         , improve = Bolgia.improve
+        , reveal = Bolgia.reveal
         , ooo = Bolgia.circles
         , ostr = ooo.str
         , oarr = ooo.arr
@@ -29,7 +30,7 @@ module.exports = ( function () {
 
                 // oerr, command object with error
                 case 'error':
-                    return inspect( [ args[ 0 ].cmd, args[ 0 ].err ], iopt );
+                    return inspect( [ args[ 0 ].cmd, args[ 0 ].err, reveal( args[ 0 ].data ) ], iopt );
 
                 // script_list
                 case 'cacheinit':
