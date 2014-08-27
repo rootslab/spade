@@ -14,7 +14,7 @@
 
 [![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
+[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
 
 > ♠ __Spade__, a full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
