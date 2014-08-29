@@ -30,7 +30,7 @@ module.exports = ( function () {
 
                 // oerr, command object with error
                 case 'error':
-                    return inspect( [ args[ 0 ].cmd, args[ 0 ].err, reveal( args[ 0 ].data ) ], iopt );
+                    return inspect( [ args[ 0 ].cmd, args[ 0 ].err, args[ 0 ].data ? reveal( args[ 0 ].data ) : args[ 0 ].data ], iopt );
 
                 // script_list
                 case 'cacheinit':

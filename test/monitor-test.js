@@ -51,13 +51,19 @@ exports.test = function ( done, assertions ) {
                 assert.ok( fn( reply )[ 0 ] === 'OK' );
             } );
 
-            log( '- try to execute a ping command in monitor mode.' );
+            log( '- try to execute a PING command in monitor mode.' );
 
             client.commands.ping( function ( is_err, reply, fn ) {
                 log( '- PING callback should get an error: %s.', fn( reply ) );
                 assert.ok( is_err );
             } );
 
+            log( '- try to execute a MONITOR command in monitor mode.' );
+
+            client.commands.monitor( function ( is_err, reply, fn ) {
+                log( '- MONITOR callback should get an error: %s.', fn( reply ) );
+                // assert.ok( is_err );
+            } );
             log( '- connecting another client to Redis for sending commands.' );
 
             log( '- the other client will automatically send "SELECT db" command.' );
