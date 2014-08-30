@@ -57,7 +57,7 @@
    - __[#disconnect](#disconnect)__
    - __[#initCache](#initcache)__
    - __[#initTasks](#inittasks)__
-   - __[#loadIterators](#loadIterators)__
+   - __[#loadIterators](#loaditerators)__
    - __[#cli](#cli)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
@@ -521,15 +521,18 @@ Spade#loadIterators( [ Array file_list ] ) : Object
 > It returns the current __Spade.iterators__ property filled with:
 
 ```javascript
-{
-   scan : function ( Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
-   , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
-   , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
+Spade.iterators : {
+   scan : function ( Number cursor [, Object options [, Function cback ] ] ) : Iterator
+   , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
+   , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
 }
+
+Iterator : { next : Function }
+
 ```
 > __NOTE__:
->  - signatures are the same as for relative Spade commands, but they returns iterator objects.
->  - the callback function gets 3 arguments ( Boolean is_err_reply, Array reply, Function reveal ).
+>  - signatures are the same as for relative __Spade.commands__, but they returns __Iterator__ objects.
+>  - the '__cback__' callback function gets __3__ arguments: __( Boolean is_err_reply, Array reply, Function reveal )__.
 
 --------------------------------------------------------------------------------------------
 
