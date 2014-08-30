@@ -526,7 +526,7 @@ Spade.iterators : {
    , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
    , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
 }
-
+// with 
 Iterator : { next : Function }
 
 ```
