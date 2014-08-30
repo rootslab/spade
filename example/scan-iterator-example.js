@@ -34,7 +34,7 @@ for ( ; i < n; ++i ) client.commands.set( 'key:' + i, i );
 
 client.connect();
 
-// load files form iterators dir
+// load files from iterators dir
 client.loadIterators();
 
 stime = Date.now();
