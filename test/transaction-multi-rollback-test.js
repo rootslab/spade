@@ -42,7 +42,7 @@ exports.test = function ( done, assertions ) {
 
     client.connect( null, function () {
         // push expected events
-        evts.push( 'connect', 'scanqueue', 'ready' );
+        evts.push( 'connect','scanqueue', 'ready' );
 
         log( '- execute queue #rollUp.');
         client.queue.rollUp();

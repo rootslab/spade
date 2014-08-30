@@ -36,7 +36,7 @@ exports.test = function ( done, assertions ) {
     log( '- now connecting client.' );
 
     // push expected events
-    evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
+    evts.push( 'connect', 'reply', 'dbselected', 'scanqueue', 'ready' );
 
     client.connect( null, function () {
         var i = 0
@@ -49,7 +49,7 @@ exports.test = function ( done, assertions ) {
         log( '- try to execute a TIME command in pubsub mode.' );
 
         // push expected events
-        evts.push( 'error', 'reply' );
+        evts.push( 'error' );
         evts.push( 'listen' );
         for ( ; i < channels.length + 3; ++i ) evts.push( 'message' );
         // push a message after shutup for the last unsubscribe message

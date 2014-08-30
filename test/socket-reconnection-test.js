@@ -57,7 +57,7 @@ exports.test = function ( done, assertions ) {
                 log( '- client disconnected.' );
 
                 // push expected events
-                evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'offline', 'lost' );
+                evts.push( 'connect', 'reply', 'dbselected', 'scanqueue', 'ready', 'offline', 'lost' );
 
                 log( '- check collected events from client, should be: %s.', inspect( evts ) );
                 assert.deepEqual( collected.events, evts, 'got: ' + inspect( collected.events ) );

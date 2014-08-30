@@ -66,8 +66,8 @@ exports.test = function ( done, assertions ) {
     log( '- opening client connection.' );
 
     // push expected events
-    evts.push( 'connect' );
-    evts.push( 'authfailed', 'error-reply' );
+    evts.push( 'connect', 'error-reply' );
+    evts.push( 'authfailed' );
     evts.push( 'offline', 'lost' );
     client.connect();
 

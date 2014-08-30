@@ -381,6 +381,12 @@ Spade.lua.cache : Camphora
 Spade.qq : Cucu
 
 /*
+ * A property that holds iterators for commands like SCAN, HSCAN, ZSCAN,
+ * loaded with Spade#loadIterators.
+ */
+Spade.iterators : Object
+
+/*
  * Debug Properties
  */
 
@@ -500,6 +506,18 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 Spade#initTasks( [ Array file_list ] ) : Cucu
 ```
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
+
+--------------------------------------------------------------------------------------------
+
+####loadIterators
+
+> Load default iterators, for commands like SCAN, HSCAN, ZSCAN, from _'spade/lib/iterators'_
+> dir, you could restrict files to load, specifying some filenames.
+> It returns the current Spade.iterators property.
+
+```javascript
+Spade#loadIterators( [ Array file_list ] ) : Object
+```
 
 --------------------------------------------------------------------------------------------
 

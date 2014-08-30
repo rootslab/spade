@@ -77,7 +77,7 @@ exports.test = function ( done, assertions ) {
         log( '- now client is connected and ready to send.' );
 
         // push expected events
-        evts.push( 'connect', 'authorized', 'reply', 'dbselected', 'scanqueue', 'ready', 'reply' );
+        evts.push( 'connect',  'reply', 'authorized', 'reply', 'dbselected', 'scanqueue', 'ready' );
 
         client.on( 'polling', function () {
             if ( vp.silent ) return;
@@ -99,7 +99,7 @@ exports.test = function ( done, assertions ) {
             vp.mute( false );
 
             // push expected events
-            evts.push( 'connect', 'authorized', 'reply', 'dbselected', 'scanqueue', 'ready', 'reply', 'reply' );
+            evts.push( 'connect', 'reply', 'authorized', 'reply', 'dbselected', 'scanqueue', 'ready', 'reply' );
 
             setTimeout( function () {
 

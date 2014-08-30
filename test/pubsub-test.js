@@ -36,7 +36,7 @@ exports.test = function ( done, assertions ) {
 
     log( '- now connecting client.' );
 
-    evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
+    evts.push( 'connect', 'reply', 'dbselected', 'scanqueue', 'ready' );
 
     client.connect( null, function () {
 
@@ -51,7 +51,7 @@ exports.test = function ( done, assertions ) {
         log( '- try to execute a TIME command in pubsub mode.' );
 
         // push expected error event
-        evts.push( 'error', 'reply' );
+        evts.push( 'error' );
 
         client.commands.time( function ( is_err, reply, fn ) {
             log( '- TIME callback should get an error: %s.', fn( reply ) );

@@ -40,7 +40,7 @@ exports.test = function ( done, assertions ) {
 
     client.connect();
 
-    evts.push( 'connect', 'dbfailed', 'error-reply', 'offline', 'lost' );
+    evts.push( 'connect', 'error-reply', 'dbfailed', 'offline', 'lost' );
 
     log( '- wait 1 second to collect events..' );
 

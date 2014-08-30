@@ -66,8 +66,8 @@ exports.test = function ( done, assertions ) {
 
     // push expected events
     evts.push( 'connect' );
-    evts.push( 'authorized', 'reply' );
-    evts.push( 'dbselected', 'scanqueue', 'ready', 'reply' );
+    evts.push( 'reply', 'authorized' );
+    evts.push( 'reply', 'dbselected', 'scanqueue', 'ready' );
 
     client.connect( null, function () {
 

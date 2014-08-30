@@ -41,7 +41,7 @@ exports.test = function ( done, assertions ) {
             ;
         log( '- now client is connected and ready to send.' );
         // push expected events
-        evts.push( 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'listen' );
+        evts.push( 'connect', 'reply', 'dbselected', 'scanqueue', 'ready', 'listen' );
 
         log( '- now #initTasks.' );
         client.initTasks();

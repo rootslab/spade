@@ -35,7 +35,7 @@ exports.test = function ( done, assertions ) {
 
     client.initCache();
 
-    evts.push( 'cacheinit', 'connect', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready', 'reply' );
+    evts.push( 'cacheinit', 'connect', 'reply', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready' );
 
     log( '- opening client connection.' );
 
@@ -58,7 +58,7 @@ exports.test = function ( done, assertions ) {
 
             log( '- re-opening client connection.' );
 
-            evts.push( 'connect', 'dbselected', 'scanqueue', 'ready' );
+            evts.push( 'connect', 'reply', 'dbselected', 'scanqueue', 'ready' );
 
             client.connect( null, function () {
 
