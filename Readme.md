@@ -512,13 +512,24 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 
 ####loadIterators
 
-> Load default iterators, for commands like SCAN, HSCAN, ZSCAN, from _'spade/lib/iterators'_
+> Load default iterators, for commands like __SCAN__, __HSCAN__, __ZSCAN__, from _'spade/lib/iterators'_
 > dir, you could restrict files to load, specifying some filenames.
-> It returns the current Spade.iterators property.
 
 ```javascript
 Spade#loadIterators( [ Array file_list ] ) : Object
 ```
+> It returns the current __Spade.iterators__ property filled with:
+
+```javascript
+{
+   scan : function ( Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
+   , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
+   , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : { next : Function }
+}
+```
+> __NOTE__:
+>  - signatures are the same as for relative Spade commands, but they returns iterator objects.
+>  - the callback function gets 3 arguments ( Boolean is_err_reply, Array reply, Function reveal ).
 
 --------------------------------------------------------------------------------------------
 
