@@ -501,7 +501,7 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 > Load default methods/tasks from _'spade/lib/tasks'_ dir, you could restrict files to load,
 > specifying some filenames. It returns the current Spade.tasks (Cucu.ttable) property.
 
-> __NOTE__: for now, there is only one task, '__polling__', contained in the 'tasks/connection.js' file.
+> __NOTE__: for now, there is only one task, '__polling__', contained in the 'connection.js' file.
 
 ```javascript
 Spade#initTasks( [ Array file_list ] ) : Cucu
