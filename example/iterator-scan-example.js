@@ -29,7 +29,7 @@ client.cli();
 
 // client.commands.flushdb();
 
-// push 200 test keys
+// push 500 test keys
 for ( ; i < n; ++i ) client.commands.set( 'key:' + i, i );
 
 client.connect();
