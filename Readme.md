@@ -57,6 +57,7 @@
    - __[#disconnect](#disconnect)__
    - __[#initCache](#initcache)__
    - __[#initTasks](#inittasks)__
+   - __[#loadIterators](#loadIterators)__
    - __[#cli](#cli)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
