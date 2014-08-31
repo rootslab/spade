@@ -6,6 +6,7 @@
 exports.test = function ( done, assertions ) {
 
     var debug = !! true
+        , isArray = Array.isArray
         , emptyFn = function () {}
         , log = console.log
         , dbg = debug ? console.log : emptyFn
@@ -36,8 +37,8 @@ exports.test = function ( done, assertions ) {
 
             if ( ! data[ 0 ] ) return iter.next();
 
-            log( ' - check if last scan iterations return an empty array: %s,', inspect( data[ 1 ]) );
-            assert.deepEqual( data[ 1 ], [] );
+            log( ' - check if last scan iterations return an array: %s.', inspect( data[ 1 ]) );
+            assert.ok( isArray( data[ 1 ] ) );
 
             log( ' - check if last scan iterations returned values,' );
 
@@ -83,8 +84,6 @@ exports.test = function ( done, assertions ) {
     client.loadIterators();
 
     log( '- opening client connection.' );
-
-
 
     client.connect( null, function () {
 
