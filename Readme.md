@@ -53,12 +53,12 @@
    - __[Options](#options)__
 - __[Properties](#properties)__
 - __[Methods](#methods)__
+   - __[#cli](#cli)__
    - __[#connect](#connect)__
    - __[#disconnect](#disconnect)__
    - __[#initCache](#initcache)__
    - __[#initTasks](#inittasks)__
    - __[#loadIterators](#loaditerators)__
-   - __[#cli](#cli)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
    - __[Interactive Mode](#interactive-mode)__
@@ -406,6 +406,26 @@ _[Back to ToC](#table-of-contents)_
 
 > Arguments within [ ] are optional.
 
+####cli
+
+__Enable event logging to console__.
+
+> This method enables/logs some extra event for debugging/testing purpose:
+>  - __reply__ for Redis replies.
+>  - __scanqueue__ when the "offline" command queue is processed.
+>  - __queued__ for commands executed when the client is offline.
+
+> __NOTE__:
+>  - the _'enable'_ option defaults to true.
+>  - the _'logger'_ fn gets event name and event arguments.
+
+```javascript
+Spade#cli( [ Boolean enable [, Function logger [, Boolean collect_events ] ] ] ) : undefined
+```
+> See "[Other Debug Events](#other-debug-events)" section.
+
+--------------------------------------------------------------------------------------------
+
 ####connect
 
 __Open a connection to the Redis Server__:
@@ -536,26 +556,6 @@ Iterator : { next : Function }
 >  - __3 debug events__ will be added: '__scan__', '__hscan__', '__zscan__'.
 
 > See [scan example](example/iterator-scan-example.js).
-
---------------------------------------------------------------------------------------------
-
-####cli
-
-__Enable event logging to console__.
-
-> This method enables/logs some extra event for debugging/testing purpose:
->  - __reply__ for Redis replies.
->  - __scanqueue__ when the "offline" command queue is processed.
->  - __queued__ for commands executed when the client is offline.
-
-> __NOTE__:
->  - the _'enable'_ option defaults to true.
->  - the _'logger'_ fn gets event name and event arguments.
-
-```javascript
-Spade#cli( [ Boolean enable [, Function logger [, Boolean collect_events ] ] ] ) : undefined
-```
-> See "[Other Debug Events](#other-debug-events)" section.
 
 _[Back to ToC](#table-of-contents)_
 
