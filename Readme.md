@@ -546,7 +546,7 @@ Spade.iterators : {
    , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
    , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
 }
-// with 
+// with
 Iterator : { next : Function }
 
 ```
@@ -915,7 +915,7 @@ _[Back to ToC](#table-of-contents)_
  * will be enqueued in 'offline mode' and sent/written to socket when
  * 'ready' will be emitted.
  */
-'ready' : function ( Object address )
+'ready' : function ( Object address, Number queued_command_sent )
 
 /*
  * A client connection is fully established with Redis host. This event
