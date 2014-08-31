@@ -34,7 +34,6 @@ exports.test = function ( done, assertions ) {
         }
         , n = 10
         , cback = function ( err, data, fn ) {
-
             if ( ! data[ 0 ] ) return iter.next();
 
             log( ' - check if last scan iterations return an array: %s.', inspect( data[ 1 ]) );

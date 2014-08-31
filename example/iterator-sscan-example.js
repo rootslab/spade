@@ -29,7 +29,7 @@ client.cli();
 
 // client.commands.flushdb();
 
-// push 5000 test keys to force multiple iterations with COUNT
+// push 1000 test keys to force multiple iterations with COUNT
 for ( ; i < n; ++i ) client.commands.sadd( skey, 'el:' + i, i );
 
 client.connect();

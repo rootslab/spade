@@ -32,7 +32,7 @@
  See [tests](#run-tests) for pubsub.
  - It supports the new __PING__ command signature also in __PubSub mode__.
  - It implements a __polling mechanism__, useful to force __automatic re-connection__ when client hangs while in __PubSub mode__.
- - It facilitates scanning of Redis keyspace, implementing some simple iterators for __SCAN__/__HSCAN__/__ZSCAN__ commands. See [#loadIterators](#loaditerators).
+ - It facilitates scanning of Redis keyspace, implementing some simple iterators for __SCAN__/__HSCAN__/__SSCAN__/__ZSCAN__ commands. See [#loadIterators](#loaditerators).
 
 > ♠ __Spade__ makes use of some __well tested__ modules:
  - __[Σ Syllabus](https://github.com/rootslab/syllabus)__ module for __command encoding__ and __command helpers mix-ins__, it  also offers a series of __helpers functions__ to convert a raw data reply in a usable format.
