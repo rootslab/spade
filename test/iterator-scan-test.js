@@ -27,9 +27,9 @@ exports.test = function ( done, assertions ) {
         // collected events
         , collected = client.logger.collected
         , i = 0
-        // Spade defualt options for SCAN ZSCAN HSCAN commands.
+        // Spade default options for SCAN ZSCAN HSCAN commands.
         , opt = {
-            match : null
+            match : '♠:key:*'
             , count : 1
         }
         , n = 10
@@ -53,11 +53,8 @@ exports.test = function ( done, assertions ) {
             log( '- now disconnecting client with QUIT.' );
 
             client.commands.quit( function () {
-
                 log( '- OK, client was disconnected.' );
-
                 exit();
-
             } );
 
         }
@@ -78,7 +75,7 @@ exports.test = function ( done, assertions ) {
 
     log( '- SET %s keys for SCAN test.', inspect( n ) );
 
-    for ( ; i < n; ++i ) client.commands.set( '♠:' + i, i );
+    for ( i = 0; i < n; ++i ) client.commands.set( '♠:key:' + i, i );
 
     log( '- load iterators.' );
     client.loadIterators();
@@ -98,4 +95,4 @@ exports.test = function ( done, assertions ) {
 };
 
 // single test execution with node
-if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();
+if ( process.argv[ 1 ] === __filename ) exports.test = exports.test();

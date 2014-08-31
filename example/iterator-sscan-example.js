@@ -1,5 +1,5 @@
 /* 
- * Spade SCAN iterator example
+ * Spade SSCAN iterator example
  */
 
 var log = console.log
@@ -8,7 +8,7 @@ var log = console.log
     , cback = function ( err, data, fn ) {
         if ( ! data[ 0 ] ) return iter.next();
         etime = Date.now();
-        log( '\n- %s keys scanned through %s iterations.', data[ 3 ], data[ 2 ] );
+        log( '\n- %s properties scanned from hash key \'%s\' through %s iterations.', data[ 3 ], skey, data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
     , iter = null
@@ -16,9 +16,10 @@ var log = console.log
     // Spade default options for SCAN ZSCAN SSCAN HSCAN commands.
     , opt = {
         match : null
-        , count : 10
+        , count : 1
     }
-    , n = 500
+    , skey = 'skey'
+    , n = 1000
     , stime = -1
     , etime = -1
     ;
@@ -28,8 +29,8 @@ client.cli();
 
 // client.commands.flushdb();
 
-// push 500 test keys
-for ( ; i < n; ++i ) client.commands.set( 'key:' + i, i );
+// push 5000 test keys to force multiple iterations with COUNT
+for ( ; i < n; ++i ) client.commands.sadd( skey, 'el:' + i, i );
 
 client.connect();
 
@@ -37,7 +38,7 @@ client.connect();
 client.loadIterators();
 
 stime = Date.now();
-// get a SCAN iterator
-iter = client.iterators.scan( 0, opt, cback );
+// get a SSCAN iterator
+iter = client.iterators.sscan( skey, 0, opt, cback );
 
 iter.next();

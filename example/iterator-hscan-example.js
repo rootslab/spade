@@ -1,14 +1,15 @@
 /* 
- * Spade SCAN iterator example
+ * Spade HSCAN iterator example
  */
 
 var log = console.log
+    , util = require( 'util' )
     , Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, fn ) {
         if ( ! data[ 0 ] ) return iter.next();
         etime = Date.now();
-        log( '\n- %s keys scanned through %s iterations.', data[ 3 ], data[ 2 ] );
+        log( '\n- %s properties scanned from hash key \'%s\' through %s iterations.', data[ 3 ], hkey, data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
     , iter = null
@@ -18,7 +19,8 @@ var log = console.log
         match : null
         , count : 10
     }
-    , n = 500
+    , hkey = 'hkey'
+    , n = 5000
     , stime = -1
     , etime = -1
     ;
@@ -28,8 +30,8 @@ client.cli();
 
 // client.commands.flushdb();
 
-// push 500 test keys
-for ( ; i < n; ++i ) client.commands.set( 'key:' + i, i );
+// push 5000 test keys to force multiple iterations with COUNT
+for ( ; i < n; ++i ) client.commands.hset( hkey, 'prop:' + i, i );
 
 client.connect();
 
@@ -38,6 +40,6 @@ client.loadIterators();
 
 stime = Date.now();
 // get a SCAN iterator
-iter = client.iterators.scan( 0, opt, cback );
+iter = client.iterators.hscan( hkey, 0, opt, cback );
 
 iter.next();

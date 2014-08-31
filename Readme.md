@@ -383,7 +383,7 @@ Spade.lua.cache : Camphora
 Spade.qq : Cucu
 
 /*
- * A property that holds iterators for commands like SCAN, HSCAN, ZSCAN,
+ * A property that holds iterators for commands like SCAN, HSCAN, SSCAN, ZSCAN,
  * loaded with Spade#loadIterators.
  */
 Spade.iterators : Object
@@ -533,7 +533,7 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 
 ####loadIterators
 
-> Load default iterators, for commands like __SCAN__, __HSCAN__, __ZSCAN__, from _'spade/lib/iterators'_
+> Load default iterators, for commands like __SCAN__, __SSCAN__, __HSCAN__, __ZSCAN__, from _'spade/lib/iterators'_
 > dir, you could restrict files to load, specifying some filenames.
 
 ```javascript
@@ -545,6 +545,7 @@ Spade#loadIterators( [ Array file_list ] ) : Object
 Spade.iterators : {
    scan : function ( Number cursor [, Object options [, Function cback ] ] ) : Iterator
    , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
+   , sscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
    , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
 }
 // with
@@ -554,7 +555,7 @@ Iterator : { next : Function }
 > __NOTE__:
 >  - signatures are the same as for relative __Spade.commands__, but they returns __Iterator__ objects.
 >  - the '__cback__' callback function gets __3__ arguments: __( Boolean is_err_reply, Array reply, Function reveal )__.
->  - __3 debug events__ will be added: '__scan__', '__hscan__', '__zscan__'.
+>  - __3 debug events__ will be added: '__scan__', '__sscan__', '__hscan__', '__zscan__'.
 
 > See [scan example](example/iterator-scan-example.js).
 
