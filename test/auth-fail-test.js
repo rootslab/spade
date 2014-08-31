@@ -34,7 +34,7 @@ exports.test = function ( done, assertions ) {
 
     log( '- enable CLI logging.' );
 
-    client.cli( true, function ( ename, args ) {
+    client.cli( null, function ( ename, args ) {
         dbg( '  !%s %s', ename, format( ename, args || [] ) );
     }, true );
 
