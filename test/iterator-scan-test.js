@@ -33,7 +33,7 @@ exports.test = function ( done, assertions ) {
             , count : 1
         }
         , n = 10
-        , cback = function ( err, data, fn ) {
+        , cback = function ( err, data, iterate ) {
             if ( ! data[ 0 ] ) return iter.next();
 
             log( ' - check if last scan iterations return an array: %s.', inspect( data[ 1 ]) );
@@ -70,7 +70,7 @@ exports.test = function ( done, assertions ) {
         dbg( '  !%s %s', ename, format( ename, args || [] ) );
     }, true );
 
-    // client.commands.flushdb();
+    client.commands.flushdb();
 
     log( '- SET %s keys for SCAN test.', inspect( n ) );
 

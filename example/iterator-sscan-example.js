@@ -5,13 +5,14 @@
 var log = console.log
     , Spade = require( '../' )
     , client = Spade()
-    , cback = function ( err, data, fn ) {
-        if ( ! data[ 0 ] ) return iter.next();
+    , cback = function ( err, data, iterate ) {
+        // if ( ! data[ 0 ] ) return iterator.next();
+        if ( ! data[ 0 ] ) return iterate();
         etime = Date.now();
         log( '\n- %s properties scanned from hash key \'%s\' through %s iterations.', data[ 3 ], skey, data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
-    , iter = null
+    , iterator = null
     , i = 0
     // Spade default options for SCAN ZSCAN SSCAN HSCAN commands.
     , opt = {
@@ -39,6 +40,4 @@ client.loadIterators();
 
 stime = Date.now();
 // get a SSCAN iterator
-iter = client.iterators.sscan( skey, 0, opt, cback );
-
-iter.next();
+iterator = client.iterators.sscan( skey, 0, opt, cback ).next();

@@ -554,7 +554,7 @@ Iterator : { next : Function }
 ```
 > __NOTE__:
 >  - signatures are the same as for relative __Spade.commands__, but they returns __Iterator__ objects.
->  - the '__cback__' callback function gets __3__ arguments: __( Boolean is_err_reply, Array reply, Function reveal )__.
+>  - the '__cback__' callback function gets __3__ arguments: __( Boolean is_err_reply, Array reply, Function iterate )__.
 >  - __3 debug events__ will be added: '__scan__', '__sscan__', '__hscan__', '__zscan__'.
 
 > See [scan example](example/iterator-scan-example.js).
