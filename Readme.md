@@ -530,7 +530,8 @@ _[Back to ToC](#table-of-contents)_
 ####initTasks
 
 > Load default methods/tasks from _'spade/lib/tasks'_ dir, you could restrict files to load,
-> specifying some filenames. It returns the current Spade.tasks (Cucu.ttable) property.
+> specifying some filenames ( without '.js' extension ).
+> It returns the current Spade.tasks (Cucu.ttable) property.
 
 ```javascript
 Spade#initTasks( [ Array file_list ] ) : Cucu
@@ -587,8 +588,9 @@ _[Back to ToC](#table-of-contents)_
 
 ####loadIterators
 
-> Load default iterators, for commands like __SCAN__, __SSCAN__, __HSCAN__, __ZSCAN__, from _'spade/lib/iterators'_
-> dir, you could restrict files to load, specifying some filenames.
+> Load default iterators, for commands like __SCAN__, __SSCAN__, __HSCAN__, __ZSCAN__,
+> from _'spade/lib/iterators'_ dir, you could restrict files to load, specifying some
+> filenames without '.js' extension, for example: [ 'scan' ].
 
 ```javascript
 Spade#loadIterators( [ Array file_list ] ) : Object

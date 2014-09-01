@@ -72,7 +72,7 @@ exports.test = function ( done, assertions ) {
     client.connect();
 
     // load files from iterators dir
-    client.loadIterators();
+    client.loadIterators( [ 'scan' ] );
 
     stime = Date.now();
     // get a HSCAN iterator
