@@ -75,7 +75,7 @@
    - __[PubSub Events](#pubsub-events)__
    - __[Monitor Events](#monitor-events)__
    - __[Tasks Events](#tasks-events)__
-      - __[polling events](#polling events)__
+      - __[polling events](#polling-events)__
    - __[Other Debug Events](#other-debug-events)__
       - __[iterators events](#iterators-events)__
 - __[MIT License](#mit-license)__
