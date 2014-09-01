@@ -40,5 +40,5 @@ client.connect();
 client.loadIterators();
 
 stime = Date.now();
-// get a SCAN iterator
-iterator = client.iterators.hscan( hkey, 0, opt, cback ).next();
+// get a HSCAN iterator
+client.iterators.hscan( hkey, 0, opt, cback ).next();

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /* 
- * Spade, SCAN iterator test.
+ * Spade, SSCAN iterator test.
  */
 exports.test = function ( done, assertions ) {
 
@@ -30,16 +30,18 @@ exports.test = function ( done, assertions ) {
         // Spade default options for SCAN ZSCAN HSCAN commands.
         , opt = {
             match : '♠:key:*'
-            , count : 1
+            , count : 10
         }
-        , n = 10
+        , n = 100
+        , skey = '♠:set:1'
         , cback = function ( err, data, iterate ) {
-            if ( ! data[ 0 ] ) return iter.next();
+            // if ( ! data[ 0 ] ) return iterator.next();
+            if ( ! data[ 0 ] ) return iterate();
 
             log( ' - check if last scan iteration returns an array: %s.', inspect( data[ 1 ]) );
             assert.ok( isArray( data[ 1 ] ) );
 
-            log( '- check returned values form the last SCAN iteration,' );
+            log( '- check returned values form the last SSCAN iteration,' );
 
             log( '- iterations counter should be: %s < %s <= %s,', inspect( 0 ), inspect( data[ 2 ] ), inspect( n ) );
             assert.ok( data[ 2 ] && ( data[ 2 ] <= n ) );
@@ -55,42 +57,26 @@ exports.test = function ( done, assertions ) {
                 log( '- OK, client was disconnected.' );
                 exit();
             } );
-
         }
-        , iter = null
         , exit = typeof done === 'function' ? done : function () {}
         , assert = assertions || require( 'assert' )
-        ;
 
-    log( '- a new Spade client was created with default options:', inspect( client.options ) );
-
-    log( '- enable CLI logging.' );
-
-    client.cli( true, function ( ename, args ) {
-        dbg( '  !%s %s', ename, format( ename, args || [] ) );
-    }, true );
+    // enable cli logging
+    client.cli();
 
     client.commands.flushdb();
 
-    log( '- SET %s keys for SCAN test.', inspect( n ) );
+    // push 1000 test keys to force multiple iterations with COUNT
+    for ( ; i < n; ++i ) client.commands.sadd( skey, '♠:key:' + i, i );
 
-    for ( i = 0; i < n; ++i ) client.commands.set( '♠:key:' + i, i );
+    client.connect();
 
-    log( '- load iterators.' );
+    // load files from iterators dir
     client.loadIterators();
 
-    log( '- opening client connection.' );
-
-    client.connect( null, function () {
-
-        log( '- get a SCAN iterator with options: %s.', inspect( opt ) );
-        iter = client.iterators.scan( 0, opt, cback );
-
-        log( '- start iterations..' );
-        iter.next();
-
-    } );
-
+    stime = Date.now();
+    // get a SSCAN iterator
+    client.iterators.sscan( skey, 0, opt, cback ).next();
 };
 
 // single test execution with node

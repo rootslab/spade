@@ -9,15 +9,14 @@ var log = console.log
         // if ( ! data[ 0 ] ) return iterator.next();
         if ( ! data[ 0 ] ) return iterate();
         etime = Date.now();
-        log( '\n- %s properties scanned from hash key \'%s\' through %s iterations.', data[ 3 ], skey, data[ 2 ] );
+        log( '\n- %s properties scanned from set key \'%s\' through %s iterations.', data[ 3 ], skey, data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
-    , iterator = null
     , i = 0
     // Spade default options for SCAN ZSCAN SSCAN HSCAN commands.
     , opt = {
         match : null
-        , count : 1
+        , count : 10
     }
     , skey = 'skey'
     , n = 1000
@@ -40,4 +39,4 @@ client.loadIterators();
 
 stime = Date.now();
 // get a SSCAN iterator
-iterator = client.iterators.sscan( skey, 0, opt, cback ).next();
+client.iterators.sscan( skey, 0, opt, cback ).next();

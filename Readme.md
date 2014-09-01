@@ -548,14 +548,27 @@ Spade.iterators : {
    , sscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
    , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
 }
-// with
+
+// you could use Iterator#next outside the callback to receive next results.
 Iterator : { next : Function }
+
+// 'cback' gets 3 arguments, you could call 'iterate' function inside the callback to receive next results.
+cback : function ( Boolean is_err_reply, Array reply, Function iterate )
+
+// reply Array for SCAN command
+reply : [ Boolean is_last_iteration, Array keys, iterator_counter, keys_counter ]
+
+// for HSCAN, SSCAN, ZSCAN commands, the last element is the current hash/set/zset key being scanned.
+reply : [ Boolean is_last_iteration, Array keys, iterator_counter, keys_counter, String key ]
 
 ```
 > __NOTE__:
 >  - signatures are the same as for relative __Spade.commands__, but they returns __Iterator__ objects.
->  - the '__cback__' callback function gets __3__ arguments: __( Boolean is_err_reply, Array reply, Function iterate )__.
->  - __3 debug events__ will be added: '__scan__', '__sscan__', '__hscan__', '__zscan__'.
+>  - when console logging is enabled with __#cli__, 3 additional __debug events__ will be added: 
+>    - *__scan__*
+>    - *__sscan__*
+>    - *__hscan__*
+>    - *__zscan__*
 
 > See [scan example](example/iterator-scan-example.js).
 

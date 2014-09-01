@@ -12,7 +12,6 @@ var log = console.log
         log( '\n- %s keys scanned through %s iterations.', data[ 3 ], data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
-    , iterator = null
     , i = 0
     // Spade default options for SCAN ZSCAN SSCAN HSCAN commands.
     , opt = {
@@ -39,4 +38,4 @@ client.loadIterators();
 
 stime = Date.now();
 // get a SCAN iterator
-iterator = client.iterators.scan( 0, opt, cback ).next();
+client.iterators.scan( 0, opt, cback ).next();
