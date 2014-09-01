@@ -575,6 +575,8 @@ pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, 
 >   - *__hangup__*
 > - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs from polling task__ to avoid waste of space.
 
+> See [Tasks Events](#task-events).
+
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
 
 > See [polling tests](test/).
@@ -626,6 +628,8 @@ reply : [ Boolean is_last_iter, Array keys, Number iter_counter, Number keys_cou
 >    - *__zscan__*
 
 > See [scan example](example/iterator-scan-example.js).
+
+> See [iterators events](#iterators-events).
 
 _[Back to ToC](#table-of-contents)_
 
