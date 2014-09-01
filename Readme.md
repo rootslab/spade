@@ -543,14 +543,17 @@ Spade#loadIterators( [ Array file_list ] ) : Object
 
 ```javascript
 Spade.iterators : {
-   scan : function ( Number cursor [, Object options [, Function cback ] ] ) : Iterator
-   , hscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
-   , sscan: function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
-   , zscan : function ( String key, Number cursor [, Object options [, Function cback ] ] ) : Iterator
+   scan : function ( Number cursor [, Object opt [, Function cback ] ] ) : Iterator
+   , hscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
+   , sscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
+   , zscan : function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
 }
 
 // you could use Iterator#next outside the callback to receive next results.
 Iterator : { next : Function }
+
+// default options for iterator commands:
+opt : { match : null, count : 10 }
 
 // 'cback' gets 3 arguments, you could call 'iterate' function inside the callback to receive next results.
 cback : function ( Boolean is_err_reply, Array reply, Function iterate )
