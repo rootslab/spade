@@ -74,7 +74,10 @@
    - __[Socket Connection Events](#socket-connection-events)__
    - __[PubSub Events](#pubsub-events)__
    - __[Monitor Events](#monitor-events)__
+   - __[Tasks Events](#tasks-events)__
+      - __[polling events](#polling events)__
    - __[Other Debug Events](#other-debug-events)__
+      - __[iterators events](#iterators-events)__
 - __[MIT License](#mit-license)__
 
 -----------------------------------------------------------------------
@@ -541,7 +544,7 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 >  the task signature is:
 
 ```javascript
-Spade.tasks.polling.run( Number interval, Array pollingFn_arguments );
+Spade.tasks.polling.run( [ Number interval [, Array pollingFn_arguments [, Number times ] ] ] );
 ```
 > polling function gets 4 optional arguments:
 
@@ -552,17 +555,19 @@ pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, 
 
 ```javascript
 /*
- * PINGing server with a 'BANG!' message every 2 secs emitting 'polling' event. 
- * If a reply wasn't received within 1 sec, client emits 'hangup' event, then it
- * disconnects and reconnects to the server.
+ * PINGing server with a 'BANG!' message every 2 secs emitting 'polling' event,
+ * stopping after 10 times.
+ * If a reply will be not received within 1 sec, client will emit 'hangup' event,
+ * then it disconnects and reconnects to the server.
  */
  var client = require( 'spade' )()
  client.cli();
  client.connect();
  client.initTasks();
- client.tasks.polling.run( 2000, [ null, 'BANG!', 1000, true ] );
+ client.tasks.polling.run( 2000, [ null, 'BANG!', 1000, true ], 10 );
  ...
  client.task.polling.stop();
+ ..
 ```
 > __NOTE__: 
 > - __2 additional events__ are enabled:
@@ -1110,6 +1115,27 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
+####Tasks Events
+
+> __NOTE__: to enable logging for events below, execute __Spade#initTask__ method.
+
+#####polling events
+
+```javascript
+/*
+ * polling event will be emitted every time a reply for PING will be received.
+ */
+'polling' : function ( Number is_pubsub_active, Number is_monitor_active )
+
+/*
+ * When the client doesn't receive a reply within the timeout interval specified
+ * with Spade.tasks.polling#run, it disconnects form server, and optionally reconnects.
+ */
+'hangup' : function ( Number is_pubsub_active, Number is_monitor_active )
+```
+
+> See __[polling task](#polling-task)__.
+
 ####Other Debug Events
 
 > __NOTE__: to enable logging for events below, execute __Spade#cli__ method.
@@ -1139,6 +1165,19 @@ _[Back to ToC](#table-of-contents)_
  */
 'error-reply' : function ( Object command, String err_reply )
 ```
+
+#####iterators events
+
+> __NOTE__: to enable logging for events below, execute __Spade#loadIterators__ method.
+
+```javascript
+'scan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter )
+'hscan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter, String key )
+'sscan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter, String key )
+'zscan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter, String key )
+```
+> See __[#loadIterators](#loadIterators)__.
+
 _[Back to ToC](#table-of-contents)_
 
 -------------------------------------------------------------------------------
