@@ -538,9 +538,6 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 > ( in millis ); it is useful to test aliveness of the connection in particular cases,
 > like when the client is in PubSub mode.
 
-> __NOTE__: when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid
-> waste of space. 
-
 >  the task signature is:
 
 ```javascript
@@ -551,10 +548,6 @@ Spade.tasks.polling.run( Number interval, Array pollingFn_arguments );
 ```javascript
 pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, Boolean reconnect ] ] ] ] )
 ```
-> __NOTE__: __2 additional events__ are enabled:
->   - *__polling__*
->   - *__hangup__*
-
 > For example:
 
 ```javascript
@@ -565,10 +558,18 @@ pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, 
  */
  var client = require( 'spade' )()
  client.cli();
- client.initTasks();
  client.connect();
+ client.initTasks();
  client.tasks.polling.run( 2000, [ null, 'BANG!', 1000, true ] );
+ ...
+ client.task.polling.stop();
 ```
+> __NOTE__: 
+> - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid waste of space.
+> - __2 additional events__ are enabled:
+>   - *__polling__*
+>   - *__hangup__*
+
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
 
 > See [polling tests](test/).
