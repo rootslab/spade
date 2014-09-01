@@ -426,6 +426,8 @@ Spade#cli( [ Boolean enable [, Function logger [, Boolean collect_events ] ] ] )
 ```
 > See "[Other Debug Events](#other-debug-events)" section.
 
+_[Back to ToC](#table-of-contents)_
+
 --------------------------------------------------------------------------------------------
 
 ####connect
@@ -458,6 +460,7 @@ __Open a connection to the Redis Server__:
  */
 Spade#connect( [ Object socket_opt [, Function cback ] ] ) : Spade
 ```
+_[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
 
@@ -475,6 +478,7 @@ __Disconnect client from the Redis Server__:
 ```javascript
 Spade#disconnect( [ Function cback ] ) : Spade
 ```
+_[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
 
@@ -516,6 +520,8 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 
 > See "[Script Cache Events](#script-cache-events)" Section for the list of events.
 
+_[Back to ToC](#table-of-contents)_
+
 --------------------------------------------------------------------------------------------
 
 ####initTasks
@@ -528,9 +534,9 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 ```
 #####polling task
 
-> __Polling__ task is loaded from 'connection.js', when enabled, it starts to __PING__ server
-> within a specified interval ( in millis ); it is useful to test aliveness of the connection
-> in particular cases, like when the client is in PubSub mode.
+> When _polling_ is  enabled, it starts to __PING__ server within a specified interval
+> ( in millis ); it is useful to test aliveness of the connection in particular cases,
+> like when the client is in PubSub mode.
 
 > __NOTE__: when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid
 > waste of space. 
@@ -566,6 +572,8 @@ pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, 
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
 
 > See [polling tests](test/).
+
+_[Back to ToC](#table-of-contents)_
 
 --------------------------------------------------------------------------------------------
 
