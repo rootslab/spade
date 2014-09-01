@@ -1138,7 +1138,7 @@ _[Back to ToC](#table-of-contents)_
 
 ####Other Debug Events
 
-> __NOTE__: to enable logging for events below, execute __Spade#cli__ method.
+> __NOTE__: to enable logging for debug events , execute __Spade#cli__ method.
 
 ```javascript
 /*
@@ -1168,7 +1168,7 @@ _[Back to ToC](#table-of-contents)_
 
 #####iterators events
 
-> __NOTE__: to enable logging for events below, execute __Spade#loadIterators__ method.
+> __NOTE__: to enable logging for events below, execute also __Spade#loadIterators__ method.
 
 ```javascript
 'scan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter )
@@ -1176,7 +1176,7 @@ _[Back to ToC](#table-of-contents)_
 'sscan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter, String key )
 'zscan' : function ( Boolean is_last_iter, Number iterations, Number keys_counter, String key )
 ```
-> See __[#loadIterators](#loadIterators)__.
+> See __[#loadIterators](#loaditerators)__.
 
 _[Back to ToC](#table-of-contents)_
 
