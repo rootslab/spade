@@ -59,7 +59,7 @@
    - __[#disconnect](#disconnect)__
    - __[#initCache](#initcache)__
    - __[#initTasks](#inittasks)__
-      - __[polling-task](#polling-task)__
+      - __[polling task](#polling-task)__
    - __[#loadIterators](#loaditerators)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
