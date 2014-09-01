@@ -522,12 +522,49 @@ Spade#initCache( [ Object f_opt [, Object cache_opt, [ Function cback ] ] ] ) : 
 > Load default methods/tasks from _'spade/lib/tasks'_ dir, you could restrict files to load,
 > specifying some filenames. It returns the current Spade.tasks (Cucu.ttable) property.
 
-> __NOTE__: for now, there is only one task, '__polling__', contained in the 'connection.js' file.
-
 ```javascript
 Spade#initTasks( [ Array file_list ] ) : Cucu
 ```
+#####polling task
+
+> __Polling__ task is loaded from 'connection.js', when enabled, it starts to __PING__ server
+> within a specified interval ( in millis ); it is useful to test aliveness of the connection
+> in particular cases, like when the client is in PubSub mode.
+
+> __NOTE__: when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid
+> waste of space. 
+
+>  the polling signature is:
+
+```javascript
+Spade.tasks.polling.run( Number interval, Array pollingFn_arguments );
+```
+> polling function gets 4 optional arguments:
+
+```javascript
+pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, Boolean reconnect ] ] ] ] )
+```
+> __NOTE__: __2 additional events__ are enabled:
+>   - *__polling__*
+>   - *__hangup__*
+
+> For example:
+
+```javascript
+/*
+ * PINGing server with a 'BANG!' message every 2 secs emitting 'polling' event. 
+ * If a reply wasn't received within 1 sec, client emits 'hangup' event, then it
+ * disconnects and reconnects to the server.
+ */
+ var client = require( 'spade' )()
+ client.cli();
+ client.initTasks();
+ client.connect();
+ client.tasks.polling.run( 2000, [ null, 'BANG!', 1000, true ] );
+```
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
+
+> See [polling tests](test/).
 
 --------------------------------------------------------------------------------------------
 
