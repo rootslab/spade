@@ -555,11 +555,11 @@ Iterator : { next : Function }
 // 'cback' gets 3 arguments, you could call 'iterate' function inside the callback to receive next results.
 cback : function ( Boolean is_err_reply, Array reply, Function iterate )
 
-// reply Array for SCAN command
-reply : [ Boolean is_last_iteration, Array keys, iterator_counter, keys_counter ]
+// reply Array for SCAN command:
+reply : [ Boolean is_last_iter, Array keys, Number iter_counter, Number keys_counter ]
 
 // for HSCAN, SSCAN, ZSCAN commands, the last element is the current hash/set/zset key being scanned.
-reply : [ Boolean is_last_iteration, Array keys, iterator_counter, keys_counter, String key ]
+reply : [ Boolean is_last_iter, Array keys, Number iter_counter, Number keys_counter, String key ]
 
 ```
 > __NOTE__:
