@@ -59,6 +59,7 @@
    - __[#disconnect](#disconnect)__
    - __[#initCache](#initcache)__
    - __[#initTasks](#inittasks)__
+      - __[polling-task](#polling-task)__
    - __[#loadIterators](#loaditerators)__
    - __[Redis Commands](#redis-commands)__
    - __[Command Callback](#command-callback)__
@@ -534,7 +535,7 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 > __NOTE__: when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid
 > waste of space. 
 
->  the polling signature is:
+>  the task signature is:
 
 ```javascript
 Spade.tasks.polling.run( Number interval, Array pollingFn_arguments );
