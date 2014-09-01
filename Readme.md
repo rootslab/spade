@@ -565,10 +565,10 @@ pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, 
  client.task.polling.stop();
 ```
 > __NOTE__: 
-> - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ to avoid waste of space.
 > - __2 additional events__ are enabled:
 >   - *__polling__*
 >   - *__hangup__*
+> - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs from polling task__ to avoid waste of space.
 
 > See [Cucu](https://github.com/rootslab/cucu) to see all available options to handle tasks.
 
