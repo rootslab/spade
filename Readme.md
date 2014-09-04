@@ -910,7 +910,7 @@ _[Back to ToC](#table-of-contents)_
 'authfailed' : function ( String password, Array reply, Object address )
 
 /*
- * Client authorization is successful. After that the command queue will be processed.
+ * Client authorization was successful. After that, the command queue will be processed
  * and the 'ready' event could be launched.
  */
 'authorized' : function ( String password, Array reply, Object address )
