@@ -880,7 +880,7 @@ lost<----+(*attempt*)  |     +------------------+ready+------------+
 >  - events within __*__ could be emitted more than once, namely __0__ or __k__ times with _k >= 1_.
 >  - __timeout__ could happen in _"any"_ moment after the __connect__ event.
 >  - __listen__ signals that client is entering in subscription mode
->  - __shutup__ signals that client is leaving subscription mode.
+>  - __shutup__ signals that client is leaving (voluntarily) subscription mode.
 >  - __monitor__ mode could end only with a __QUIT__ command (then '_offline_').
 
 _[Back to ToC](#table-of-contents)_
