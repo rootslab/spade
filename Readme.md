@@ -1135,7 +1135,7 @@ _[Back to ToC](#table-of-contents)_
 
 /*
  * When the client doesn't receive a reply within the timeout interval specified
- * with Spade.tasks.polling#run, it disconnects form server, and optionally reconnects.
+ * with Spade.tasks.polling#run, it disconnects from server, and optionally reconnects.
  */
 'hangup' : function ( Number is_pubsub_active, Number is_monitor_active )
 ```
