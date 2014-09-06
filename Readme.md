@@ -891,7 +891,7 @@ _[Back to ToC](#table-of-contents)_
 /*
  * A parser or command encoding error has occurred.
  */
-'error' : function ( Error err, Object command ) : undefined
+'error' : function ( Error err, Object command )
 ```
 
 ####Auth Events
@@ -997,7 +997,7 @@ _[Back to ToC](#table-of-contents)_
  * A client connection is fully established with Redis host. This event
  * happens before 'ready' and AUTH/SELECT related events.
  */
-'connect' : function ( Object address ) : undefined
+'connect' : function ( Object address )
 
 /*
  * Connection is currently down ( on the first 'close' event from the socket ).
