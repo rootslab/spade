@@ -13,6 +13,7 @@ var log = console.log
     , stime = 0
     , ttime = 0
     , small_string = '1234'
+    , hiredis = null
     ;
 
 var sendCommands = function () {
@@ -35,7 +36,7 @@ var sendCommands = function () {
                 process.exit( 0 );
             }
         } );
-    };
+    }
 };
 
 var enqueue = function () {
@@ -53,11 +54,11 @@ var run = function () {
         s = nRedis.createClient( 6379, '127.0.0.1' );
         list[ i ] = s;
         s.on( 'ready', enqueue );
-    };
+    }
 };
 
 var add = function () {
-    var s = nRedis.createClient( 6379, '127.0.0.1' );
+    var s = nRedis.createClient( 6379, '127.0.0.1' )
         ;
     s.once( 'ready', function () {
         var i = 0
@@ -70,7 +71,7 @@ var add = function () {
                     s.quit( run );
                 }
             } );
-        };
+        }
     } );
 };
 
@@ -83,5 +84,4 @@ try {
     log( '-> using: "node_redis JS" parser.' );
 } finally {
     add();
-};
-
+}

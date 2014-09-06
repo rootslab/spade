@@ -51,7 +51,6 @@ var onError = function () {
 
 var sendCommands = function () {
     var i = 0
-        , client = null
         , pcmd = publisher.commands.publish
         ;
     stime = Date.now();
@@ -81,10 +80,10 @@ var run = function () {
         s.on( 'message', count );
         // only once to prevent error on disconnection by Redis
         s.once( 'ready', enqueue.bind( s ) );
-    };
+    }
     for ( ; --i >= 0; ) {
         list[ i ].connect();
-    };
+    }
 };
 
 var add = function () {

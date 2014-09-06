@@ -26,7 +26,6 @@ var log = console.log
 
 var sendCommands = function () {
     var i = 0
-        , client = null
         , ccmd = null
         ;
 
@@ -45,7 +44,7 @@ var sendCommands = function () {
                 process.exit( 0 );
             }
         } );
-    };
+    }
 };
 
 var enqueue = function () {
@@ -63,10 +62,10 @@ var run = function () {
         s = Spade( spade_opt );
         list[ i ] = s;
         s.on( 'ready', enqueue );
-    };
+    }
     for ( ; --i >= 0; ) {
         list[ i ].connect();
-    };
+    }
 };
 
 var add = function () {
@@ -84,7 +83,7 @@ var add = function () {
                     commands.quit( run );
                 }
             } );
-        };
+        }
     } );
     s.connect();
 };

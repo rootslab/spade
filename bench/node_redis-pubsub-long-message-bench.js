@@ -7,7 +7,6 @@
  */
 
 var log = console.log
-    , assert = require( 'assert' )
     , nRedis = require( 'redis' )
     // number of clients
     , tclients = 20
@@ -21,8 +20,8 @@ var log = console.log
     , stime = 0
     , ttime = 0
     , long_string = 'node_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redisnode_redis'
-    , spade_opt = { hiredis : !! true }
     , publisher = null
+    , hiredis = null
     ;
 
 var count = function () {
@@ -75,11 +74,11 @@ var run = function () {
         s.on( 'message', count );
         // count also subscribe messages
         s.on( 'subscribe', count );
-    };
+    }
 };
 
 var add = function () {
-    var s = nRedis.createClient( 6379, '127.0.0.1' );
+    var s = nRedis.createClient( 6379, '127.0.0.1' )
         ;
     publisher = s;
     s.once( 'ready', function () {
@@ -97,6 +96,6 @@ try {
 } finally {
     log( '-> message length: (%d bytes)\n', long_string.length );
     add();
-};
+}
 
 add();

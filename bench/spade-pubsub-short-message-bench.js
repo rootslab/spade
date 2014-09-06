@@ -42,7 +42,6 @@ var onError = function () {
 
 var sendCommands = function () {
     var i = 0
-        , client = null
         , pcmd = publisher.commands.publish
         ;
     stime = Date.now();
@@ -71,15 +70,14 @@ var run = function () {
         s.on( 'error', onError );
         s.on( 'message', count );
         s.on( 'ready', enqueue.bind( s ) );
-    };
+    }
     for ( ; --i >= 0; ) {
         list[ i ].connect();
-    };
+    }
 };
 
 var add = function () {
     var s = Spade( spade_opt )
-        , commands = s.commands
         ;
     publisher = s;
     s.once( 'ready', function () {

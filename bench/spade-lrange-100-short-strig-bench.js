@@ -26,7 +26,6 @@ var log = console.log
 
 var sendCommands = function () {
     var i = 0
-        , client = null
         , ccmd = null
         ;
 
@@ -45,7 +44,7 @@ var sendCommands = function () {
                 process.exit( 0 );
             }
         } );
-    };
+    }
 };
 
 var enqueue = function () {
