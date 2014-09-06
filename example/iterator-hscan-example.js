@@ -3,17 +3,14 @@
  */
 
 var log = console.log
-    , util = require( 'util' )
     , Spade = require( '../' )
     , client = Spade()
     , cback = function ( err, data, iterate ) {
-        // if ( ! data[ 0 ] ) return iterator.next();
         if ( ! data[ 0 ] ) return iterate();
         etime = Date.now();
         log( '\n- %s properties scanned from hash key \'%s\' through %s iterations.', data[ 3 ], hkey, data[ 2 ] );
         log( '- elapsed time: %d secs.\n', ( ( etime - stime ) / 1000 ).toFixed( 1 ) );
     }
-    , iterator = null
     , i = 0
     // Spade default options for SCAN ZSCAN SSCAN HSCAN commands.
     , opt = {
