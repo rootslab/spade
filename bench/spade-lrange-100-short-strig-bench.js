@@ -62,10 +62,10 @@ var run = function () {
         s = Spade( spade_opt );
         list[ i ] = s;
         s.on( 'ready', enqueue );
-    };
+    }
     for ( ; --i >= 0; ) {
         list[ i ].connect();
-    };
+    }
 };
 
 var add = function () {
@@ -83,7 +83,7 @@ var add = function () {
                     commands.quit( run );
                 }
             } );
-        };
+        }
     } );
     s.connect();
 };
