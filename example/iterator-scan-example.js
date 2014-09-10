@@ -33,7 +33,7 @@ for ( ; i < n; ++i ) client.commands.set( 'key:' + i, i );
 
 client.connect();
 
-// load files from iterators dir
+// load files from iterators directory
 client.loadIterators();
 
 stime = Date.now();

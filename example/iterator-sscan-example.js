@@ -34,7 +34,7 @@ for ( ; i < n; ++i ) client.commands.sadd( skey, 'el:' + i, i );
 
 client.connect();
 
-// load files from iterators dir
+// load files from iterators directory
 client.loadIterators();
 
 stime = Date.now();

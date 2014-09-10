@@ -545,7 +545,7 @@ Spade#initTasks( [ Array file_list ] ) : Cucu
 >  the task signature is:
 
 ```javascript
-Spade.tasks.polling.run( [ Number interval [, Array pollingFn_arguments [, Number times ] ] ] );
+Spade.tasks.polling.run( [ Number interval [, Array arguments [, Number times ] ] ] );
 ```
 > polling function gets 4 optional arguments:
 
