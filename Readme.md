@@ -238,30 +238,32 @@ opt = {
     /*
      * Security options.
      *
-     * Options for db selection and password sending when the client connects to a
-     * particular host.
-     * An entry will be automatically added with the socket.address or socket.path
-     * defined in the constructor option. However, two sample entries are already
-     * present in the cache, holding default values from redis.conf. 
+     * Options for db selection and password sending when the 
+     * client connects to a particular host.
+     * An entry will be automatically added with the socket.address
+     * or socket.path defined in the constructor option. However,
+     * two sample entries are already present in the cache, holding
+     * default values from redis.conf. 
      *
-     * Every entry should be a file path ('/path/to/file.sock'), or a network path
-     * ('ip:port'), and should contain a:
+     * Every entry should be a file path ('/path/to/file.sock'),
+     * or a network path ('ip:port'), and should contain a:
      *
-     * - 'requirepass' property, it contains the Redis password string for the current
-     * host. It defaults to null. Whenever a client connection is established and if
-     * an entry is found in the security hash. an AUTH command will be sent to Redis,
+     * - 'requirepass' property, it contains the Redis password string
+     * for the current host. It defaults to null.
+     * Whenever a client connection is established and if an entry is
+     * found in the security hash. an AUTH command will be sent to Redis,
      * before any other command in the command queue.
      *
-     * - 'db' property, it defaults to 0. On every reconnection the first command to
-     * send after AUTH is SELECT db. If db === -1, on client reconnection the SELECT
-     * command will not been sent.
+     * - 'db' property, it defaults to 0. On every reconnection the first
+     * command to send after AUTH is SELECT db. If db === -1, on client
+     * reconnection the SELECT command will not been sent.
      *
-     * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will be emitted,
-     * then the client will be automatically disconnected to force re-AUTH on
-     * reconnection; it also happens if AUTH isn't required by Redis, but was sent
-     * by the client.
-     * If authorization is granted by Redis, an 'authorize' event will be emitted,
-     * then if the command queue is not empty, it will be processed.
+     * NOTE: If the AUTH reply is erroneous, an 'authfailed' event will
+     * be emitted, then the client will be automatically disconnected to
+     * force re-AUTH on reconnection; it also happens if AUTH isn't required
+     * by Redis, but was sent by the client.
+     * If authorization is granted by Redis, an 'authorize' event will be
+     * emitted, then if the command queue is not empty, it will be processed.
      */
      , security : {
         // a network path (ip:port)
