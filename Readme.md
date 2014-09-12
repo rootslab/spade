@@ -803,20 +803,23 @@ _[Back to ToC](#table-of-contents)_
 ```javascript
 /*
  * Get a script from the cache and send it to Redis.
- * It executes an EVALSHA command with the digest of the current script, if it exists.
+ * It executes an EVALSHA command with the digest of the current script,
+ * if it exists.
  */
 #run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
 /*
- * Manually load a script into the cache and send it to Redis. It executes a SCRIPT LOAD 
- * command. 'lback' function will be called with an argument that represents the entry
- * loaded in the cache, or undefined if an error occurs.
+ * Manually load a script into the cache and send it to Redis.
+ * It executes a SCRIPT LOAD command. 'lback' function will be called with an
+ * argument that represents the entry loaded in the cache, or undefined if an
+ * error occurs.
  */
 #load( String key, String data [, Function cback [, Function lback ] ] ) : undefined
  
 /*
  * Clear Spade and Redis cache. It executes a SCRIPT FLUSH command.
- * 'fback' function will be called with the number of elements flushed from the cache.
+ * 'fback' function will be called with the number of elements flushed from the
+ * cache.
  */
 #flush( [ Function cback [, Function fback ] ] ) : undefined
 ```
@@ -905,15 +908,15 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * The reply to AUTH command is an Error, then client will be disconnected; it also
- * happens when AUTH is not required by Redis but issued by the client. No 'ready'
- * event could be launched.
+ * The reply to AUTH command is an Error, then client will be disconnected;
+ * it also happens when AUTH is not required by Redis but issued by the client.
+ * No 'ready' event could be launched.
  */
 'authfailed' : function ( String password, Array reply, Object address )
 
 /*
- * Client authorization was successful. After that, the command queue will be processed
- * and the 'ready' event could be launched.
+ * Client authorization was successful. After that, the command queue will be
+ * processed and the 'ready' event could be launched.
  */
 'authorized' : function ( String password, Array reply, Object address )
 ```
@@ -1045,11 +1048,13 @@ _[Back to ToC](#table-of-contents)_
 
 ```javascript
 /*
- * A message was received through the PubSub system when the client is in PubSub mode.
+ * A message was received through the PubSub system when the client
+ * is in PubSub mode.
  *
- * NOTE: the 'formatter' function converts the received 'message' to an obj/hash.
- * For example, a message reply to a (P)(UN)SUBSCRIBE command issued by the client,
- * could be:
+ * NOTE: the 'formatter' function converts the received 'message' to
+ * an obj/hash.
+ * For example, a message reply to a (P)(UN)SUBSCRIBE command issued
+ * by the client, could be:
  *
  * 'message' -> [ 'unsubscribe', 'channel', 0 ]
  *
@@ -1137,7 +1142,8 @@ _[Back to ToC](#table-of-contents)_
 
 /*
  * When the client doesn't receive a reply within the timeout interval specified
- * with Spade.tasks.polling#run, it disconnects from server, and optionally reconnects.
+ * with Spade.tasks.polling#run, it disconnects from server, and optionally
+ * reconnects.
  */
 'hangup' : function ( Number is_pubsub_active, Number is_monitor_active )
 ```
