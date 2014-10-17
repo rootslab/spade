@@ -804,7 +804,7 @@ _[Back to ToC](#table-of-contents)_
 /*
  * Get a script from the cache and send it to Redis.
  * It executes an EVALSHA command with the digest of the current script,
- * if it exists.
+ * if it already exists.
  */
 #run( String name, Array keys, Array args [, Function cback ] ) : undefined
  
@@ -926,7 +926,7 @@ _[Back to ToC](#table-of-contents)_
 
 > These events are emitted on every client (re)connection to __Redis__. If the __db__
 > property is set ( >== 0 ) in the options.security hash, for the current connected
-> Redis host, the __SELECT__ db command will be sent before all other commands in the
+> Redis host, the __SELECT__ db command will be sent before all the other commands
 > already present in the queue.
 >
 > __NOTE__:
