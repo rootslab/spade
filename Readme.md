@@ -42,8 +42,8 @@
  - __[Hiboris](https://github.com/rootslab/hiboris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ string protocol; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
  - __[Cucu](https://github.com/rootslab/cucu)__, a tiny module to handle the __scheduled execution of repetitive methods/tasks__.
  - __[Gerry](https://github.com/rootslab/gerry)__, a tiny module to handle __event logging__ to console, for debugging and testing purpose.
-- __[Dado](https://github.com/rootslab/dado)__, for running tests .
-- __[Vapid](https://github.com/rootslab/vapid)__, a vacuous __Redis__ implementation, with fully functional PubSub system.
+ - __[Dado](https://github.com/rootslab/dado)__, for running tests .
+ - __[Vapid](https://github.com/rootslab/vapid)__, a vacuous __Redis__ implementation, with fully functional PubSub system.
 
 
 > __NOTE__ : If you need a __minimal Redis client__ based on __♠ Spade__ code, __specific for PubSub and Monitor mode__ try 🂢 __[Deuces](https://github.com/rootslab/deuces)__.
