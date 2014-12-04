@@ -66,4 +66,4 @@
 };
 
 // single test execution with node
-if ( process.argv[ 1 ] === __filename  ) exports.test = exports.test();
+if ( process.argv[ 1 ] === __filename ) exports.test = exports.test();

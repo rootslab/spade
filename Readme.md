@@ -42,6 +42,9 @@
  - __[Hiboris](https://github.com/rootslab/hiboris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ string protocol; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
  - __[Cucu](https://github.com/rootslab/cucu)__, a tiny module to handle the __scheduled execution of repetitive methods/tasks__.
  - __[Gerry](https://github.com/rootslab/gerry)__, a tiny module to handle __event logging__ to console, for debugging and testing purpose.
+- __[Dado](https://github.com/rootslab/dado)__, for running tests .
+- __[Vapid](https://github.com/rootslab/vapid)__, a vacuous __Redis__ implementation, with fully functional PubSub system.
+
 
 > __NOTE__ : If you need a __minimal Redis client__ based on __♠ Spade__ code, __specific for PubSub and Monitor mode__ try 🂢 __[Deuces](https://github.com/rootslab/deuces)__.
 
@@ -87,9 +90,9 @@
 > __NOTE:__ only __node__ engines **">=v0.10.x"** are supported.
 
 ```bash
-$ npm install spade [-g]
-// clone repo
-$ git clone git@github.com:rootslab/spade.git
+ $ npm install spade [-g]
+ // clone repo
+ $ git clone git@github.com:rootslab/spade.git
 ```
 > __install and update devDependencies__:
 
@@ -108,16 +111,19 @@ var Spade = require( 'spade' );
 
 ###Run Tests
 
-> __to run all test files:__
+> __to run all test files, install devDependecies:__
 
 ```bash
-$ cd spade/
-$ npm test
+ $ cd spade/
+ # install or update devDependecies 
+ $ npm install --dev
+ # run tests
+ $ npm test
 ```
 > __to execute a single test file simply do__:
 
 ```bash
-$ node test/file-name.js
+ $ node test/file-name.js
 ```
 > __NOTE__:
 >  - tests need a running __Redis__ server instance, with default/stock configuration ( port __6379__ ).
@@ -128,15 +134,15 @@ $ node test/file-name.js
 > run benchmarks for __spade__.
 
 ```bash
-$ cd spade/
-$ npm run bench
+ $ cd spade/
+ $ npm run bench
 ```
 > run benchmarks for **node_redis**.
 
 ```bash
-$ cd spade/
-$ npm install redis
-$ npm run node_redis_bench
+ $ cd spade/
+ $ npm install redis
+ $ npm run node_redis_bench
 ```
 
 > __NOTE__:
@@ -885,7 +891,7 @@ lost<----+(*attempt*)  |     +------------------+ready+------------+
 >  - events within __*__ could be emitted more than once, namely __0__ or __k__ times with _k >= 1_.
 >  - __timeout__ could happen in _"any"_ moment after the __connect__ event.
 >  - __listen__ signals that client is entering in subscription mode
->  - __shutup__ signals that client is leaving (voluntarily) subscription mode.
+>  - __shutup__ signals that client is (voluntarily) leaving subscription mode.
 >  - __monitor__ mode could end only with a __QUIT__ command (then '_offline_').
 
 _[Back to ToC](#table-of-contents)_
