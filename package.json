@@ -1,6 +1,6 @@
 {
   "name": "spade"
-  , "version": "0.50.1"
+  , "version": "0.50.2"
   , "description": "♠ Spade, a robust, full-featured, multi-modular Redis client, with offline queue for commands, automatic socket reconnection and command rollback mechanisms for subscriptions, moreover, it supports caching for LUA scripts."
   , "homepage": "https://github.com/rootslab/spade"
   , "private": false
@@ -31,13 +31,13 @@
     , "cocker" : "=0.15.3"
     , "libra" : "=0.20.6"
     , "cucu" : "=0.10.1"
-    , "gerry" : "=0.6.1"
+    , "gerry" : "=0.6.2"
   }
   , "devDependencies": {
       "hiredis" : ">=0.1.17"
       , "deuces" : ">=0.11.4"
       , "vapid" : ">=0.7.0"
-      , "dado" : ">=0.1.3"
+      , "dado" : ">=0.2.0"
     }
   , "main": "index"
   , "engines": {
