@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 ( function () {
-   require( 'dado' )().do( 'test' )
+   require( 'dado' )().do( 'test' );
 } )();

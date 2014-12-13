@@ -1,20 +1,24 @@
 ###♠ Spade
 
-[![CODECLIMATE](http://img.shields.io/codeclimate/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
-[![CODECLIMATE-TEST-COVERAGE](http://img.shields.io/codeclimate/coverage/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
+[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
+[![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
+[![CODECLIMATE](https://codeclimate.com/github/rootslab/spade/badges/gpa.svg)](https://codeclimate.com/github/rootslab/spade)
+[![CODECLIMATE-TEST-COVERAGE](https://codeclimate.com/github/rootslab/spade/badges/coverage.svg)](https://codeclimate.com/github/rootslab/spade)
 
-[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/rootslab/spade#mit-license)
-[![GITTIP](http://img.shields.io/gittip/rootslab.svg?style=flat)](https://www.gittip.com/rootslab/)
-[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
+[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg)](http://travis-ci.org/rootslab/spade)
+[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
+[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
 
-[![NPM VERSION](http://img.shields.io/npm/v/spade.svg?style=flat)](https://www.npmjs.org/package/spade)
-[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg?style=flat)](http://travis-ci.org/rootslab/spade)
-[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade)
-[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade#info=devDependencies)
+[![status](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.badges/status.png)](https://sourcegraph.com/github.com/rootslab/spade)
+[![views](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views.png)](https://sourcegraph.com/github.com/rootslab/spade)
+[![views 24h](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views-24h.png)](https://sourcegraph.com/github.com/rootslab/spade)
+[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://npm-stat.com/charts.html?package=spade)
+[![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
 
 [![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
-[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
+[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&stars=true)](https://nodei.co/npm/spade/)
+
 
 > ♠ __Spade__, a robust, full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
@@ -29,7 +33,7 @@
  - It offers automatic __LUA scripts caching__, using a simple __NFU__ with __linear aging__ eviction
    algorithm ( __NFU__ stands for _Not Frequently Used_ ).
  - It __correctly handles multiple (p)(un)subscription__ commands as we will expect (1 command : multiple replies : multiple callback execution); it was well tested against some weird edge cases.
- See [tests](#run-tests) for pubsub.
+ See __[tests](#run-tests)__ for pubsub.
  - It supports the new __PING__ command signature also in __PubSub mode__.
  - It implements a __polling mechanism__, useful to force __automatic re-connection__ when client hangs while in __PubSub mode__.
  - It facilitates scanning of Redis keyspace, implementing some simple iterators for __SCAN__/__HSCAN__/__SSCAN__/__ZSCAN__ commands. See [#loadIterators](#loaditerators).
@@ -42,7 +46,7 @@
  - __[Hiboris](https://github.com/rootslab/hiboris)__, a utility module to load  __[hiredis](https://github.com/redis/hiredis-node)__ _native parser_, or to fall back to __[Boris](https://github.com/rootslab/boris)__, a _pure js parser_ module for __Redis__ string protocol; internally _Boris_ uses __[Peela](https://github.com/rootslab/peela)__ as command stack.
  - __[Cucu](https://github.com/rootslab/cucu)__, a tiny module to handle the __scheduled execution of repetitive methods/tasks__.
  - __[Gerry](https://github.com/rootslab/gerry)__, a tiny module to handle __event logging__ to console, for debugging and testing purpose.
- - __[Dado](https://github.com/rootslab/dado)__, for running tests .
+ - __[Dado](https://github.com/rootslab/dado)__, for running tests.
  - __[Vapid](https://github.com/rootslab/vapid)__, a vacuous __Redis__ implementation, with fully functional PubSub system.
 
 
@@ -126,12 +130,12 @@ var Spade = require( 'spade' );
  $ node test/file-name.js
 ```
 > __NOTE__:
->  - tests need a running __Redis__ server instance, with default/stock configuration ( port __6379__ ).
+>  - tests need a running __[Redis](http://redis.io/)__ server instance, with default/stock configuration ( port __6379__ ).
 >  - for some connection tests you need the __[Vapid](https://github.com/rootslab/vapid)__ **_devDependency_**, a vacuous __Redis__ server module ( port __6380__ ).
 
 ###Run Benchmarks
 
-> run benchmarks for __spade__.
+> run benchmarks for __Spade__.
 
 ```bash
  $ cd spade/
@@ -608,13 +612,13 @@ Spade#loadIterators( [ Array file_list ] ) : Object
 ```javascript
 Spade.iterators : {
    scan : function ( Number cursor [, Object opt [, Function cback ] ] ) : Iterator
-   , hscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
-   , sscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
-   , zscan : function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Iterator
+   , hscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
+   , sscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
+   , zscan : function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
 }
 
-// you could use Iterator#next outside the callback to receive next results.
-Iterator : { next : Function }
+// you could use #next outside the callback to receive other results.
+Object : { next : Function }
 
 // default options for iterator commands:
 opt : { match : null, count : 10 }
