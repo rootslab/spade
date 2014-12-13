@@ -1,9 +1,9 @@
 ###♠ Spade
 
-[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
 [![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
-[![CODECLIMATE](https://codeclimate.com/github/rootslab/spade/badges/gpa.svg)](https://codeclimate.com/github/rootslab/spade)
+[![CODACY BADGE](https://img.shields.io/codacy/b18ed7d95b0a4707a0ff7b88b30d3def.svg)](https://www.codacy.com/public/44gatti/spade)
 [![CODECLIMATE-TEST-COVERAGE](https://codeclimate.com/github/rootslab/spade/badges/coverage.svg)](https://codeclimate.com/github/rootslab/spade)
+[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
 
 [![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg)](http://travis-ci.org/rootslab/spade)
 [![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
