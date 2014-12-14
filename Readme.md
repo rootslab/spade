@@ -540,8 +540,8 @@ _[Back to ToC](#table-of-contents)_
 
 ####initTasks
 
-> Load methods/tasks from _'spade/lib/tasks'_ directory; 
-> It returns the current Spade.tasks property (Cucu.ttable).
+> Load methods/tasks from __'spade/lib/tasks'__ directory.
+> It returns the current _Spade.tasks_ property (or Cucu.ttable).
 
 ```javascript
 // filenames should be without '.js' extension.
@@ -554,12 +554,12 @@ Spade#initTasks( [ Array file_list ] ) : Object
 > When _polling_ is enabled, the client starts to __PING__ server every 60 secs; it could
 > be useful for testing connection aliveness, when the client is in PubSub mode.
 
-> to start the polling task:
+> Start the polling task:
 
 ```javascript
 Spade.tasks.polling.run( [ Number interval [, Array polling_fn_args [, Number times ] ] ] ) : Number
 ```
-> the polling method could receive 4 optional arguments (through the polling_fn_args Array):
+> the polling method could receive 4 optional arguments, through the __polling_fn_args__ Array:
 
 ```javascript
 pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, Boolean reconnect ] ] ] ] )
@@ -1143,7 +1143,7 @@ _[Back to ToC](#table-of-contents)_
 
 ####Tasks Events
 
-> __NOTE__: to enable logging for events below, execute __Spade#initTask__ method.
+> __NOTE__: to enable logging for events below, execute __Spade#initTasks__ method.
 
 #####polling events
 
