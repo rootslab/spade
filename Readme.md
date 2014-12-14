@@ -610,7 +610,7 @@ Spade#loadIterators( [ Array file_list ] ) : Object
 
 ```javascript
 Spade.iterators : {
-   scan : function ( Number cursor [, Object opt [, Function cback ] ] ) : Iterator
+   scan : function ( Number cursor [, Object opt [, Function cback ] ] ) : Object
    , hscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
    , sscan: function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
    , zscan : function ( String key, Number cursor [, Object opt [, Function cback ] ] ) : Object
