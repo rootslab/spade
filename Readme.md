@@ -540,52 +540,56 @@ _[Back to ToC](#table-of-contents)_
 
 ####initTasks
 
-> Load default methods/tasks from _'spade/lib/tasks'_ dir, you could restrict files to load,
-> specifying some filenames ( without '.js' extension ).
-> It returns the current Spade.tasks (Cucu.ttable) property.
+> Load methods/tasks from _'spade/lib/tasks'_ directory; 
+> It returns the current Spade.tasks property (Cucu.ttable).
 
 ```javascript
-Spade#initTasks( [ Array file_list ] ) : Cucu
+// filenames should be without '.js' extension.
+Spade#initTasks( [ Array file_list ] ) : Object
 ```
+
 #####polling task
 
-> When _polling_ is  enabled, it starts to __PING__ server within a specified interval
-> ( in millis ); it is useful to test aliveness of the connection in particular cases,
-> like when the client is in PubSub mode.
+> For default, the 'connection.js' file exports/adds a single polling method to tasks.
+> When _polling_ is enabled, the client starts to __PING__ server every 60 secs; it could
+> be useful for testing connection aliveness, when the client is in PubSub mode.
 
->  the task signature is:
+> to start the polling task:
 
 ```javascript
-Spade.tasks.polling.run( [ Number interval [, Array arguments [, Number times ] ] ] );
+Spade.tasks.polling.run( [ Number interval [, Array polling_fn_args [, Number times ] ] ] ) : Number
 ```
-> polling function gets 4 optional arguments:
+> the polling method could receive 4 optional arguments (through the polling_fn_args Array):
 
 ```javascript
 pollingFn : function ( [ Function cback [, String ping_msg [, Number timeout [, Boolean reconnect ] ] ] ] )
 ```
-> For example:
+> for example:
 
 ```javascript
 /*
- * PINGing server with a 'BANG!' message every 2 secs emitting 'polling' event,
- * stopping after 10 times.
- * If a reply will be not received within 1 sec, client will emit 'hangup' event,
- * then it disconnects and reconnects to the server.
+ * Pinging server every 2 seconds, with a 'BANG!' message and stop after 10 times.
+ * For every reply received client emits 'polling' event.
+ * If no reply will be received within 1 sec, client emits the 'hangup' event, then
+ * disconnects and reconnects to the server.
  */
  var client = require( 'spade' )()
+ ...
  client.cli();
  client.connect();
+ ...
  client.initTasks();
+
  client.tasks.polling.run( 2000, [ null, 'BANG!', 1000, true ], 10 );
  ...
  client.task.polling.stop();
  ..
 ```
-> __NOTE__: 
-> - __2 additional events__ are enabled:
->   - *__polling__*
->   - *__hangup__*
-> - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs from polling task__ to avoid waste of space.
+
+> __NOTE__:
+> - executing #initTasks, automatically enables/adds the __polling__ and __hangup__ events.
+> - when in __PubSub__ mode, the __rollback mechanism doesn't save PINGs__ sent by the
+>   polling task.
 
 > See [Tasks Events](#tasks-events).
 
