@@ -637,8 +637,8 @@ reply : [ Boolean is_last_iter, Array keys, Number iter_counter, Number keys_cou
 
 ```
 > __NOTE__:
->  - signatures are the same as for relative __Spade.commands__, but they returns __Iterator__ objects.
->  - when console logging is enabled with __#cli__, 3 additional __debug events__ will be added: 
+>  - signatures are the same as for relative __Spade.commands__, but they returns __iterator objects__.
+>  - when console logging is enabled with __#cli__, 3 additional __[debug events](#other-debug-events)__ will be added: 
 >    - *__scan__*
 >    - *__sscan__*
 >    - *__hscan__*
