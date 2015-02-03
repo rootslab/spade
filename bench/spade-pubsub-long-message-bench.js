@@ -9,7 +9,6 @@
 var log = console.log
     , assert = require( 'assert' )
     , util = require( 'util' )
-    , inspect = util.inspect
     , Spade = require( '../' )
     // number of clients
     , tclients = 20
@@ -88,7 +87,6 @@ var run = function () {
 
 var add = function () {
     var s = Spade( spade_opt )
-        , commands = s.commands
         ;
     publisher = s;
     s.once( 'ready', function () {

@@ -15,6 +15,7 @@ var log = console.log
     , ttime = 0
     , small_string = 'node_redisnode_redisnode_redisnode_redisnode_redisnode_redis'
     , publisher = null
+    , hiredis = null
     ;
 
 var count = function () {
