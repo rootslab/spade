@@ -9,7 +9,6 @@ module.exports = ( function () {
         , ooo = Bolgia.circles
         , ostr = ooo.str
         , oarr = ooo.arr
-        , inspect = util.inspect
         , keys = Object.keys
         , iopt = {
             showHidden : false
