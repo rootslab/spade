@@ -1,23 +1,24 @@
 ###♠ Spade
 
-[![NPM VERSION](http://img.shields.io/npm/v/spade.svg)](https://www.npmjs.org/package/spade)
-[![CODACY BADGE](https://img.shields.io/codacy/b18ed7d95b0a4707a0ff7b88b30d3def.svg)](https://www.codacy.com/public/44gatti/spade)
-[![CODECLIMATE-TEST-COVERAGE](https://codeclimate.com/github/rootslab/spade/badges/coverage.svg)](https://codeclimate.com/github/rootslab/spade)
-[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rootslab/spade#mit-license)
+[![NPM VERSION](http://img.shields.io/npm/v/spade.svg?style=flat)](https://www.npmjs.org/package/spade)
+[![CODACY BADGE](https://img.shields.io/codacy/b18ed7d95b0a4707a0ff7b88b30d3def.svg?style=flat)](https://www.codacy.com/public/44gatti/spade)
+[![CODECLIMATE](http://img.shields.io/codeclimate/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
+[![CODECLIMATE-TEST-COVERAGE](https://img.shields.io/codeclimate/coverage/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
+[![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/rootslab/spade#mit-license)
 
-[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg)](http://travis-ci.org/rootslab/spade)
-[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg)](https://david-dm.org/rootslab/spade)
-[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg)](https://david-dm.org/rootslab/spade#info=devDependencies)
-
-[![status](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.badges/status.png)](https://sourcegraph.com/github.com/rootslab/spade)
-[![views](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views.png)](https://sourcegraph.com/github.com/rootslab/spade)
-[![views 24h](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views-24h.png)](https://sourcegraph.com/github.com/rootslab/spade)
-[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg)](http://npm-stat.com/charts.html?package=spade)
-[![GITTIP](http://img.shields.io/gittip/rootslab.svg)](https://www.gittip.com/rootslab/)
+[![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg?style=flat)](http://travis-ci.org/rootslab/spade)
+[![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade)
+[![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade#info=devDependencies)
+[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
 
 [![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
 
 [![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
+
+[![status](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.badges/status.png)](https://sourcegraph.com/github.com/rootslab/spade)
+[![views](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views.png)](https://sourcegraph.com/github.com/rootslab/spade)
+[![views 24h](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views-24h.png)](https://sourcegraph.com/github.com/rootslab/spade)
+
 
 > ♠ __Spade__, a robust, full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
