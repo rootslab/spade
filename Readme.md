@@ -19,7 +19,6 @@
 [![views](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views.png)](https://sourcegraph.com/github.com/rootslab/spade)
 [![views 24h](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views-24h.png)](https://sourcegraph.com/github.com/rootslab/spade)
 
-
 > ♠ __Spade__, a robust, full-featured, multi-modular __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
    constructor option. Specifying this option turns __Spade__ in _develop mode_, it enables a series
@@ -48,7 +47,6 @@
  - __[Gerry](https://github.com/rootslab/gerry)__, a tiny module to handle __event logging__ to console, for debugging and testing purpose.
  - __[Dado](https://github.com/rootslab/dado)__, for running tests.
  - __[Vapid](https://github.com/rootslab/vapid)__, a vacuous __Redis__ implementation, with fully functional PubSub system.
-
 
 > __NOTE__ : If you need a __minimal Redis client__ based on __♠ Spade__ code, __specific for PubSub and Monitor mode__ try 🂢 __[Deuces](https://github.com/rootslab/deuces)__.
 
