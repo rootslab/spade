@@ -100,9 +100,9 @@
 
 ```bash
  $ cd spade/
- $ npm install --dev
+ $ npm install
  # update
- $ npm update --dev
+ $ npm update
 ```
 > __require__
 
@@ -118,7 +118,7 @@ var Spade = require( 'spade' );
 ```bash
  $ cd spade/
  # install or update devDependecies 
- $ npm install --dev
+ $ npm install 
  # run tests
  $ npm test
 ```
