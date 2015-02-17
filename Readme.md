@@ -507,13 +507,13 @@ __Initialize or reveal the (hidden) LUA script cache__:
 >    - a cback that will be executed on __cacheready__ passing the current cache instance
 >      as argument.
 
-> __NOTE__: Empty files and scripts processed and then refused by Redis, with
-> an error reply, are automatically evicted from the cache.
+> __NOTE__: Empty files and scripts, processed and then refused by Redis with an error reply,
+> are automatically evicted from the cache.
 
-> __NOTE__: If **_cache_opt_** is set, the cache will be re-initialized; it happens
-> only if the cache is ready, or when no other script commands are already been
-> queued and not yet been sent to Redis ( for example, when the client is offline );
-> otherwise option object will be ignored and cache will remain intact.
+> __NOTE__: If **_cache_opt_** is already set, the cache will be re-initialized; it happens
+> only if the cache is ready, or when no other script commands are already been queued and
+> not yet been sent to Redis (for example, when the client is offline); otherwise the cache
+> will remain intact and an Error will be passed to the callback as the first argument.
 
 ```javascript
 /*

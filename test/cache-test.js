@@ -15,6 +15,7 @@ exports.test = function ( done, assertions ) {
         , format = test_utils.format
         , Spade = require( '../' )
         , client = Spade()
+        , okeys = Object.keys
         // expected events
         , evts = []
         // collected events
@@ -33,7 +34,15 @@ exports.test = function ( done, assertions ) {
 
     log( '- call #initCache before #connect, with no options, to emit only "cacheinit" event.' );
 
-    client.initCache();
+    client.initCache( null, null, function ( err, camphora ) {
+        assert.ok( ! ( err instanceof Error ) );
+        log( '- check loaded cache, test_reply LUA script should be present.' );
+        assert.deepEqual( okeys( camphora.cache ), [ 'test_reply.lua' ], 'error loading cache' )
+    } );
+
+    log( '- call #initCache a second time to force an error.' );
+
+    client.initCache( null, null, function ( err ) { assert.ok( err instanceof Error ); } );
 
     evts.push( 'cacheinit', 'connect', 'reply', 'dbselected', 'scanqueue', 'ready', 'reply', 'cacheload', 'cacheready' );
 
