@@ -1,25 +1,21 @@
-###♠ Spade
+### ♠ Spade
 
 [![NPM VERSION](http://img.shields.io/npm/v/spade.svg?style=flat)](https://www.npmjs.org/package/spade)
 [![CODACY BADGE](https://img.shields.io/codacy/b18ed7d95b0a4707a0ff7b88b30d3def.svg?style=flat)](https://www.codacy.com/public/44gatti/spade)
-[![CODECLIMATE](http://img.shields.io/codeclimate/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
 [![CODECLIMATE-TEST-COVERAGE](https://img.shields.io/codeclimate/coverage/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
 [![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/rootslab/spade#mit-license)
 
+![NODE VERSION](https://img.shields.io/node/v/spade.svg)
 [![TRAVIS CI BUILD](http://img.shields.io/travis/rootslab/spade.svg?style=flat)](http://travis-ci.org/rootslab/spade)
 [![BUILD STATUS](http://img.shields.io/david/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade)
 [![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade#info=devDependencies)
-[![NPM DOWNLOADS](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
 
-[![NPM GRAPH1](https://nodei.co/npm-dl/spade.png)](https://nodei.co/npm/spade/)
+[![NPM MONTHLY](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
+![NPM YEARLY](https://img.shields.io/npm/dy/spade.svg)
 
-[![NPM GRAPH2](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
+[![NPM GRAPH](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
 
-[![status](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.badges/status.png)](https://sourcegraph.com/github.com/rootslab/spade)
-[![views](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views.png)](https://sourcegraph.com/github.com/rootslab/spade)
-[![views 24h](https://sourcegraph.com/api/repos/github.com/rootslab/spade/.counters/views-24h.png)](https://sourcegraph.com/github.com/rootslab/spade)
-
-> ♠ __Spade__, a robust, full-featured, multi-modular __Redis__ client:
+> ♠ __Spade__, a robust, full-featured, multi-module __Redis__ client:
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
    constructor option. Specifying this option turns __Spade__ in _develop mode_, it enables a series
    of mix-ins to get brief descriptions of every implemented command.
@@ -50,7 +46,7 @@
 
 > __NOTE__ : If you need a __minimal Redis client__ based on __♠ Spade__ code, __specific for PubSub and Monitor mode__ try 🂢 __[Deuces](https://github.com/rootslab/deuces)__.
 
-###Table of Contents
+### Table of Contents
 
 - __[Install](#install)__
 - __[Run Tests](#run-tests)__
@@ -87,7 +83,7 @@
 
 -----------------------------------------------------------------------
 
-###Install
+### Install
 
 > __NOTE:__ only __node__ engines **">=v0.10.x"** are supported.
 
@@ -111,7 +107,7 @@ var Spade = require( 'spade' );
 ```
 > See [examples](example/).
 
-###Run Tests
+### Run Tests
 
 > __to run all test files, install devDependecies:__
 
@@ -131,7 +127,7 @@ var Spade = require( 'spade' );
 >  - tests need a running __[Redis](http://redis.io/)__ server instance, with default/stock configuration ( port __6379__ ).
 >  - for some connection tests you need the __[Vapid](https://github.com/rootslab/vapid)__ **_devDependency_**, a vacuous __Redis__ server module ( port __6380__ ).
 
-###Run Benchmarks
+### Run Benchmarks
 
 > run benchmarks for __Spade__.
 
@@ -153,7 +149,7 @@ var Spade = require( 'spade' );
 
 ----------------------------------------------------------------------------------------------
 
-###Constructor
+### Constructor
 
 > Create an instance, the argument within [ ] is optional.
 
@@ -163,7 +159,7 @@ Spade( [ Object opt ] )
 new Spade( [ Object opt ] )
 ```
 
-####Options
+### Options
 
 > Default options are listed.
 
@@ -417,11 +413,11 @@ _[Back to ToC](#table-of-contents)_
 
 ----------------------------------------------------------------------
 
-###Methods
+### Methods
 
 > Arguments within [ ] are optional.
 
-####cli
+#### cli
 
 __Enable event logging to console__.
 
@@ -443,7 +439,7 @@ _[Back to ToC](#table-of-contents)_
 
 --------------------------------------------------------------------------------------------
 
-####connect
+#### connect
 
 __Open a connection to the Redis Server__:
 >  - When the connection is fully established, the __ready__ event will be emitted.
@@ -477,7 +473,7 @@ _[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
 
-####disconnect
+#### disconnect
 
 __Disconnect client from the Redis Server__:
 >  - You can optionally use a cback that will be executed after socket
@@ -495,7 +491,7 @@ _[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
 
-####initCache
+#### initCache
 
 __Initialize or reveal the (hidden) LUA script cache__:
 >  - It loads and sends all the files found in the __./node_modules/syllabus/lib/lua/scripts__
@@ -537,7 +533,7 @@ _[Back to ToC](#table-of-contents)_
 
 --------------------------------------------------------------------------------------------
 
-####initTasks
+#### initTasks
 
 > Load methods/tasks from __'spade/lib/tasks'__ directory.
 > It returns the current _Spade.tasks_ property (or Cucu.ttable).
@@ -547,7 +543,7 @@ _[Back to ToC](#table-of-contents)_
 Spade#initTasks( [ Array file_list ] ) : Object
 ```
 
-#####polling task
+##### polling task
 
 > For default, the 'connection.js' file exports/adds a single polling method to tasks.
 > When _polling_ is enabled, the client starts to __PING__ server every 60 secs; it could
@@ -600,7 +596,7 @@ _[Back to ToC](#table-of-contents)_
 
 --------------------------------------------------------------------------------------------
 
-####loadIterators
+#### loadIterators
 
 > Load default iterators, for commands like __SCAN__, __SSCAN__, __HSCAN__, __ZSCAN__,
 > from _'spade/lib/iterators'_ dir, you could restrict files to load, specifying some
@@ -651,7 +647,7 @@ _[Back to ToC](#table-of-contents)_
 
 ---------------------------------------------------------------------------------------
 
-####Redis Commands
+#### Redis Commands
 
 > The __Spade.commands__ property contains all methods to encode and send __Redis__ commands,
 > via the __Syllabus__ module.
@@ -672,7 +668,7 @@ _[Back to ToC](#table-of-contents)_
 
 > See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
-####Command Callback
+#### Command Callback
 
 > __Every command mix-in accepts a callback__ function as the last argument, it will get __3__ arguments:
 
@@ -711,7 +707,7 @@ client.commands.time( function ( is_err_reply, reply_data_arr, reveal_fn ) {
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Interactive Mode
+#### Interactive Mode
 
 > Specifying a __semver__ option ( like __*__ or __1.0.0__ ) enables _Syllabus_
 > development mode for commands.
@@ -802,7 +798,7 @@ $ node
 
 _[Back to ToC](#table-of-contents)_
 
-####LUA Cache and SCRIPT Methods
+#### LUA Cache and SCRIPT Methods
 
 > Manually execute scripts commands, differently from _**Spade.commands.script**_ methods,
 > _**Spade.lua.script**_ will also update the hidden cache for __LUA__ scripts.
@@ -841,7 +837,7 @@ _[Back to ToC](#table-of-contents)_
 
 -----------------------------------------------------------------------------
 
-##Events
+## Events
 
 - __[Events Sequence Diagram](#events-sequence-diagram)__
 - __[Error Events](#error-events)__
@@ -853,7 +849,7 @@ _[Back to ToC](#table-of-contents)_
 - __[Monitor Events](#monitor-events)__
 - __[Other Debug Events](#other-debug-events)__
 
-####Events Sequence Diagram
+#### Events Sequence Diagram
 
 >  - the event emitted for first could be:
     - **_connect_** or **_offline_**, after the execution of __connect__ or __disconnect__ methods.
@@ -902,7 +898,7 @@ lost<----+(*attempt*)  |     +------------------+ready+------------+
 
 _[Back to ToC](#table-of-contents)_
 
-####Error Events
+#### Error Events
 
 ```javascript
 /*
@@ -911,7 +907,7 @@ _[Back to ToC](#table-of-contents)_
 'error' : function ( Error err, Object command )
 ```
 
-####Auth Events
+#### Auth Events
 
 > These events are emitted on every client (re)connection to Redis and only if
 > __AUTH is set to be mandatory__ for the current connected host; namely, should
@@ -934,7 +930,7 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Select Events
+#### Select Events
 
 > These events are emitted on every client (re)connection to __Redis__. If the __db__
 > property is set ( >== 0 ) in the options.security hash, for the current connected
@@ -960,7 +956,7 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Script Cache Events
+#### Script Cache Events
 
 ```javascript
 /*
@@ -995,7 +991,7 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Socket Connection Events
+#### Socket Connection Events
 
 ```javascript
 /*
@@ -1042,7 +1038,7 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####PubSub Events
+#### PubSub Events
 
 > __NOTE__: for multiple (__P__)(__UN__)__SUBSCRIBE__ commands, __callbacks are executed
 > one time for every message reply__, those __messages__ will be received also through the _Pub/Sub_
@@ -1111,7 +1107,7 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Monitor Events
+#### Monitor Events
 
 ```javascript
 /*
@@ -1140,11 +1136,11 @@ _[Back to ToC](#table-of-contents)_
 ```
 _[Back to ToC](#table-of-contents)_
 
-####Tasks Events
+#### Tasks Events
 
 > __NOTE__: to enable logging for events below, execute __Spade#initTasks__ method.
 
-#####polling events
+##### polling events
 
 ```javascript
 /*
@@ -1162,7 +1158,7 @@ _[Back to ToC](#table-of-contents)_
 
 > See __[polling task](#polling-task)__.
 
-####Other Debug Events
+#### Other Debug Events
 
 > __NOTE__: to enable logging for debug events , execute __[Spade#cli](#cli)__ method.
 
@@ -1192,7 +1188,7 @@ _[Back to ToC](#table-of-contents)_
 'error-reply' : function ( Object command, String err_reply )
 ```
 
-#####iterators events
+##### iterators events
 
 > __NOTE__: to enable logging for events below, execute also __Spade#loadIterators__ method.
 
@@ -1210,7 +1206,7 @@ _[Back to ToC](#table-of-contents)_
 
 ### MIT License
 
-> Copyright (c) 2015 &lt; Guglielmo Ferri : 44gatti@gmail.com &gt;
+> Copyright (c) 2015-present &lt; Guglielmo Ferri : 44gatti@gmail.com &gt;
 
 > Permission is hereby granted, free of charge, to any person obtaining
 > a copy of this software and associated documentation files (the
