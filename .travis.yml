@@ -9,7 +9,6 @@ node_js:
   - "6"
   - "5"
   - "4"
-  - "3"
   - "2"
   - "1"
   - "0.12"
@@ -23,6 +22,3 @@ after_script:
  - codeclimate-test-reporter < coverage/lcov.info
 env: 
  - CODECLIMATE_REPO_TOKEN=8df1db9ce3b83822e3d97a72b57c3813495f22f3143965a5cdeb02fc6ef3732e
- matrix:
- allow_failures:
-  - node_js:  "3"
