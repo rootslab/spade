@@ -653,18 +653,20 @@ _[Back to ToC](#table-of-contents)_
 > via the __Syllabus__ module.
 
 > __Brief List of Redis Command Types:__
-> - [__Keys__](https://github.com/rootslab/syllabus#keys) : _24 commands_.
-> - [__Strings__](https://github.com/rootslab/syllabus#strings) : _27 commands_.
-> - [__Hashes__](https://github.com/rootslab/syllabus#hashes) : _15 commands_.
-> - [__Lists__](https://github.com/rootslab/syllabus#lists) : _17 commands_.
-> - [__Sets__](https://github.com/rootslab/syllabus#sets) : _15 commands_.
-> - [__Sorted Sets__](https://github.com/rootslab/syllabus#sorted-sets) : _21 commands_.
-> - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _4 commands_.
-> - [__PubSub__](https://github.com/rootslab/syllabus#pubsub) : _6 commands_.
-> - [__Transactions__](https://github.com/rootslab/syllabus#transactions) : _5 commands_.
-> - [__Scripting__](https://github.com/rootslab/syllabus#scripting) : _7 commands_.
+> - [__Cluster__](https://github.com/rootslab/syllabus#cluster) : _1 command (19 missing)_.
 > - [__Connection__](https://github.com/rootslab/syllabus#connection) : _6 commands_.
+> - [__Geo__](https://github.com/rootslab/syllabus#geo) : _4 commands, (2 missing)_.
+> - [__Hashes__](https://github.com/rootslab/syllabus#hashes) : _15 commands_.
+> - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _4 commands_.
+> - [__Keys__](https://github.com/rootslab/syllabus#keys) : _24 commands_.
+> - [__Lists__](https://github.com/rootslab/syllabus#lists) : _17 commands_.
+> - [__PubSub__](https://github.com/rootslab/syllabus#pubsub) : _6 commands_.
+> - [__Scripting__](https://github.com/rootslab/syllabus#scripting) : _7 commands_.
+> - [__Sets__](https://github.com/rootslab/syllabus#sets) : _15 commands_.
 > - [__Server__](https://github.com/rootslab/syllabus#server) : _31 commands_.
+> - [__Sorted Sets__](https://github.com/rootslab/syllabus#sorted-sets) : _21 commands_.
+> - [__Strings__](https://github.com/rootslab/syllabus#strings) : _23 commands, (1 missing)_.
+> - [__Transactions__](https://github.com/rootslab/syllabus#transactions) : _5 commands_.
 
 > See **_[Syllabus Commands Section](https://github.com/rootslab/syllabus#syllabus-commands)_** for all signatures and available commands.
 
