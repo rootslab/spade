@@ -129,18 +129,26 @@ var Spade = require( 'spade' );
 
 ### Run Benchmarks
 
-> run benchmarks for __Spade__.
+> run benchmarks for __spade__ (fast/tight checks/turtle developer).
 
 ```bash
  $ cd spade/
  $ npm run bench
 ```
-> run benchmarks for **node_redis**.
+> run benchmarks for **node_redis** (faster/loose checks/an army of contributors).
 
 ```bash
  $ cd spade/
  $ npm install redis
  $ npm run node_redis_bench
+```
+
+> run benchmarks for **ioredis** (slowest/loose checks/unsafe pubsub).
+
+```bash
+ $ cd spade/
+ $ npm install ioredis
+ $ npm run ioredis_bench
 ```
 
 > __NOTE__:
