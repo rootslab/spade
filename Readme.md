@@ -662,7 +662,7 @@ _[Back to ToC](#table-of-contents)_
 > __Brief List of Redis Command Types:__
 > - [__Cluster__](https://github.com/rootslab/syllabus#cluster) : _1 command (19 missing)_.
 > - [__Connection__](https://github.com/rootslab/syllabus#connection) : _6 commands_.
-> - [__Geo__](https://github.com/rootslab/syllabus#geo) : _4 commands, (2 missing)_.
+> - [__Geo__](https://github.com/rootslab/syllabus#geo) : _6 commands_.
 > - [__Hashes__](https://github.com/rootslab/syllabus#hashes) : _15 commands_.
 > - [__HyperLogLog__](https://github.com/rootslab/syllabus#hyperloglog) : _4 commands_.
 > - [__Keys__](https://github.com/rootslab/syllabus#keys) : _24 commands_.
