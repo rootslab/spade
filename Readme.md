@@ -19,8 +19,7 @@
  - It offers the ability to restrict __commands to a particular Redis version__ via the _**semver**_
    constructor option. Specifying this option turns __Spade__ in _develop mode_, it enables a series
    of mix-ins to get brief descriptions of every implemented command.
- - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was
-   not voluntarily interrupted.
+ - It implements a simple __delayed mechanism for re-connecting to socket__ when the client connection was not voluntarily interrupted.
  - It collects commands in the __queue__ also when the client is __offline__.
  - It implements an automatic __command rollback__ mechanism for __subscriptions__ when connection is lost and becames ready again.
  - It implements __AUTH__ logic and __automatic db SELECT__ on socket (re)connection, configurable
