@@ -25,7 +25,7 @@
     , "email": "44gatti@gmail.com"
   }
   , "dependencies": {
-    "bolgia" : ">=2.8.1"
+    "bolgia" : ">=2.8.2"
     , "cocker" : ">=0.16.0"
     , "cucu" : ">=0.11.0"
     , "gerry" : ">=0.7.0"
