@@ -32,4 +32,4 @@ client.on( 'ready', function () {
     } );
 } );
 
-client.connect( null);
+client.connect( null );

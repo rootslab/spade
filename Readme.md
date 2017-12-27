@@ -2,7 +2,7 @@
 
 [![NPM VERSION](http://img.shields.io/npm/v/spade.svg?style=flat)](https://www.npmjs.org/package/spade)
 [![CODACY BADGE](https://img.shields.io/codacy/b18ed7d95b0a4707a0ff7b88b30d3def.svg?style=flat)](https://www.codacy.com/public/44gatti/spade)
-[![CODECLIMATE-TEST-COVERAGE](https://img.shields.io/codeclimate/coverage/github/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
+[![CODECLIMATE-TEST-COVERAGE](https://img.shields.io/codeclimate/c/rootslab/spade.svg?style=flat)](https://codeclimate.com/github/rootslab/spade)
 [![LICENSE](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/rootslab/spade#mit-license)
 
 ![NODE VERSION](https://img.shields.io/node/v/spade.svg)
@@ -12,6 +12,7 @@
 
 [![NPM MONTHLY](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
 ![NPM YEARLY](https://img.shields.io/npm/dy/spade.svg)
+![NPM TOTAL](https://img.shields.io/npm/dt/syllabus.svg)
 
 [![NPM GRAPH](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
 
@@ -195,6 +196,11 @@ opt = {
      * in favour of ( the slower ) Boris JS parser.
      */
     , hiredis : false
+
+    /*
+     * Promisify Redis commands (via Syllabus)
+     */
+    , promisify : false
 
     /*
      * Cocker socket options
