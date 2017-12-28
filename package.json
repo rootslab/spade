@@ -30,8 +30,8 @@
     , "cucu" : ">=0.11.0"
     , "gerry" : ">=0.7.0"
     , "hiboris" : ">=1.6.1"
-    , "libra" : ">=1.0.0"
-    , "syllabus" : ">=1.1.0"
+    , "libra" : ">=1.1.2"
+    , "syllabus" : ">=2.0.0"
   }
   , "devDependencies": {
     "hiredis" : ">=0.5.0"
@@ -41,10 +41,11 @@
   }
   , "main": "index"
   , "engines": {
-    "node": ">=0.10.x"
+    "node": ">=6.x.x"
   }
   , "scripts": {
-    "test": "node test/run.js"
+    "test": "node test/run-promises.js"
+    , "told": "node test/run-callbacks.js"
     , "bench": "bash bench/run_spade.sh"
     , "node_redis_bench": "bash bench/run_node_redis.sh"
     , "ioredis_bench": "bash bench/run_ioredis.sh"

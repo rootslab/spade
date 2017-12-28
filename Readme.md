@@ -12,7 +12,7 @@
 
 [![NPM MONTHLY](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
 ![NPM YEARLY](https://img.shields.io/npm/dy/spade.svg)
-![NPM TOTAL](https://img.shields.io/npm/dt/syllabus.svg)
+![NPM TOTAL](https://img.shields.io/npm/dt/spade.svg)
 
 [![NPM GRAPH](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
 
