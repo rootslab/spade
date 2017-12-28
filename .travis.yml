@@ -14,6 +14,9 @@ node_js:
   - "0.12"
   - "0.11"
   - "0.10"
+branches:
+  only:
+  - master
 before_script: 
  - npm install -g istanbul
  - npm install -g codeclimate-test-reporter
