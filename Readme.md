@@ -11,8 +11,8 @@
 [![DEVDEPENDENCY STATUS](http://img.shields.io/david/dev/rootslab/spade.svg?style=flat)](https://david-dm.org/rootslab/spade#info=devDependencies)
 
 [![NPM MONTHLY](http://img.shields.io/npm/dm/spade.svg?style=flat)](http://npm-stat.com/charts.html?package=spade)
-![NPM YEARLY](https://img.shields.io/npm/dy/spade.svg)
-![NPM TOTAL](https://img.shields.io/npm/dt/spade.svg)
+[![NPM YEARLY](https://img.shields.io/npm/dy/spade.svg)](http://npm-stat.com/charts.html?package=spade)
+[![NPM TOTAL](https://img.shields.io/npm/dt/spade.svg)](http://npm-stat.com/charts.html?package=spade)
 
 [![NPM GRAPH](https://nodei.co/npm/spade.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/spade/)
 
